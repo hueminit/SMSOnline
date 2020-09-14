@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using Data;
 using Data.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +11,8 @@ using Newtonsoft.Json.Serialization;
 using Services.Implementation;
 using Services.Interface;
 using System;
+using Microsoft.AspNetCore.Identity;
+using Model.Entites;
 
 namespace SMSOnline
 {
@@ -28,8 +30,30 @@ namespace SMSOnline
         {
             //register DbContext
             var sqlConnectionString = Configuration.GetConnectionString("SqlServerConnection");
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(sqlConnectionString));
+            services.AddDbContext<AppDbContext>(
+                options => options.UseSqlServer(sqlConnectionString));
+
+            services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            // Configure cơ chế  mặc định register user của Identity
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddTransient<DbInitializer>();
