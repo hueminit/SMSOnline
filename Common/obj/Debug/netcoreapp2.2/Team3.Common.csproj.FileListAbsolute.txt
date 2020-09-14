@@ -1,0 +1,16 @@
+E:\project\test2222\Team3_Project\Team3.Common\bin\Debug\netcoreapp2.2\Team3.Common.deps.json
+E:\project\test2222\Team3_Project\Team3.Common\bin\Debug\netcoreapp2.2\Team3.Common.dll
+E:\project\test2222\Team3_Project\Team3.Common\bin\Debug\netcoreapp2.2\Team3.Common.pdb
+E:\project\test2222\Team3_Project\Team3.Common\obj\Debug\netcoreapp2.2\Team3.Common.csproj.CoreCompileInputs.cache
+E:\project\test2222\Team3_Project\Team3.Common\obj\Debug\netcoreapp2.2\Team3.Common.AssemblyInfoInputs.cache
+E:\project\test2222\Team3_Project\Team3.Common\obj\Debug\netcoreapp2.2\Team3.Common.AssemblyInfo.cs
+E:\project\test2222\Team3_Project\Team3.Common\obj\Debug\netcoreapp2.2\Team3.Common.dll
+E:\project\test2222\Team3_Project\Team3.Common\obj\Debug\netcoreapp2.2\Team3.Common.pdb
+C:\Users\lucvi\Documents\projectteam\Team3.Common\bin\Debug\netcoreapp2.2\Team3.Common.deps.json
+C:\Users\lucvi\Documents\projectteam\Team3.Common\bin\Debug\netcoreapp2.2\Team3.Common.dll
+C:\Users\lucvi\Documents\projectteam\Team3.Common\bin\Debug\netcoreapp2.2\Team3.Common.pdb
+C:\Users\lucvi\Documents\projectteam\Team3.Common\obj\Debug\netcoreapp2.2\Team3.Common.AssemblyInfoInputs.cache
+C:\Users\lucvi\Documents\projectteam\Team3.Common\obj\Debug\netcoreapp2.2\Team3.Common.AssemblyInfo.cs
+C:\Users\lucvi\Documents\projectteam\Team3.Common\obj\Debug\netcoreapp2.2\Team3.Common.csproj.CoreCompileInputs.cache
+C:\Users\lucvi\Documents\projectteam\Team3.Common\obj\Debug\netcoreapp2.2\Team3.Common.dll
+C:\Users\lucvi\Documents\projectteam\Team3.Common\obj\Debug\netcoreapp2.2\Team3.Common.pdb

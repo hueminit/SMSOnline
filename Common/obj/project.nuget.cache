@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "8vDymlN+ZUqvY2kVxCwLB77PoPuqT13Er7LphelJcH8QHReHYd2Qy+QNxlqzeY2XKdq7QVa2xlPfSZnJer8p/A==",
+  "success": true,
+  "projectFilePath": "C:\\simplecode\\simplecode\\TestPr\\Micro\\projectteam-test-sss\\projectteam-test-sss\\Common\\Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lucvi\\.nuget\\packages\\microsoft.netcore.app\\2.2.0\\microsoft.netcore.app.2.2.0.nupkg.sha512",
+    "C:\\Users\\lucvi\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.2.0\\microsoft.netcore.dotnetapphost.2.2.0.nupkg.sha512",
+    "C:\\Users\\lucvi\\.nuget\\packages\\microsoft.netcore.dotnethostpolicy\\2.2.0\\microsoft.netcore.dotnethostpolicy.2.2.0.nupkg.sha512",
+    "C:\\Users\\lucvi\\.nuget\\packages\\microsoft.netcore.dotnethostresolver\\2.2.0\\microsoft.netcore.dotnethostresolver.2.2.0.nupkg.sha512",
+    "C:\\Users\\lucvi\\.nuget\\packages\\microsoft.netcore.platforms\\2.2.0\\microsoft.netcore.platforms.2.2.0.nupkg.sha512",
+    "C:\\Users\\lucvi\\.nuget\\packages\\microsoft.netcore.targets\\2.0.0\\microsoft.netcore.targets.2.0.0.nupkg.sha512",
+    "C:\\Users\\lucvi\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

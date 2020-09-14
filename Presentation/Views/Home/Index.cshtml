@@ -1,0 +1,41 @@
+﻿
+@model List<Model.ViewModel.ProductViewModel>
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-download fa-sm text-white-50"></i> Cart
+            </a>
+        </div>
+        <!-- Content Row -->
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!-- Approach -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">List Product</h6>
+                    </div>
+                    @if (Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <div class="card-body">
+                                <p>ProductId : @item.Id</p>
+                                <p class="mb-0">ProductName : @item.Name</p>
+                            </div>
+                        }
+
+                    }
+                    else
+                    {
+                        <div class="card-body">
+                            <p>Not Found Product</p>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
