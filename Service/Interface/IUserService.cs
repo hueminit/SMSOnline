@@ -32,6 +32,6 @@ namespace Services.Interface
 
         Task<AppUserViewModel> ChangePassByUserWithPasswordHashIsNull(AppUserViewModel userVm);
 
-        Task<bool> FindUserByEmailOrUserName(string userOrName);
+        Task<string> FindUserByEmailOrUserName(string userOrName);
     }
 }

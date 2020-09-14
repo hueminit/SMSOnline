@@ -256,16 +256,15 @@ namespace Services.Implementation
             return userVm;
         }
 
-        public async Task<bool> FindUserByEmailOrUserName(string userOrName)
+        public async Task<string> FindUserByEmailOrUserName(string userOrName)
         {
             var checkmail = TextHelper.EmailIsValid(userOrName);
-            var flag = false;
             if (checkmail)
             {
                 var user = await _userManager.FindByEmailAsync(userOrName);
                 if (user != null)
                 {
-                    flag = true;
+                    return user.UserName;
                 }
             }
             else
@@ -273,11 +272,11 @@ namespace Services.Implementation
                 var user = await _userManager.FindByNameAsync(userOrName);
                 if (user != null)
                 {
-                    flag = true;
+                    return user.UserName;
                 }
             }
 
-            return flag;
+            return string.Empty;
         }
     }
 }

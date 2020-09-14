@@ -67,11 +67,10 @@ namespace SMSOnline.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-
                 //var checkPermistion = await _roleService.CheckAccount(model.Email);
-                var checkUser = await _userService.FindUserByEmailOrUserName(model.Email);
+                var userName = await _userService.FindUserByEmailOrUserName(model.Email);
 
-                if (checkUser == false)
+                if (string.IsNullOrEmpty(userName))
                 {
                     ModelState.AddModelError(string.Empty, "User does not exist");
                     return View(model);
@@ -85,13 +84,9 @@ namespace SMSOnline.Controllers
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
-                    lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(userName, model.Password, model.RememberMe,lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    // khi login thành công => tạo ra 1 cookie trên client được mã hóa
-
-
                     _logger.LogInformation("User logged in.");
                     return RedirectToLocal(returnUrl);
                 }
@@ -112,7 +107,6 @@ namespace SMSOnline.Controllers
                     return View(model);
                 }
             }
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
