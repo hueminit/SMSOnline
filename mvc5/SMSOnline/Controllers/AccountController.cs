@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Models.Entities;
-
+using Services;
 namespace SMSOnline.Controllers
 {
     [Authorize]
@@ -55,8 +55,9 @@ namespace SMSOnline.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            LoginViewModel model = new LoginViewModel();
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View(model);
         }
 
         //
@@ -70,10 +71,13 @@ namespace SMSOnline.Controllers
             {
                 return View(model);
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var userName = await FindUserByEmailOrUserName(model.Email);
+            if (string.IsNullOrEmpty(userName))
+            {
+                ModelState.AddModelError(string.Empty, "User does not exist");
+                return View(model);
+            }
+            var result = await SignInManager.PasswordSignInAsync(userName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -142,7 +146,8 @@ namespace SMSOnline.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            RegisterViewModel model = new RegisterViewModel();
+            return View(model);
         }
 
         //
@@ -427,6 +432,29 @@ namespace SMSOnline.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        public async Task<string> FindUserByEmailOrUserName(string userOrName)
+        {
+            var checkmail = Data.Helpers.TextHelper.EmailIsValid(userOrName);
+            if (checkmail)
+            {
+                var user = await UserManager.FindByEmailAsync(userOrName);
+                if (user != null)
+                {
+                    return user.UserName;
+                }
+            }
+            else
+            {
+                var user = await UserManager.FindByNameAsync(userOrName);
+                if (user != null)
+                {
+                    return user.UserName;
+                }
+            }
+
+            return string.Empty;
         }
 
         #region Helpers

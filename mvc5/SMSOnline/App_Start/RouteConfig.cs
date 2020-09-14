@@ -14,6 +14,26 @@ namespace SMSOnline
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+
+            routes.MapRoute(
+                name: "Login",
+                url: "login",
+                defaults: new
+                {
+                    controller = "Account",
+                    action = "Login",
+                    id = UrlParameter.Optional
+                },
+                namespaces: new string[] { "SMSOnline.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Register",
+                url: "register",
+                defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
+                namespaces: new string[] { "SMSOnline.Controllers" }
+            );
         }
     }
 }

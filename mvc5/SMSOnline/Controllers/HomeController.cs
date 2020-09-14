@@ -13,8 +13,14 @@ namespace SMSOnline.Controllers
         }
         public async Task<ActionResult> Index()
         {
-            var res =  await  _testService.GetAllAsync();
-            return View();
+            bool isAuthenticated = (System.Web.HttpContext.Current.User != null) &&
+                        System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            if (isAuthenticated)
+            {
+                var res = await _testService.GetAllAsync();
+                return View();
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         public ActionResult About()
