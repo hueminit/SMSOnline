@@ -1,0 +1,164 @@
+.header {
+	background-color: white;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 3;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: $header-height;
+	margin-left: $navigation-width;
+	border-bottom: 1px solid white - 20;
+	padding: 0 1.8rem;
+
+	.avatar {
+		border-color: transparent;
+
+		&.avatar-state-success {
+			&:before {
+				border-color: $color-primary
+			}
+		}
+	}
+
+	.header-app-list {
+		a {
+			display: block;
+			text-align: center;
+			margin-bottom: 1.5rem;
+			background-color: red;
+			color: black;
+			width: 50%;
+		}
+	}
+
+	form {
+		.input-group {
+			position: relative;
+
+			.form-control {
+				border: none;
+				background-color: rgba(white, .1);
+
+				&:focus {
+					background-color: rgba(white, .2);
+				}
+			}
+
+			.input-group-append {
+				position: absolute;
+				right: 0;
+
+				button.btn {
+					position: relative;
+					z-index: 9;
+					border-top-right-radius: 5px;
+					border-bottom-right-radius: 5px;
+					background-color: inherit;
+					border: none;
+					@extend a;
+
+					svg {
+						width: 18px;
+						height: 18px;
+					}
+
+					&:hover {
+						opacity: .7;
+					}
+
+					&:focus, &:active, &:hover {
+						background-color: inherit;
+						box-shadow: none !important;
+					}
+				}
+			}
+		}
+	}
+
+	.header-toggler {
+		display: none;
+	}
+
+	.navigation-toggler {
+		background-color: #f4f4f4;
+		border-radius: .50rem;
+		margin-right: 1rem;
+
+		a {
+			color: black
+		}
+
+		&.mobile-toggler {
+			display: none;
+		}
+	}
+
+	[data-toggle="fullscreen"] {
+		.minimize {
+			display: none;
+		}
+	}
+
+	.active-fullscreen {
+		.minimize {
+			display: block;
+		}
+
+		.maximize {
+			display: none;
+		}
+	}
+
+	ul.navbar-nav {
+		flex-direction: row;
+		align-items: center;
+
+		li.nav-item {
+
+
+			a.nav-link {
+				line-height: 100%;
+				padding: 10px 15px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				svg {
+					width: 18px;
+					height: 18px
+				}
+
+				&.nav-link-notify {
+					position: relative;
+
+					&:before {
+						content: '';
+						position: absolute;
+						width: 6px;
+						height: 6px;
+						right: 0;
+						border-radius: 50%;
+						top: 3px;
+						background: $color-danger;
+					}
+				}
+
+				&:hover, &:focus {
+					outline: none;
+				}
+			}
+		}
+
+		& + form.search {
+			margin-left: 1.5rem;
+		}
+	}
+
+	.dropdown-menu {
+		position: absolute;
+	}
+}
+

@@ -1,20 +1,21 @@
-﻿using System.Collections.Generic;
-using Model.ViewModel;
+﻿using Model.ViewModel;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Services.Interface
 {
     public interface IProductService
     {
-        void Add(ProductViewModel ProductViewModel);
+        Task<bool> AddAsync(ProductViewModel productViewModel);
 
-        void Update(ProductViewModel ProductViewModel);
+        Task<bool> UpdateAsync(ProductViewModel productViewModel);
 
-        void Delete(int id);
+        Task<bool> DeleteAsync(int id);
 
-        List<ProductViewModel> GetAll();
+        Task<List<ProductViewModel>> GetAllAsync();
 
-        ProductViewModel GetById(int id);
+        Task<ProductViewModel> GetByIdAsync(int id);
 
-        void SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

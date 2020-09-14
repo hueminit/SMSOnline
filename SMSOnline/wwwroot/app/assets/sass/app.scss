@@ -1,0 +1,145 @@
+@import "../fonts/inter-ui/inter.css";
+// Google Font
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600&display=swap');
+// Themify Icon
+@import "../icons/themify/themify-icons.css";
+// Fontawesome Icon
+@import "../icons/font-awesome/css/font-awesome.min.css";
+// Weather Icon
+@import "../icons/weather/css/pe-icon-7-weather.css";
+@import "../icons/weather/css/helper.css";
+// Vars
+@import "core/vars";
+// Mixins
+@import "core/mixins";
+// Components
+@import "components/preloader";
+@import "components/icon-block";
+@import "components/error";
+@import "components/form";
+@import "components/form-wizard";
+@import "components/page-header";
+@import "components/lightbox";
+@import "components/card";
+@import "components/color";
+@import "components/colorpicker";
+@import "components/body";
+@import "components/typography";
+@import "components/button";
+@import "components/progress";
+@import "components/dropdown";
+@import "components/badge";
+@import "components/collapse";
+@import "components/media-object";
+@import "components/accordion";
+@import "components/scrollbar";
+@import "components/datepicker";
+@import "components/alert";
+@import "components/notification";
+@import "components/pagination";
+@import "components/tour";
+@import "components/sweet-alert";
+@import "components/range-slider";
+@import "components/select2";
+@import "components/modal";
+@import "components/timepicker";
+@import "components/avatar";
+@import "components/file-upload";
+@import "components/authentication";
+@import "components/chat";
+@import "components/table";
+@import "components/pricing-table";
+@import "components/timeline";
+@import "components/calendar";
+@import "components/list-group";
+@import "components/toastr";
+@import "components/nestable";
+@import "components/slick";
+@import "components/webapp";
+@import "components/demo";
+@import "layouts";
+@import "other";
+// Header
+@import "components/header";
+// Navigation
+@import "components/navigation";
+// Footer
+@import "components/footer";
+// Aside
+@import "components/aside";
+// Dark Theme
+@import "dark";
+// Responsive
+@import "responsive";
+
+#nav-icon1 {
+	width: 60px;
+	height: 45px;
+	position: relative;
+	margin: 50px auto;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-transition: .5s ease-in-out;
+	-moz-transition: .5s ease-in-out;
+	-o-transition: .5s ease-in-out;
+	transition: .5s ease-in-out;
+	cursor: pointer;
+
+	span {
+		display: block;
+		position: absolute;
+		height: 9px;
+		width: 100%;
+		background: #d3531a;
+		border-radius: 9px;
+		opacity: 1;
+		left: 0;
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+		-webkit-transition: .25s ease-in-out;
+		-moz-transition: .25s ease-in-out;
+		-o-transition: .25s ease-in-out;
+		transition: .25s ease-in-out;
+
+		&:nth-child(1) {
+			top: 0px;
+		}
+
+		&:nth-child(2) {
+			top: 18px;
+		}
+
+		&:nth-child(3) {
+			top: 36px;
+		}
+	}
+
+	&.open {
+		span {
+			&:nth-child(1) {
+				top: 18px;
+				-webkit-transform: rotate(135deg);
+				-moz-transform: rotate(135deg);
+				-o-transform: rotate(135deg);
+				transform: rotate(135deg);
+			}
+
+			&:nth-child(2) {
+				opacity: 0;
+				left: -60px;
+			}
+
+			&:nth-child(3) {
+				top: 18px;
+				-webkit-transform: rotate(-135deg);
+				-moz-transform: rotate(-135deg);
+				-o-transform: rotate(-135deg);
+				transform: rotate(-135deg);
+			}
+		}
+	}
+}

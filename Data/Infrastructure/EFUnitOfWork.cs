@@ -1,4 +1,6 @@
-﻿namespace Data.Infrastructure
+﻿using System.Threading.Tasks;
+
+namespace Data.Infrastructure
 {
     public class EFUnitOfWork : IUnitOfWork
     {
@@ -9,14 +11,14 @@
             _context = context;
         }
 
-        public void Commit()
+        public async Task<int> Commit()
         {
-            _context.SaveChanges();
+          return await _context.SaveChangesAsync();
         }
 
         public void Dispose()
         {
-            _context.Dispose();
+            _context.DisposeAsync();
         }
     }
 }

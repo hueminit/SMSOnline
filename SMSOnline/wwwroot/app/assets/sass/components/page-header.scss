@@ -1,0 +1,50 @@
+.page-header {
+	margin: -1.9rem;
+	padding: 1rem 1.8rem;
+	margin-bottom: 30px;
+	height: $header-height - 1;
+	background-color: white;
+	z-index: 3;
+	box-shadow: 0 3px 10px rgba(62, 85, 120, .070);
+	display: flex;
+	align-items: center;
+
+	h1, h2, h3, h4, h5 {
+		margin: 0;
+	}
+
+	.breadcrumb {
+		background: none;
+		padding: 0;
+		margin: 0;
+
+		a {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		li.breadcrumb-item {
+			font-size: inherit !important;
+
+			&:first-child:before {
+				font-size: 12px;
+				font-family: themify;
+				content: "\e69b";
+				display: inline-block;
+				margin-right: 8px;
+			}
+
+			@extend .small;
+
+			& + .breadcrumb-item::before {
+				font-size: 10px;
+			}
+
+			&.active {
+				color: $color-primary;
+				font-weight: 600;
+			}
+		}
+	}
+}

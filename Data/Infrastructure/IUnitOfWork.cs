@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Data.Infrastructure
 {
     public interface IUnitOfWork : IDisposable
     {
-        void Commit();
+        Task<int> Commit();
     }
 }

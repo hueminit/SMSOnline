@@ -1,0 +1,169 @@
+﻿@*<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - SMSOnline</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SMSOnline</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2020 - SMSOnline - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+    </body>
+    </html>*@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewData["Title"] - SMSOnline</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/app/assets/media/image/favicon.png" />
+
+    <!-- Plugin styles -->
+    <link rel="stylesheet" href="~/app/vendors/bundle.css" type="text/css">
+
+    <!-- Slick.js styles -->
+    <link rel="stylesheet" href="~/app/vendors/slick/slick.css" type="text/css">
+    <link rel="stylesheet" href="~/app/vendors/slick/slick-theme.css" type="text/css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="~/app/assets/css/app.min.css" type="text/css">
+</head>
+<body>
+
+    <!-- begin::preloader-->
+    <div class="preloader">
+        <div class="preloader-icon"></div>
+    </div>
+    <!-- end::preloader -->
+    <!-- begin::header -->
+    <partial name="_Header.cshtml" />
+    <!-- end::header -->
+
+    <div id="main">
+
+        <!-- begin::navigation -->
+        <partial name="_Navigation.cshtml" />
+        <!-- end::navigation -->
+        <!-- begin::main content -->
+        <main class="main-content">
+
+            @RenderBody()
+
+            <!-- begin::footer -->
+            <partial name="_Footer.cshtml" />
+            <!-- end::footer -->
+
+        </main>
+        <!-- end::main content -->
+
+    </div>
+
+    <!-- Plugin scripts -->
+    <script src="~/app/vendors/bundle.js"></script>
+
+    <!-- Slick.js -->
+    <script src="~/app/vendors/slick/slick.min.js"></script>
+
+    <!-- Chartjs -->
+    <script src="~/app/vendors/charts/chartjs/chart.min.js"></script>
+
+    <!-- Apex chart -->
+    <script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>
+    <script src="~/app/vendors/charts/apex/apexcharts.min.js"></script>
+
+    <!-- Circle progress -->
+    <script src="~/app/vendors/circle-progress/circle-progress.min.js"></script>
+
+    <!-- Dashboard scripts -->
+    <script src="~/app/assets/js/examples/dashboard.js"></script>
+    <div class="colors">
+        <!-- To use theme colors with Javascript -->
+        <div class="bg-primary"></div>
+        <div class="bg-primary-bright"></div>
+        <div class="bg-secondary"></div>
+        <div class="bg-secondary-bright"></div>
+        <div class="bg-info"></div>
+        <div class="bg-info-bright"></div>
+        <div class="bg-success"></div>
+        <div class="bg-success-bright"></div>
+        <div class="bg-danger"></div>
+        <div class="bg-danger-bright"></div>
+        <div class="bg-warning"></div>
+        <div class="bg-warning-bright"></div>
+    </div>
+
+    <!-- App scripts -->
+    <script src="~/app/assets/js/app.min.js"></script>
+
+    <script>
+        $(function () {
+            $('.slick-js').slick({
+                speed: 500,
+                arrows: false,
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        })
+    </script>
+</body>
+</html>

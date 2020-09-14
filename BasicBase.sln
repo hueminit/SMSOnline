@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Service\Services.csproj", "{558FC2EB-E5CE-488F-B190-46CB5CEE051C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{FAEA1D6C-3FAE-48D2-B84A-70DF3A51DB7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMSOnline", "SMSOnline\SMSOnline.csproj", "{69551C0A-7652-41AC-B47B-969494BFE9CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{558FC2EB-E5CE-488F-B190-46CB5CEE051C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{558FC2EB-E5CE-488F-B190-46CB5CEE051C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{558FC2EB-E5CE-488F-B190-46CB5CEE051C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAEA1D6C-3FAE-48D2-B84A-70DF3A51DB7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAEA1D6C-3FAE-48D2-B84A-70DF3A51DB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAEA1D6C-3FAE-48D2-B84A-70DF3A51DB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAEA1D6C-3FAE-48D2-B84A-70DF3A51DB7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69551C0A-7652-41AC-B47B-969494BFE9CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69551C0A-7652-41AC-B47B-969494BFE9CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69551C0A-7652-41AC-B47B-969494BFE9CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69551C0A-7652-41AC-B47B-969494BFE9CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

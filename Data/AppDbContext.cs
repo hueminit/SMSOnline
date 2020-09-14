@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using Model.Entites;
+using Model.Shared;
 using System;
 using System.IO;
 using System.Linq;
-using Model.Entites;
-using Model.Shared;
 
 namespace Data
 {

@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
+using Model.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Model.Shared;
+using System.Threading.Tasks;
 
 namespace Data.Infrastructure
 {
@@ -18,9 +20,18 @@ namespace Data.Infrastructure
             _context = context;
         }
 
-        public void Add(T entity)
+        public async Task<bool> AddAsync(T entity)
         {
-            _context.Add(entity);
+            try
+            {
+                _context.Add(entity);
+               return await Task.FromResult(true);
+            }
+            catch (Exception e)
+            {
+                //todo
+            }
+            return await Task.FromResult(false);
         }
 
         public void Dispose()
@@ -31,7 +42,7 @@ namespace Data.Infrastructure
             }
         }
 
-        public IQueryable<T> FindAll(params Expression<Func<T, object>>[] includeProperties)
+        public async Task<IQueryable<T>> FindAllAsync(params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> items = _context.Set<T>();
 
@@ -42,10 +53,10 @@ namespace Data.Infrastructure
                     items = items.Include(includeProperty);
                 }
             }
-            return items;
+            return await Task.FromResult(items.AsNoTracking());
         }
 
-        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<IQueryable<T>> FindAllAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> items = _context.Set<T>();
             if (includeProperties != null)
@@ -55,36 +66,63 @@ namespace Data.Infrastructure
                     items = items.Include(includeProperty);
                 }
             }
-            return items.Where(predicate);
+            return await Task.FromResult(items.Where(predicate).AsNoTracking());
         }
 
-        public T FindById(K id, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<T> FindByIdAsync(K id, params Expression<Func<T, object>>[] includeProperties)
         {
-            return FindAll(includeProperties).SingleOrDefault(x => x.Id.Equals(id));
+            return await FindAllAsync(includeProperties).Result.SingleOrDefaultAsync(x => x.Id.Equals(id));
         }
 
-        public T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<T> FindSingleAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
-            return FindAll(includeProperties).SingleOrDefault(predicate);
+            return await FindAllAsync(includeProperties).Result.SingleOrDefaultAsync(predicate);
         }
 
-        public void Remove(T entity)
+        public async Task<bool> RemoveAsync(T entity)
         {
-            _context.Set<T>().Remove(entity);
+            try
+            {
+                _context.Set<T>().Remove(entity);
+               return await Task.FromResult(true);
+            }
+            catch (Exception e)
+            {
+                //todo
+            }
+            return await Task.FromResult(false);
         }
 
-        public void RemoveById(K id)
+        public async Task<bool> RemoveByIdAsync(K id)
         {
-            var entity = FindById(id);
-            Remove(entity);
+            try
+            {
+                var entity = await FindByIdAsync(id);
+                return await Task.FromResult(await RemoveAsync(entity));
+            }
+            catch (Exception e)
+            {
+                //todo
+            }
+            return await Task.FromResult(false);
+            
         }
 
-        public void RemoveMultiple(List<T> entities)
+        public async Task<bool> RemoveMultipleAsync(List<T> entities)
         {
-            _context.Set<T>().RemoveRange(entities);
+            try
+            {
+                _context.Set<T>().RemoveRange(entities);
+                return await Task.FromResult(true);
+            }
+            catch (Exception e)
+            {
+                //todo
+            }
+            return await Task.FromResult(false);
         }
 
-        public virtual void Update(K id, T entity, params Expression<Func<T, object>>[] updatedProperties)
+        public virtual async Task<bool> UpdateAsync(K id, T entity, params Expression<Func<T, object>>[] updatedProperties)
         {   //chỉ update cái gì thay đổi
             var dbEntity = _context.Set<T>().AsNoTracking().Single(p => p.Id.Equals(id));
             var databaseEntry = _context.Entry(dbEntity);
@@ -124,7 +162,18 @@ namespace Data.Infrastructure
                     }
                 }
             }
-            _context.Set<T>().Update(dbEntity);
+
+            try
+            {
+                _context.Set<T>().Update(dbEntity);
+                return await Task.FromResult(true);
+            }
+            catch (Exception e)
+            {
+                //todo
+            }
+            return await Task.FromResult(false);
         }
+
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\simplecode\\simplecode\\TestPr\\Micro\\projectteam-test-sss\\projectteam-test-sss\\Model\\Model.csproj": {}
+    "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj": {}
   },
   "projects": {
-    "C:\\simplecode\\simplecode\\TestPr\\Micro\\projectteam-test-sss\\projectteam-test-sss\\Model\\Model.csproj": {
+    "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\simplecode\\simplecode\\TestPr\\Micro\\projectteam-test-sss\\projectteam-test-sss\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\simplecode\\simplecode\\TestPr\\Micro\\projectteam-test-sss\\projectteam-test-sss\\Model\\Model.csproj",
+        "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj",
         "packagesPath": "C:\\Users\\lucvi\\.nuget\\packages\\",
-        "outputPath": "C:\\simplecode\\simplecode\\TestPr\\Micro\\projectteam-test-sss\\projectteam-test-sss\\Model\\obj\\",
+        "outputPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -23,14 +23,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.2"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp2.2": {
+          "netcoreapp3.1": {
             "projectReferences": {}
           }
         },
@@ -41,29 +41,19 @@
         }
       },
       "frameworks": {
-        "netcoreapp2.2": {
+        "netcoreapp3.1": {
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
-              "version": "[8.1.1, )"
-            },
-            "Microsoft.AspNetCore.Identity": {
-              "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[3.1.8, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[2.2.4, )"
-            },
-            "Microsoft.NETCore.App": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.2.0, )",
-              "autoReferenced": true
+              "version": "[3.1.8, )"
             }
           },
           "imports": [
@@ -76,6 +66,11 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
