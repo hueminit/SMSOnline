@@ -22,9 +22,6 @@ namespace Data
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
-
-        public DbSet<Product> Products { get; set; }
-
         public DbSet<Contact> Contacts { get; set; }
 
         //public DbSet<Message> Messages { get; set; }

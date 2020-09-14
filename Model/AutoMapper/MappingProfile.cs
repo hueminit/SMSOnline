@@ -9,8 +9,6 @@ namespace Model.AutoMapper
         // setup mapping trực tiếp giữa  các entityViewModel và entityModel và ngược lại
         public MappingProfile()
         {
-            CreateMap<Product, ProductViewModel>().ReverseMap();
-            CreateMap<ProductViewModel, Product>().ReverseMap();
 
             CreateMap<AppUser, AppUserViewModel>().ReverseMap();
             CreateMap<AppUserViewModel, AppUser>().ReverseMap();

@@ -66,8 +66,6 @@ namespace SMSOnline
             services.AddTransient(typeof(IUnitOfWork), typeof(EFUnitOfWork));
             services.AddTransient(typeof(IRepository<,>), typeof(EFRepository<,>));
 
-            services.AddTransient<IProductService, ProductService>();
-
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRoleService, RoleService>();
 

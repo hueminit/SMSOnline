@@ -10,18 +10,16 @@ namespace SMSOnline.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IProductService _productService;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _productService = productService;
         }
 
+        [Route("home")]
         public async Task<IActionResult> Index()
         {
-            var res = await _productService.GetAllAsync();
-            return View(res);
+            return View();
         }
 
         public IActionResult Privacy()
