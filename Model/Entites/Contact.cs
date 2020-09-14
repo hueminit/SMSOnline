@@ -35,6 +35,8 @@ namespace Model.Entites
 
         public bool IsFriend { set; get; }
 
+        public bool StatusRequest { set; get; }
+
         public string PhoneNumber { set; get; }
     }
 }

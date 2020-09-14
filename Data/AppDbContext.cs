@@ -27,7 +27,7 @@ namespace Data
 
         public DbSet<Contact> Contacts { get; set; }
 
-       // public DbSet<Message> Messages { get; set; }
+        //public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -40,7 +40,20 @@ namespace Data
             builder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.RoleId, x.UserId });
 
             builder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => new { x.UserId });
-            
+
+
+            //builder.Entity<Message>()
+            //    .HasOne(p => p.Receiver)
+            //    .WithMany(t => t.MessagesReceived)
+            //    .HasForeignKey(m => m.UserId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+            //builder.Entity<Message>()
+            //    .HasOne(p => p.Sender)
+            //    .WithMany(t => t.MessagesSent)
+            //    .HasForeignKey(m => m.ContactId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(builder);
         }
       

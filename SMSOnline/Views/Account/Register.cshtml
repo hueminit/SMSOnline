@@ -1,0 +1,39 @@
+﻿@model SMSOnline.Models.AccountViewModels.RegisterViewModel
+@{
+    Layout = "_IdentityLayout";
+    ViewData["Title"] = "SMSOnline Register";
+    ViewData["MetaDescription"] = "SMSOnline Register";
+    ViewData["MetaKeyword"] = "SMSOnline Register";
+}
+<h5>Create account</h5>
+
+<!-- form -->
+<form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" id="registerForm">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <input type="text" class="form-control" asp-for="FullName" name="fullName" placeholder="FullName" required autofocus>
+    </div>
+    <div class="form-group">
+        <input type="email" asp-for="Email" name="email" class="form-control" placeholder="Email" required>
+    </div>
+    <div class="form-group">
+        <input type="password" asp-for="Password" name="password" class="form-control" placeholder="Password" required>
+    </div>
+    <div class="form-group">
+        <input type="password" asp-for="ConfirmPassword" name="confirmPassword" class="form-control" placeholder="ConfirmPassword" required>
+    </div>
+    <div class="form-group">
+        <input type="date" asp-for="BirthDay" name="birthDay" class="form-control" placeholder="BirthDay" required>
+    </div>
+    <div class="form-group">
+        <input type="text" name="phoneNumber" asp-for="PhoneNumber" class="form-control" placeholder="PhoneNumber" required>
+    </div>
+    <div class="form-group">
+        <input type="text" name="address" asp-for="Address" class="form-control" placeholder="Address" required>
+    </div>
+    <button class="btn btn-primary btn-block">Register</button>
+    <hr>
+    <p class="text-muted">Already have an account?</p>
+    <a onclick="window.location.href='/login'" class="btn btn-outline-light btn-sm">Sign in!</a>
+</form>
+<!-- ./ form -->

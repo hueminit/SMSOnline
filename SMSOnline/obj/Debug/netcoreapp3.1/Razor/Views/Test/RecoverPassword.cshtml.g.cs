@@ -26,8 +26,15 @@ using SMSOnline.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a73edadb27694b9874c50fdda849ab5b2330bf22", @"/Views/Test/RecoverPassword.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"489c7424e492d98a1e426b2ac88d075ac0e0805b", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7c7e722232a9fb6ba2849cf37899f0da01778c92", @"/Views/_ViewImports.cshtml")]
     public class Views_Test_RecoverPassword : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #line hidden
@@ -64,7 +71,7 @@ using SMSOnline.Models;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<h5>Reset password</h5>\r\n\r\n<!-- form -->\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a73edadb27694b9874c50fdda849ab5b2330bf223512", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a73edadb27694b9874c50fdda849ab5b2330bf223710", async() => {
                 WriteLiteral(@"
     <div class=""form-group"">
         <input type=""text"" class=""form-control"" placeholder=""Username or email"" required autofocus>

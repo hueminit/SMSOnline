@@ -58,16 +58,22 @@ namespace SMSOnline
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddTransient<DbInitializer>();
 
+            services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<IEmailService, EmailService>();
+
             //Register Services
             services.AddTransient(typeof(IUnitOfWork), typeof(EFUnitOfWork));
             services.AddTransient(typeof(IRepository<,>), typeof(EFRepository<,>));
 
             services.AddTransient<IProductService, ProductService>();
 
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRoleService, RoleService>();
+
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ContractResolver =
                     new DefaultContractResolver());
-            // services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,7 +99,8 @@ namespace SMSOnline
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                   // pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }

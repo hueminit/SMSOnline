@@ -193,6 +193,9 @@ namespace Data.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -342,7 +345,7 @@ namespace Data.Migrations
             modelBuilder.Entity("Model.Entites.Contact", b =>
                 {
                     b.HasOne("Model.Entites.AppUser", "User")
-                        .WithMany()
+                        .WithMany("Contacts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

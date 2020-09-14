@@ -8,8 +8,8 @@ C:\Users\lucvi\OneDrive\Documents\SMSOnline\Data\bin\Debug\netcoreapp3.1\Model.p
 C:\Users\lucvi\OneDrive\Documents\SMSOnline\Data\obj\Debug\netcoreapp3.1\Data.csprojAssemblyReference.cache
 C:\Users\lucvi\OneDrive\Documents\SMSOnline\Data\obj\Debug\netcoreapp3.1\Data.AssemblyInfoInputs.cache
 C:\Users\lucvi\OneDrive\Documents\SMSOnline\Data\obj\Debug\netcoreapp3.1\Data.AssemblyInfo.cs
-C:\Users\lucvi\OneDrive\Documents\SMSOnline\Data\obj\Debug\netcoreapp3.1\Data.csproj.CoreCompileInputs.cache
 C:\Users\lucvi\OneDrive\Documents\SMSOnline\Data\obj\Debug\netcoreapp3.1\Data.csproj.CopyComplete
 C:\Users\lucvi\OneDrive\Documents\SMSOnline\Data\obj\Debug\netcoreapp3.1\Data.dll
 C:\Users\lucvi\OneDrive\Documents\SMSOnline\Data\obj\Debug\netcoreapp3.1\Data.pdb
 C:\Users\lucvi\OneDrive\Documents\SMSOnline\Data\obj\Debug\netcoreapp3.1\Data.genruntimeconfig.cache
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\Data\obj\Debug\netcoreapp3.1\Data.csproj.CoreCompileInputs.cache

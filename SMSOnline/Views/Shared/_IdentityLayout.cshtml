@@ -14,6 +14,7 @@
 
     <!-- App styles -->
     <link rel="stylesheet" href="~/app/assets/css/app.min.css" type="text/css">
+    @RenderSection("Css", required: false)
 </head>
 <body class="form-membership">
 
@@ -40,5 +41,6 @@
 
     <!-- App scripts -->
     <script src="~/app/assets/js/app.min.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

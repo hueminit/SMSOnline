@@ -406,3 +406,17 @@ C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\st
 C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\SMSOnline.dll
 C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\SMSOnline.pdb
 C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\SMSOnline.genruntimeconfig.cache
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\bin\Debug\netcoreapp3.1\FluentValidation.dll
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\AccessDenied.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\ConfirmEmail.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\ExternalLogin.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgotPassword.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgotPasswordConfirmation.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\Lockout.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\LoginWith2fa.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\LoginWithRecoveryCode.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassword.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPasswordConfirmation.cshtml.g.cs
+C:\Users\lucvi\OneDrive\Documents\SMSOnline\SMSOnline\obj\Debug\netcoreapp3.1\Razor\Views\Account\SignedOut.cshtml.g.cs

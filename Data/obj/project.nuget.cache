@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "n9FkaIIOe11IsjkoqByG/flhY+G0rJW0B0H4CFb6BjdfULGdC5IY+EOl7+XPYaN8uaV996+3nrxTP3PJ05Nfzg==",
+  "dgSpecHash": "n1YsiCaii4T5j5a1yjEe2H3Ehg4NkoL/6rDhGO2kXyD/rJqqqSRWwxh7Pf4GntPnpTzSz4yEKfRLSBT1qgwVxQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Data\\Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lucvi\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
+    "C:\\Users\\lucvi\\.nuget\\packages\\fluentvalidation\\9.2.0\\fluentvalidation.9.2.0.nupkg.sha512",
     "C:\\Users\\lucvi\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.8\\microsoft.aspnetcore.cryptography.internal.3.1.8.nupkg.sha512",
     "C:\\Users\\lucvi\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.8\\microsoft.aspnetcore.cryptography.keyderivation.3.1.8.nupkg.sha512",
     "C:\\Users\\lucvi\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.8\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.8.nupkg.sha512",

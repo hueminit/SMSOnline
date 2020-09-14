@@ -15,7 +15,7 @@ namespace Model.Entites
         public Message()
         {
         }
-        public Message(int id,Guid userId,int contactId,
+        public Message(int id,Guid userId, Guid contactId,
             DateTime dateCreated,DateTime dateModified,string content,Status status)
         {
             Id = id;
@@ -28,7 +28,7 @@ namespace Model.Entites
 
         }
 
-        public Message(Guid userId, int contactId,
+        public Message(Guid userId, Guid contactId,
             DateTime dateCreated, DateTime dateModified, string content, Status status)
         {
             UserId = userId;
@@ -40,13 +40,12 @@ namespace Model.Entites
 
         }
 
-        public Guid UserId { set; get; }
-        [ForeignKey("UserId"), Column(Order = 0)]
-        public virtual AppUser User { set; get; }
 
-        public int ContactId { set; get; }
-        [ForeignKey("ContactId"), Column(Order = 1)]
-        public virtual Contact Contact { set; get; }
+        public Guid UserId { set; get; }
+        public virtual AppUser Sender { set; get; }
+
+        public Guid ContactId { set; get; }
+        public virtual AppUser Receiver { set; get; }
 
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }

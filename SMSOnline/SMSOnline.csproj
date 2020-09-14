@@ -28,6 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\AccountViewModels\" />
+    <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\app\assets\css\" />
     <Folder Include="wwwroot\app\assets\fonts\inter-ui\" />
     <Folder Include="wwwroot\app\assets\icons\font-awesome\css\" />
