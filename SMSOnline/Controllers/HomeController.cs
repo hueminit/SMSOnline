@@ -16,7 +16,6 @@ namespace SMSOnline.Controllers
             _logger = logger;
         }
 
-        [Route("home")]
         public async Task<IActionResult> Index()
         {
             return View();
