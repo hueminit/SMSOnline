@@ -14,27 +14,23 @@ namespace Data
     {
         public static void CreateAppUser(AppDbContext context)
         {
-            if (context.Roles.Any())
+            if (!context.Roles.Any(r => r.Name == "Admin"))
             {
-                var roleManager = new RoleManager<AppRole>(new RoleStore<AppRole>(new AppDbContext()));
-                roleManager.Create(new AppRole()
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Admin" };
+                manager.Create(role);
+                manager.Create(new IdentityRole()
                 {
-                    Name = "Admin",
-                    Description = "Top manager"
+                    Name = "User",
                 });
-
-                roleManager.Create(new AppRole()
-                {
-                    Name = "Customer",
-                    Description = "Customer"
-                });
-                context.SaveChanges();
             }
 
-            if (!context.Users.Any())
+            if (!context.Users.Any(u => u.UserName == "admin"))
             {
-                var userManager = new UserManager<AppUser>(new UserStore<AppUser>(new AppDbContext()));
-                userManager.Create(new AppUser()
+                var store = new UserStore<AppUser>(context);
+                var manager = new UserManager<AppUser>(store);
+                var user = new AppUser()
                 {
                     UserName = "admin",
                     FullName = "Administrator",
@@ -43,13 +39,11 @@ namespace Data
                     DateModified = DateTime.Now,
                     Gender = Gender.Male,
                     Address = "43 nguyễn chí thanh hà nội"
-                }, "123654$");
-                var user = userManager.FindByNameAsync("admin");
-                userManager.AddToRole(user.Result.Id, "Admin");
-                context.SaveChanges();
+                };
+
+                manager.Create(user, "123654$");
+                manager.AddToRole(user.Id, "Admin");
             }
-
-
         }
 
     }

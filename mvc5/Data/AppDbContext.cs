@@ -6,7 +6,7 @@ using Models.Entities;
 namespace Data
 {
     //Enable-Migrations
-    //Add-Migration init
+    //Add-Migration Init
     //Update-Database
     public class AppDbContext : IdentityDbContext<AppUser>
     {

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Services
 {
@@ -25,10 +26,10 @@ namespace Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly UserManager<AppUser> _userManager;
-        private readonly RoleManager<AppRole> _roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public UserService(IDbFactory dbFactory, IUnitOfWork unitOfWork, 
-            UserManager<AppUser> userManager, RoleManager<AppRole> roleManager) : base(dbFactory)
+            UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager) : base(dbFactory)
         {
             _unitOfWork = unitOfWork;
             _mapper = AutoMapperConfig.Mapper;

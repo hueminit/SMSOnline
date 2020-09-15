@@ -1,8 +1,3 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Models.Entities;
-using Models.Enums;
-
 namespace Data.Migrations
 {
     using System;
