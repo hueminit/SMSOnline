@@ -1,29 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Data.Infrastructure
 {
-    public interface IRepository<T, K> where T : class // dữ liệu kiểu T với key là K với T là 1 class
+    public interface IRepository<T> where T : class
     {
-        Task<T> FindByIdAsync(K id, params Expression<Func<T, object>>[] includeProperties);
+        Task<T> Add(T entity);
 
-        Task<T> FindSingleAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
+        Task Update(T entity);
 
-        Task<IQueryable<T>> FindAllAsync(params Expression<Func<T, object>>[] includeProperties);
+        Task<T> Delete(T entity);
 
-        Task<IQueryable<T>> FindAllAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
+        Task<T> Delete(int id);
 
-        Task<bool> AddAsync(T entity);
+        Task DeleteMulti(Expression<Func<T, bool>> where);
 
-        Task<bool> UpdateAsync(K id, T entity, params Expression<Func<T, object>>[] updatedProperties);
+        Task<T> GetSingleById(int id);
 
-        Task<bool> RemoveAsync(T entity);
+        Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null);
 
-        Task<bool> RemoveByIdAsync(K id);
+        Task<IQueryable<T>> GetAll(string[] includes = null);
 
-        Task<bool> RemoveMultipleAsync(List<T> entities);
+        Task<IQueryable<T>> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null);
+
+        Task<IQueryable<T>> GetMultiPaging(Expression<Func<T, bool>> filter, int index = 0, int size = 50, string[] includes = null);
+
+        Task<int> Count(Expression<Func<T, bool>> where);
+
+        Task<bool> CheckContains(Expression<Func<T, bool>> predicate);
     }
 }

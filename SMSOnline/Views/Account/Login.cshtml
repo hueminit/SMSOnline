@@ -1,31 +1,32 @@
-﻿@using System.Linq
-@using Microsoft.AspNetCore.Mvc.Localization
-@using Model.Entites
-@model SMSOnline.Models.AccountViewModels.LoginViewModel
-@inject SignInManager<AppUser> SignInManager
+﻿@using SMSOnline.Models
+@model SMSOnline.Models.LoginViewModel
 @{
-    Layout = "_IdentityLayout";
+    Layout = "~/Views/Shared/_IdentityLayout.cshtml";
     ViewData["Title"] = "SMSOnline Login";
-    ViewData["MetaDescription"] = "SMSOnline Login";
-    ViewData["MetaKeyword"] = "SMSOnline Login";
 }
-
 <h5>Sign in</h5>
 <!-- form -->
-<form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        <input type="text" asp-for="Email" class="form-control" placeholder="Username or email" required autofocus>
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control"
+            , placeholder = "Username or email",@required = "required" ,@autofocus= "autofocus"})
     </div>
     <div class="form-group">
-        <input asp-for="Password" type="password" class="form-control" placeholder="Password" required>
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", @required = "required" })
     </div>
     <div class="form-group d-flex justify-content-between">
+        
         <div class="custom-control custom-checkbox">
-            <input class="custom-control-input" asp-for="RememberMe">
-            <label class="custom-control-label" for="customCheck1">Remember me</label>
+            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "custom-control-input",
+           @type = "checkbox",
+           @checked = ""
+       })
+            <label class="custom-control-label" for="RememberMe">Remember me</label>
         </div>
-        <a asp-action="ForgotPassword">Reset password</a>
+        @Html.ActionLink("Forgot your password?", "ForgotPassword")
     </div>
     <button class="btn btn-primary btn-block">Sign in</button>
     <hr>
@@ -69,10 +70,9 @@
     </ul>
     <hr>
     <p class="text-muted">Don't have an account?</p>
-    <a onclick="window.location.href='/register'" class="btn btn-outline-light btn-sm">Register now!</a>
-</form>
-<!-- ./ form -->
-@section Scripts {
+    <a onclick="window.location.href='/Account/Register'" class="btn btn-outline-light btn-sm">Register now!</a>
+}
 
-    <recaptcha-script validation-message-element-id="recaptchaErrorMessage" />
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }

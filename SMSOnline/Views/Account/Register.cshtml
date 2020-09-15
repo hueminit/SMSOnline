@@ -1,39 +1,97 @@
-﻿@model SMSOnline.Models.AccountViewModels.RegisterViewModel
+﻿@model SMSOnline.Models.RegisterViewModel
 @{
-    Layout = "_IdentityLayout";
-    ViewData["Title"] = "SMSOnline Register";
-    ViewData["MetaDescription"] = "SMSOnline Register";
-    ViewData["MetaKeyword"] = "SMSOnline Register";
+    Layout = "~/Views/Shared/_IdentityLayout.cshtml";
+    ViewBag.Title = "Register";
 }
 <h5>Create account</h5>
 
-<!-- form -->
-<form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" id="registerForm">
-    <div asp-validation-summary="All" class="text-danger"></div>
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "registerForm" }))
+{
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.AntiForgeryToken()
     <div class="form-group">
-        <input type="text" class="form-control" asp-for="FullName" name="fullName" placeholder="FullName" required autofocus>
+        @Html.TextBoxFor(m => m.FullName, new
+        {
+            @class = "form-control",
+            @placeholder = "FullName",
+            @required = "required",
+            @autofocus = "autofocus"
+        })
+    </div>
+
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.UserName, new
+        {
+            @class = "form-control",
+            @placeholder = "UserName",
+            @required = "required",
+            @autofocus = "autofocus"
+        })
+    </div>
+
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Email, new
+        {
+            @class = "form-control",
+            @placeholder = "Username or email",
+            @required = "required",
+            @autofocus = "autofocus"
+        })
     </div>
     <div class="form-group">
-        <input type="email" asp-for="Email" name="email" class="form-control" placeholder="Email" required>
+        @Html.PasswordFor(m => m.Password, new
+        {
+            @class = "form-control",
+            @placeholder = "Password",
+            @required = "required"
+        })
+
     </div>
     <div class="form-group">
-        <input type="password" asp-for="Password" name="password" class="form-control" placeholder="Password" required>
+        @Html.PasswordFor(m => m.ConfirmPassword, new
+        {
+            @class = "form-control",
+            @placeholder = "ConfirmPassword",
+            @required = "required"
+        })
     </div>
     <div class="form-group">
-        <input type="password" asp-for="ConfirmPassword" name="confirmPassword" class="form-control" placeholder="ConfirmPassword" required>
+        @Html.TextBoxFor(m => m.BirthDay, new
+             {
+                 @class = "form-control",
+                 @placeholder = "BirthDay",
+                 @required = "required",
+                 @type = "date"
+             })
     </div>
     <div class="form-group">
-        <input type="date" asp-for="BirthDay" name="birthDay" class="form-control" placeholder="BirthDay" required>
+        @Html.TextBoxFor(m => m.PhoneNumber, new
+        {
+            @class = "form-control",
+            @placeholder = "PhoneNumber",
+            @required = "required"
+        })
     </div>
     <div class="form-group">
-        <input type="text" name="phoneNumber" asp-for="PhoneNumber" class="form-control" placeholder="PhoneNumber" required>
+        @Html.TextBoxFor(m => m.Address, new
+        {
+            @class = "form-control",
+            @placeholder = "Address",
+            @required = "required"
+        })
     </div>
-    <div class="form-group">
-        <input type="text" name="address" asp-for="Address" class="form-control" placeholder="Address" required>
+    <div class="form-check">
+        <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="..."> Male
     </div>
-    <button class="btn btn-primary btn-block">Register</button>
+    <div class="form-check">
+        <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option2" aria-label="..."> Gender
+    </div>
+    <a href="javascript:document.getElementById('registerForm').submit()" class="btn btn-primary btn-block">Register</a>
     <hr>
     <p class="text-muted">Already have an account?</p>
-    <a onclick="window.location.href='/login'" class="btn btn-outline-light btn-sm">Sign in!</a>
-</form>
-<!-- ./ form -->
+    <a onclick="window.location.href='/Account/Login'" class="btn btn-outline-light btn-sm">Sign in!</a>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

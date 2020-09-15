@@ -1,35 +1,40 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Services.Interface;
-using SMSOnline.Models;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using Services;
 
 namespace SMSOnline.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ITestService _testService;
+        public HomeController(ITestService testService)
         {
-            _logger = logger;
+            _testService = testService;
+        }
+        public async Task<ActionResult> Index()
+        {
+            bool isAuthenticated = (System.Web.HttpContext.Current.User != null) &&
+                        System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            if (isAuthenticated)
+            {
+                var res = await _testService.GetAllAsync();
+                return View();
+            }
+            return RedirectToAction("Login", "Account");
         }
 
-        public async Task<IActionResult> Index()
+        public ActionResult About()
         {
+            ViewBag.Message = "Your application description page.";
+
             return View();
         }
 
-        public IActionResult Privacy()
+        public ActionResult Contact()
         {
-            return View();
-        }
+            ViewBag.Message = "Your contact page.";
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

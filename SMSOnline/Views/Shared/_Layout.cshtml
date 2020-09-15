@@ -1,4 +1,48 @@
-﻿<!doctype html>
+﻿@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>*@
+
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,17 +50,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@ViewData["Title"] - SMSOnline</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="~/app/assets/media/image/favicon.png" />
+    <link rel="shortcut icon" href="~/Content/app/assets/media/image/favicon.png" />
 
     <!-- Plugin styles -->
-    <link rel="stylesheet" href="~/app/vendors/bundle.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/app/vendors/bundle.css" type="text/css">
 
     <!-- Slick.js styles -->
-    <link rel="stylesheet" href="~/app/vendors/slick/slick.css" type="text/css">
-    <link rel="stylesheet" href="~/app/vendors/slick/slick-theme.css" type="text/css">
-
+    <link rel="stylesheet" href="~/Content/app/vendors/slick/slick.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/app/vendors/slick/slick-theme.css" type="text/css">
+    <link href="~/Content/app/assets/css/app.css" rel="stylesheet" />
     <!-- App styles -->
-    <link rel="stylesheet" href="~/app/assets/css/app.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/app/assets/css/app.min.css" type="text/css">
     @RenderSection("Css", required: false)
 </head>
 <body>
@@ -27,13 +71,13 @@
     </div>
     <!-- end::preloader -->
     <!-- begin::header -->
-    <partial name="_Header.cshtml" />
+    @Html.Partial("_Header")
     <!-- end::header -->
 
     <div id="main">
 
         <!-- begin::navigation -->
-        <partial name="_Navigation.cshtml" />
+        @Html.Partial("_Navigation")
         <!-- end::navigation -->
         <!-- begin::main content -->
         <main class="main-content">
@@ -41,7 +85,7 @@
             @RenderBody()
 
             <!-- begin::footer -->
-            <partial name="_Footer.cshtml" />
+            @Html.Partial("_Footer")
             <!-- end::footer -->
 
         </main>
@@ -50,23 +94,23 @@
     </div>
 
     <!-- Plugin scripts -->
-    <script src="~/app/vendors/bundle.js"></script>
+    <script src="~/Content/app/vendors/bundle.js"></script>
 
     <!-- Slick.js -->
-    <script src="~/app/vendors/slick/slick.min.js"></script>
+    <script src="~/Content/app/vendors/slick/slick.min.js"></script>
 
     <!-- Chartjs -->
-    <script src="~/app/vendors/charts/chartjs/chart.min.js"></script>
+    <script src="~/Content/app/vendors/charts/chartjs/chart.min.js"></script>
 
     <!-- Apex chart -->
     <script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>
-    <script src="~/app/vendors/charts/apex/apexcharts.min.js"></script>
+    <script src="~/Content/app/vendors/charts/apex/apexcharts.min.js"></script>
 
     <!-- Circle progress -->
-    <script src="~/app/vendors/circle-progress/circle-progress.min.js"></script>
+    <script src="~/Content/app/vendors/circle-progress/circle-progress.min.js"></script>
 
     <!-- Dashboard scripts -->
-    <script src="~/app/assets/js/examples/dashboard.js"></script>
+    <script src="~/Content/app/assets/js/examples/dashboard.js"></script>
     <div class="colors">
         <!-- To use theme colors with Javascript -->
         <div class="bg-primary"></div>
@@ -84,7 +128,7 @@
     </div>
 
     <!-- App scripts -->
-    <script src="~/app/assets/js/app.min.js"></script>
+    <script src="~/Content/app/assets/js/app.min.js"></script>
     @RenderSection("Scripts", required: false)
     <script>
         $(function () {

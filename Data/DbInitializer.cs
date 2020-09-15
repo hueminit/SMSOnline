@@ -1,47 +1,36 @@
 ﻿using System;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Internal;
-using Model.Entites;
-using Model.Enums;
-using Task = System.Threading.Tasks.Task;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Models.Entities;
+using Models.Enums;
 
 namespace Data
 {
-    public class DbInitializer
+    public static class DbInitializer
     {
-        private readonly AppDbContext _context;
-        private readonly UserManager<AppUser> _userManager;
-        private readonly RoleManager<AppRole> _roleManager;
-
-        public DbInitializer(AppDbContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+        public static void CreateAppUser(AppDbContext context)
         {
-            _context = context;
-            _userManager = userManager;
-            _roleManager = roleManager;
-        }
-
-        public async Task Seed()
-        {
-            if (!_roleManager.Roles.Any())
+            if (!context.Roles.Any(r => r.Name == "Admin"))
             {
-                await _roleManager.CreateAsync(new AppRole()
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Admin" };
+                manager.Create(role);
+                manager.Create(new IdentityRole()
                 {
-                    Name = "Admin",
-                    NormalizedName = "Admin",
-                    Description = "Top manager"
-                });
-
-                await _roleManager.CreateAsync(new AppRole()
-                {
-                    Name = "Customer",
-                    NormalizedName = "Customer",
-                    Description = "Customer"
+                    Name = "User",
                 });
             }
 
-            if (!_userManager.Users.Any())
+            if (!context.Users.Any(u => u.UserName == "admin"))
             {
-                await _userManager.CreateAsync(new AppUser()
+                var store = new UserStore<AppUser>(context);
+                var manager = new UserManager<AppUser>(store);
+                var user = new AppUser()
                 {
                     UserName = "admin",
                     FullName = "Administrator",
@@ -50,11 +39,12 @@ namespace Data
                     DateModified = DateTime.Now,
                     Gender = Gender.Male,
                     Address = "43 nguyễn chí thanh hà nội"
-                }, "123654$");
-                var user = await _userManager.FindByNameAsync("admin");
-                await _userManager.AddToRoleAsync(user, "Admin");
+                };
+
+                manager.Create(user, "123654$");
+                manager.AddToRole(user.Id, "Admin");
             }
-            await _context.SaveChangesAsync();
         }
+
     }
 }
