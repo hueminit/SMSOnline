@@ -95,18 +95,13 @@ namespace SMSOnline
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
 
-            //builder.RegisterAssemblyTypes(typeof(PostCategoryRepository).Assembly)
-            //    .Where(t => t.Name.EndsWith("Repository"))
-            //    .AsImplementedInterfaces().InstancePerRequest();
-
-
             builder.RegisterAssemblyTypes(typeof(TestService).Assembly)
                .Where(t => t.Name.EndsWith("Service"))
                .AsImplementedInterfaces().InstancePerRequest();
 
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-            //GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver((IContainer)container);
+
         }
         private static UserManager<AppUser> CreateManager(IdentityFactoryOptions<UserManager<AppUser>> options, IOwinContext context)
         {

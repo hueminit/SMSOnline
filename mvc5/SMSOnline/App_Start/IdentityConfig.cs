@@ -8,6 +8,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Data;
+using Microsoft.Owin.Security.DataProtection;
 using Models.Entities;
 
 namespace SMSOnline
@@ -43,6 +44,7 @@ namespace SMSOnline
         public ApplicationUserManager(IUserStore<AppUser> store)
             : base(store)
         {
+            
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)

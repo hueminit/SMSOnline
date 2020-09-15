@@ -991,11 +991,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\Model.csproj",
+      "projectUniqueName": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj",
       "projectName": "Model",
-      "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\Model.csproj",
+      "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj",
       "packagesPath": "C:\\Users\\lucvi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\obj\\",
+      "outputPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -1055,7 +1055,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,39 +1,89 @@
 ﻿@model SMSOnline.Models.RegisterViewModel
 @{
+    Layout = "~/Views/Shared/_IdentityLayout.cshtml";
     ViewBag.Title = "Register";
 }
+<h5>Create account</h5>
 
-<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "registerForm" }))
 {
-@Html.AntiForgeryToken()
-<h4>Create a new account.</h4>
-<hr />
-@Html.ValidationSummary("", new { @class = "text-danger" })
-<div class="form-group">
-    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.FullName, new
+        {
+            @class = "form-control",
+            @placeholder = "FullName",
+            @required = "required",
+            @autofocus = "autofocus"
+        })
     </div>
-</div>
-<div class="form-group">
-    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.UserName, new
+        {
+            @class = "form-control",
+            @placeholder = "UserName",
+            @required = "required",
+            @autofocus = "autofocus"
+        })
     </div>
-</div>
-<div class="form-group">
-    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Email, new
+        {
+            @class = "form-control",
+            @placeholder = "Username or email",
+            @required = "required",
+            @autofocus = "autofocus"
+        })
     </div>
-</div>
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" class="btn btn-default" value="Register" />
+    <div class="form-group">
+        @Html.PasswordFor(m => m.Password, new
+        {
+            @class = "form-control",
+            @placeholder = "Password",
+            @required = "required"
+        })
+
     </div>
-</div>
+    <div class="form-group">
+        @Html.PasswordFor(m => m.ConfirmPassword, new
+        {
+            @class = "form-control",
+            @placeholder = "ConfirmPassword",
+            @required = "required"
+        })
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.BirthDay, new
+             {
+                 @class = "form-control",
+                 @placeholder = "BirthDay",
+                 @required = "required",
+                 @type = "date"
+             })
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.PhoneNumber, new
+        {
+            @class = "form-control",
+            @placeholder = "PhoneNumber",
+            @required = "required"
+        })
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Address, new
+        {
+            @class = "form-control",
+            @placeholder = "Address",
+            @required = "required"
+        })
+    </div>
+    <a href="javascript:document.getElementById('registerForm').submit()" class="btn btn-primary btn-block">Register</a>
+    <hr>
+    <p class="text-muted">Already have an account?</p>
+    <a onclick="window.location.href='/Account/Login'" class="btn btn-outline-light btn-sm">Sign in!</a>
 }
 
 @section Scripts {

@@ -12,7 +12,7 @@ namespace Models.ViewModel
             Roles = new List<string>();
         }
 
-        public Guid? Id { set; get; }
+        public string Id { set; get; }
 
         [StringLength(70, MinimumLength = 3)]
         [Required]

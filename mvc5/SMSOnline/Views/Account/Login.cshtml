@@ -1,10 +1,8 @@
 ﻿@using SMSOnline.Models
-@model LoginViewModel
+@model SMSOnline.Models.LoginViewModel
 @{
     Layout = "~/Views/Shared/_IdentityLayout.cshtml";
     ViewData["Title"] = "SMSOnline Login";
-    ViewData["MetaDescription"] = "SMSOnline Login";
-    ViewData["MetaKeyword"] = "SMSOnline Login";
 }
 <h5>Sign in</h5>
 <!-- form -->
@@ -15,25 +13,21 @@
     <div class="form-group">
         @Html.TextBoxFor(m => m.Email, new { @class = "form-control"
             , placeholder = "Username or email",@required = "required" ,@autofocus= "autofocus"})
-        @* <input type="text" name="@Model.Email" class="form-control" placeholder="Username or email" required autofocus> *@
     </div>
     <div class="form-group">
         @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", @required = "required" })
-        @* <input name="@Model.Password" type="password" class="form-control" placeholder="Password" required> *@
     </div>
     <div class="form-group d-flex justify-content-between">
+        
         <div class="custom-control custom-checkbox">
-            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "ustom-control-input" })
-            <label class="custom-control-label" for="customCheck1">Remember me</label>
+            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "custom-control-input",
+           @type = "checkbox",
+           @checked = ""
+       })
+            <label class="custom-control-label" for="RememberMe">Remember me</label>
         </div>
         @Html.ActionLink("Forgot your password?", "ForgotPassword")
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Log in" class="btn btn-default" />
-        </div>
-    </div>
-    @Html.ActionLink("Register as a new user", "Register")
     <button class="btn btn-primary btn-block">Sign in</button>
     <hr>
     <p class="text-muted">Login with your social media account.</p>
@@ -76,7 +70,7 @@
     </ul>
     <hr>
     <p class="text-muted">Don't have an account?</p>
-    <a onclick="window.location.href='/register'" class="btn btn-outline-light btn-sm">Register now!</a>
+    <a onclick="window.location.href='/Account/Register'" class="btn btn-outline-light btn-sm">Register now!</a>
 }
 
 @section Scripts {

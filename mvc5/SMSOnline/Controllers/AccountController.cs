@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SMSOnline.Models;
@@ -6,8 +7,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Owin.Security.DataProtection;
 using Models.Entities;
+using Models.Enums;
+using Models.ViewModel;
 using Services;
+using ExternalLoginConfirmationViewModel = SMSOnline.Models.ExternalLoginConfirmationViewModel;
+using ForgotPasswordViewModel = SMSOnline.Models.ForgotPasswordViewModel;
+using LoginViewModel = SMSOnline.Models.LoginViewModel;
+using RegisterViewModel = SMSOnline.Models.RegisterViewModel;
+using ResetPasswordViewModel = SMSOnline.Models.ResetPasswordViewModel;
+using SendCodeViewModel = SMSOnline.Models.SendCodeViewModel;
+using VerifyCodeViewModel = SMSOnline.Models.VerifyCodeViewModel;
+
 namespace SMSOnline.Controllers
 {
     [Authorize]
@@ -15,15 +27,23 @@ namespace SMSOnline.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IUserService _userService;
+        private IEmailService _emailService;
+        DpapiDataProtectionProvider provider = new DpapiDataProtectionProvider("Sample");
 
-        public AccountController()
+        public AccountController(IUserService userService, IEmailService emailService)
         {
+            _userService = userService;
+            _emailService = emailService;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserService userService, IEmailService emailService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            UserManager.UserTokenProvider =  new DataProtectorTokenProvider<AppUser>(provider.Create("EmailConfirmation"));
+            _userService = userService;
+            _emailService = emailService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -71,13 +91,20 @@ namespace SMSOnline.Controllers
             {
                 return View(model);
             }
-            var userName = await FindUserByEmailOrUserName(model.Email);
-            if (string.IsNullOrEmpty(userName))
+
+            var check = new CheckAccountViewModel()
+            {
+                Email = model.Email, 
+                PhoneNumber = model.Email,
+                UserName = model.Email
+            };
+            var user = await _userService.FindUserByEmailOrUserNameOrPhoneNumber(check);
+            if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "User does not exist");
                 return View(model);
             }
-            var result = await SignInManager.PasswordSignInAsync(userName, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -157,9 +184,27 @@ namespace SMSOnline.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            var check = new CheckAccountViewModel()
             {
-                var user = new AppUser { UserName = model.Email, Email = model.Email };
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                UserName = model.UserName
+            };
+            if (ModelState.IsValid || (await _userService.FindUserByEmailOrUserNameOrPhoneNumber(check)) == null)
+            {
+                var user = new AppUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    FullName = model.FullName,
+                    PhoneNumber = model.PhoneNumber,
+                    BirthDay = model.BirthDay,
+                    Address = model.Address,
+                    Status = Status.Active,
+                    Avatar = string.Empty,
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -167,10 +212,11 @@ namespace SMSOnline.Controllers
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await _emailService.SendEmailAsync(model.Email, "Confirm your account",
+                        "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -210,8 +256,14 @@ namespace SMSOnline.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var check = new CheckAccountViewModel()
+                {
+                    Email = model.Email,
+                    PhoneNumber = model.Email,
+                    UserName = model.Email
+                };
+                var user =  await _userService.FindUserByEmailOrUserNameOrPhoneNumber(check);
+                if (user == null)//|| !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -219,10 +271,12 @@ namespace SMSOnline.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code =  UserManager.GeneratePasswordResetToken(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await _emailService.SendEmailAsync(model.Email, "Reset Password",
+                    "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+               // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -434,28 +488,6 @@ namespace SMSOnline.Controllers
             base.Dispose(disposing);
         }
 
-        public async Task<string> FindUserByEmailOrUserName(string userOrName)
-        {
-            var checkmail = Data.Helpers.TextHelper.EmailIsValid(userOrName);
-            if (checkmail)
-            {
-                var user = await UserManager.FindByEmailAsync(userOrName);
-                if (user != null)
-                {
-                    return user.UserName;
-                }
-            }
-            else
-            {
-                var user = await UserManager.FindByNameAsync(userOrName);
-                if (user != null)
-                {
-                    return user.UserName;
-                }
-            }
-
-            return string.Empty;
-        }
 
         #region Helpers
 

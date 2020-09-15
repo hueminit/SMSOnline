@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucvi\\Documents\\SMSOnline\\SMSOnline\\SMSOnline.csproj": {}
+    "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\SMSOnline\\SMSOnline.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucvi\\Documents\\SMSOnline\\Common\\Common.csproj": {
+    "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Common\\Common.csproj",
+        "projectUniqueName": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Common\\Common.csproj",
+        "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\lucvi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Common\\obj\\",
+        "outputPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -57,18 +57,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\lucvi\\Documents\\SMSOnline\\Data\\Data.csproj": {
+    "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Data\\Data.csproj",
+        "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Data\\Data.csproj",
         "packagesPath": "C:\\Users\\lucvi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Data\\obj\\",
+        "outputPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -89,8 +89,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\Model.csproj"
+              "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj"
               }
             }
           }
@@ -154,18 +154,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\Model.csproj": {
+    "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\Model.csproj",
+        "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj",
         "packagesPath": "C:\\Users\\lucvi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\obj\\",
+        "outputPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -225,18 +225,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\lucvi\\Documents\\SMSOnline\\Service\\Services.csproj": {
+    "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Service\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Service\\Services.csproj",
+        "projectUniqueName": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Service\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Service\\Services.csproj",
+        "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Service\\Services.csproj",
         "packagesPath": "C:\\Users\\lucvi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Service\\obj\\",
+        "outputPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -257,11 +257,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\lucvi\\Documents\\SMSOnline\\Data\\Data.csproj": {
-                "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Data\\Data.csproj"
+              "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Data\\Data.csproj": {
+                "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Data\\Data.csproj"
               },
-              "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\Model.csproj"
+              "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj"
               }
             }
           }
@@ -295,18 +295,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\lucvi\\Documents\\SMSOnline\\SMSOnline\\SMSOnline.csproj": {
+    "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\SMSOnline\\SMSOnline.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucvi\\Documents\\SMSOnline\\SMSOnline\\SMSOnline.csproj",
+        "projectUniqueName": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\SMSOnline\\SMSOnline.csproj",
         "projectName": "SMSOnline",
-        "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\SMSOnline\\SMSOnline.csproj",
+        "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\SMSOnline\\SMSOnline.csproj",
         "packagesPath": "C:\\Users\\lucvi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\SMSOnline\\obj\\",
+        "outputPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\SMSOnline\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -327,17 +327,17 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\lucvi\\Documents\\SMSOnline\\Common\\Common.csproj": {
-                "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Common\\Common.csproj"
+              "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Common\\Common.csproj"
               },
-              "C:\\Users\\lucvi\\Documents\\SMSOnline\\Data\\Data.csproj": {
-                "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Data\\Data.csproj"
+              "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Data\\Data.csproj": {
+                "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Data\\Data.csproj"
               },
-              "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Model\\Model.csproj"
+              "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Model\\Model.csproj"
               },
-              "C:\\Users\\lucvi\\Documents\\SMSOnline\\Service\\Services.csproj": {
-                "projectPath": "C:\\Users\\lucvi\\Documents\\SMSOnline\\Service\\Services.csproj"
+              "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Service\\Services.csproj": {
+                "projectPath": "C:\\Users\\lucvi\\OneDrive\\Documents\\SMSOnline\\Service\\Services.csproj"
               }
             }
           }
@@ -400,7 +400,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
