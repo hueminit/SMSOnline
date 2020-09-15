@@ -70,6 +70,10 @@
     <Compile Include="Migrations\202009150357417_Init.Designer.cs">
       <DependentUpon>202009150357417_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009151744325_AddContactProperty.cs" />
+    <Compile Include="Migrations\202009151744325_AddContactProperty.Designer.cs">
+      <DependentUpon>202009151744325_AddContactProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -93,6 +97,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202009150357417_Init.resx">
       <DependentUpon>202009150357417_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009151744325_AddContactProperty.resx">
+      <DependentUpon>202009151744325_AddContactProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
