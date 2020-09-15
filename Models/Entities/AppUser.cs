@@ -15,27 +15,8 @@ namespace Models.Entities
     [Table("AppUsers")]
     public sealed class AppUser : IdentityUser, IDateTracking, ISwitchable, IsDelete
     {
-        public AppUser()
-        {
-        }
-
-        public AppUser(string id, string fullName, string userName, string email, string phoneNumber, string avatar, Status status,
-            string address, Gender gender, bool isDelete, DateTime? birthDay)
-        {
-            Id = id;
-            FullName = fullName;
-            UserName = userName;
-            Email = email;
-            PhoneNumber = phoneNumber;
-            Avatar = avatar;
-            Status = status;
-            Address = address;
-            Gender = gender;
-            IsDelete = isDelete;
-            BirthDay = birthDay;
-        }
-
         public string FullName { get; set; }
+        public decimal Balance { get; set; }
         public DateTime? BirthDay { set; get; }
         public string Avatar { get; set; }
         public Gender Gender { get; set; }

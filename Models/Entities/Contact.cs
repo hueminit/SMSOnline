@@ -9,21 +9,6 @@ namespace Models.Entities
     [Table("Contacts")]
     public class Contact : DomainEntity<int>
     {
-        public Contact()
-        {
-        }
-
-        public Contact(int id, string fullName)
-        {
-            Id = id;
-            FullName = fullName;
-        }
-
-        public Contact(string fullName)
-        {
-            FullName = fullName;
-        }
-
         [StringLength(255)]
         public string FullName { set; get; }
 
@@ -33,6 +18,8 @@ namespace Models.Entities
         public virtual AppUser User { set; get; }
 
         public bool IsFriend { set; get; }
+
+        public bool IsBlock { set; get; }
 
         public bool StatusRequest { set; get; }
 

@@ -13,21 +13,6 @@ namespace Models.Entities
     [Table("Tests")]
     public class Test : DomainEntity<int>
     {
-        public Test()
-        {
-        }
-
-        public Test(int id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
-
-        public Test(string name)
-        {
-            Name = name;
-        }
-
         [StringLength(255)]
         public string Name { set; get; }
     }

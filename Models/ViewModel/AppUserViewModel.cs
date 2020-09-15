@@ -29,16 +29,25 @@ namespace Models.ViewModel
         [Required]
         public string UserName { set; get; }
 
+        public decimal Balance { get; set; }
+
         public string Address { get; set; }
 
         [StringLength(15, MinimumLength = 9)]
         public string PhoneNumber { set; get; }
 
         public string Avatar { get; set; }
+
         public Status Status { get; set; }
+
         public Gender Gender { get; set; }
+
         public DateTime DateCreated { get; set; }
+
+        public DateTime DateModified { get; set; }
+
         public List<string> Roles { get; set; }
+
         public bool IsDelete { get; set; }
     }
 }

@@ -215,6 +215,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Hub\SMSOnlineHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -960,6 +961,10 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_IdentityLayout.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
+    <Content Include="Views\Test\FindFriend.cshtml" />
+    <Content Include="Views\Test\InfoUser.cshtml" />
+    <Content Include="Views\Test\Chat.cshtml" />
+    <Content Include="Views\Test\ListFriendAndContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
