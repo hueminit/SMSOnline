@@ -11,6 +11,7 @@ namespace SMSOnline
         {
             ConfigAutofac(app);
             ConfigureAuth(app);
+            app.MapSignalR();
         }
     }
 }

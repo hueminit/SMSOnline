@@ -11,9 +11,9 @@ namespace Models.ViewModel
         public string Server { set; get; } = "smtp.gmail.com";
         public int Port { set; get; } = 587;
         public bool EnableSsl { set; get; } = true;
-        public string UserName { set; get; } = "hung2k.com@gmail.com";
-        public string Password { set; get; } = "Manhhung@18082018";
-        public string FromEmail { set; get; } = "hung2k.com@gmail.com";
+        public string UserName { set; get; } = "c1808m@gmail.com";
+        public string Password { set; get; } = "c1808m1234";
+        public string FromEmail { set; get; } = "SMSOnline@gmail.com";
         public string FromName { set; get; } = "SMSOnline Admin";
     }
 }
