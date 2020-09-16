@@ -98,14 +98,20 @@
     <Compile Include="Shared\IsDelete.cs" />
     <Compile Include="Shared\ISwitchable.cs" />
     <Compile Include="ViewModel\AppUserViewModel.cs" />
-    <Compile Include="ViewModel\CheckAccountViewModel.cs" />
-    <Compile Include="ViewModel\MailSettingModel.cs" />
+    <Compile Include="ViewModel\ContactViewModel.cs" />
+    <Compile Include="ViewModel\CreditCardViewModel.cs" />
+    <Compile Include="ViewModel\DepositViewModel.cs" />
+    <Compile Include="ViewModel\Others\CheckAccountViewModel.cs" />
+    <Compile Include="ViewModel\Others\MailSettingModel.cs" />
+    <Compile Include="ViewModel\MessageViewModel.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
+    <Compile Include="ViewModel\TransactionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

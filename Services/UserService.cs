@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Models.ViewModel;
+using Models.ViewModel.Others;
 
 namespace Services
 {
