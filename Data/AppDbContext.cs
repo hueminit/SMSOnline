@@ -15,6 +15,9 @@ namespace Data
         }
 
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Deposit> Deposits { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         //public DbSet<Message> Messages { get; set; }
 

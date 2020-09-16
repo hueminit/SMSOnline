@@ -84,10 +84,14 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="Entities\AppUser.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\CreditCard.cs" />
+    <Compile Include="Entities\Deposits.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Test.cs" />
+    <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\Status.cs" />
+    <Compile Include="Enums\TransactionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\DomainEntity.cs" />
     <Compile Include="Shared\IDateTracking.cs" />

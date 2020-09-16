@@ -29,10 +29,11 @@ namespace Models.Entities
 
         public bool IsDelete { get; set; }
 
-        //public virtual ICollection<Message> MessagesSent { get; set; }
-        //public virtual ICollection<Message> MessagesReceived { get; set; }
-
+        public  ICollection<Message> Messages { set; get; }
         public ICollection<Contact> Contacts { get; set; }
+        public ICollection<Deposit> Deposits { get; set; }
+        public ICollection<CreditCard> CreditCards { get; set; }
+        public ICollection<Transaction> Transactions { get; set; }
 
         /// <summary>
         /// 
