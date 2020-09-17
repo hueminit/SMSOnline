@@ -18,6 +18,7 @@ namespace Services
     public interface IUserService : IRepository<AppUser>
     {
         Task<AppUserViewModel> FindUserByEmailOrUserNameOrPhoneNumber(CheckAccountViewModel model);
+        Task<AppUserViewModel> GetUserById(string userId);
         Task<bool> Save();
     }
 
@@ -37,6 +38,18 @@ namespace Services
 
             var user = await GetSingleByCondition(x => x.Email == model.Email
                                                      || x.UserName == model.UserName || x.PhoneNumber == model.PhoneNumber);
+            if (user != null)
+            {
+                return _mapper.Map<AppUser, AppUserViewModel>(user);
+            }
+
+            return null;
+        }
+
+        public async Task<AppUserViewModel> GetUserById(string userId)
+        {
+            var user = await GetSingleByCondition(x => x.Id == userId);
+
             if (user != null)
             {
                 return _mapper.Map<AppUser, AppUserViewModel>(user);

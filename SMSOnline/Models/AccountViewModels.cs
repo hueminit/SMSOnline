@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Models.Enums;
 
 namespace SMSOnline.Models
 {
@@ -48,6 +49,12 @@ namespace SMSOnline.Models
         public string Email { get; set; }
     }
 
+    public class LoginAndRegisterViewModel
+    {
+        public LoginViewModel LoginViewModel { get; set; }
+        public RegisterViewModel RegisterViewModel { get; set; }
+    }
+
     public class LoginViewModel
     {
         [Required(ErrorMessage = "The email address  or username or phonenumber is required")]
@@ -66,7 +73,7 @@ namespace SMSOnline.Models
 
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Full name required", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Full name required")]
         [Display(Name = "Full name")]
         public string FullName { set; get; }
 
@@ -94,8 +101,6 @@ namespace SMSOnline.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "Address")]
-        public string Address { get; set; }
 
         [Display(Name = "Phone number")]
         [Required(ErrorMessage = "Phone Number Required!")]
@@ -106,6 +111,9 @@ namespace SMSOnline.Models
 
         [Display(Name = "Avatar")]
         public string Avatar { get; set; }
+
+        [Display(Name = "Gender")]
+        public Gender Gender { get; set; }
     }
 
     public class ResetPasswordViewModel

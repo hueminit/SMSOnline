@@ -40,7 +40,6 @@ namespace Services
         {
             var model = _mapper.Map<TestViewModel, Test>(test);
             await Add(model);
-
         }
 
         public async Task UpdateAsync(TestViewModel test)

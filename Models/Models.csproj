@@ -104,6 +104,7 @@
     <Compile Include="ViewModel\Others\CheckAccountViewModel.cs" />
     <Compile Include="ViewModel\Others\MailSettingModel.cs" />
     <Compile Include="ViewModel\MessageViewModel.cs" />
+    <Compile Include="ViewModel\Others\UserLoginModel.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
     <Compile Include="ViewModel\TransactionViewModel.cs" />
   </ItemGroup>
