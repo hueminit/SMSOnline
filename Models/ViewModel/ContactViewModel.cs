@@ -16,7 +16,10 @@ namespace Models.ViewModel
         public string FullName { set; get; }
 
         [Required]
-        public string UserId { set; get; }
+        public string ContactSentId { set; get; }
+
+        [Required]
+        public string ContactReceivedId { set; get; }
 
         public bool IsFriend { set; get; }
 

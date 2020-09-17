@@ -12,10 +12,11 @@ namespace Models.Entities
         [StringLength(255)]
         public string FullName { set; get; }
 
-        public string UserId { set; get; }
+        public string ContactSentId { set; get; }
+        //public virtual AppUser ContactSentRequest { set; get; }
 
-        [ForeignKey("UserId")]
-        public virtual AppUser User { set; get; }
+        public string ContactReceivedId { set; get; }
+        public virtual AppUser ContactReceivedRequest { set; get; }
 
         public bool IsFriend { set; get; }
 

@@ -9,11 +9,11 @@ namespace Models.Entities
     [Table("Messages")]
     public class Message : DomainEntity<int>, IDateTracking
     {
-        public string UserId { set; get; }
-        public AppUser User { set; get; }
+        public string UserSentId { set; get; }
+        //public AppUser UserSent { set; get; }
 
-        public string ContactId { set; get; }
-        public AppUser Contact { set; get; }
+        public string UserReceivedId { set; get; }
+        public AppUser UserReceived { set; get; }
 
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }

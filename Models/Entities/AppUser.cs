@@ -29,13 +29,18 @@ namespace Models.Entities
 
         public bool IsDelete { get; set; }
 
-        [InverseProperty("User")]
-        public  ICollection<Message> MessagesSent { get; set; }
+        //[InverseProperty("UserSent")]
+        //public  ICollection<Message> MessagesSent { get; set; }
 
-        [InverseProperty("Contact")]
+        [InverseProperty("UserReceived")]
         public  ICollection<Message> MessagesReceived { get; set; }
 
-        public ICollection<Contact> Contacts { get; set; }
+        //[InverseProperty("ContactSentRequest")]
+        //public ICollection<Contact> ContactSent { get; set; }
+
+        [InverseProperty("ContactReceivedRequest")]
+        public ICollection<Contact> ContactReceived { get; set; }
+
         public ICollection<Deposit> Deposits { get; set; }
         public ICollection<CreditCard> CreditCards { get; set; }
         public ICollection<Transaction> Transactions { get; set; }

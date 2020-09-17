@@ -35,17 +35,30 @@ namespace Data
             builder.Entity<IdentityUserLogin>().ToTable("AppUserLogins").HasKey(x => x.UserId);
             builder.Entity<IdentityUserRole>().ToTable("AppUserRoles").HasKey(x => new { x.RoleId, x.UserId });
 
-            builder.Entity<Message>()
-                .HasRequired(m => m.User)
-                .WithMany(t => t.MessagesSent)
-                .HasForeignKey(m => m.UserId)
-                .WillCascadeOnDelete(false);
+            //builder.Entity<Message>()
+            //    .HasRequired(m => m.UserSent)
+            //    .WithMany(t => t.MessagesSent)
+            //    .HasForeignKey(m => m.UserSentId)
+            //    .WillCascadeOnDelete(false);
 
             builder.Entity<Message>()
-                .HasRequired(m => m.Contact)
+                .HasRequired(m => m.UserReceived)
                 .WithMany(t => t.MessagesReceived)
-                .HasForeignKey(m => m.ContactId)
+                .HasForeignKey(m => m.UserReceivedId)
                 .WillCascadeOnDelete(false);
+
+            //builder.Entity<Contact>()
+            //   .HasRequired(m => m.ContactSentRequest)
+            //   .WithMany(t => t.ContactSent)
+            //   .HasForeignKey(m => m.ContactSentId)
+            //   .WillCascadeOnDelete(false);
+
+            builder.Entity<Contact>()
+                .HasRequired(m => m.ContactReceivedRequest)
+                .WithMany(t => t.ContactReceived)
+                .HasForeignKey(m => m.ContactReceivedId)
+                .WillCascadeOnDelete(false);
+
 
             base.OnModelCreating(builder);
         }

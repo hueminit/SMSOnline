@@ -200,11 +200,13 @@ namespace SMSOnline.Controllers
                     FullName = model.FullName,
                     PhoneNumber = model.PhoneNumber,
                     BirthDay = model.BirthDay,
-                    Address = model.Address,
+                    Address = string.Empty,
                     Status = Status.Active,
-                    Avatar = string.Empty,
+                    Gender = model.Gender,
+                    Avatar = "/Content/uploads/avatar.png",
                     DateCreated = DateTime.Now,
-                    DateModified = DateTime.Now
+                    DateModified = DateTime.Now,
+                    Balance = (Common.Constants.Price * 5)
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -214,7 +216,7 @@ namespace SMSOnline.Controllers
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    
+
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await _emailService.SendEmailAsync(model.Email, "Confirm your account",
                         "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");

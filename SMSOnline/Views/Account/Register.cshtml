@@ -72,20 +72,12 @@
             @required = "required"
         })
     </div>
-    <div class="form-group">
-        @Html.TextBoxFor(m => m.Address, new
-        {
-            @class = "form-control",
-            @placeholder = "Address",
-            @required = "required"
-        })
-    </div>
     <div class="form-group" style="text-align: left;">
         <div class="form-check" style="display: inline-block;margin-right: 25px;">
-            <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="..."> Male
+            <input class="form-check-input position-static" type="radio" name="Gender" id="Gender" value="0" aria-label="..."> Male
         </div>
         <div class="form-check" style="display: inline-block">
-            <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option2" aria-label="..."> Female
+            <input class="form-check-input position-static" type="radio" name="Gender" id="Gender" value="1" aria-label="..."> Female
         </div>
     </div>
     <a href="javascript:document.getElementById('registerForm').submit()" class="btn btn-primary btn-block">Register</a>
