@@ -6,6 +6,7 @@ using Models.AutoMapper;
 using Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace Services
     public interface IUserService : IRepository<AppUser>
     {
         Task<AppUserViewModel> FindUserByEmailOrUserNameOrPhoneNumber(CheckAccountViewModel model);
+        Task<List<AppUserViewModel>> FindUser(string keyword);
         Task<AppUserViewModel> GetUserById(string userId);
         Task<bool> Save();
     }
@@ -44,6 +46,17 @@ namespace Services
             }
 
             return null;
+        }
+
+        public async Task<List<AppUserViewModel>> FindUser(string keyword)
+        {
+            var query = await GetMulti(x => x.IsDelete == false
+                                            && (x.FullName.Contains(keyword)
+                                                || x.Email.Contains(keyword)
+                                                || x.UserName.Contains(keyword)
+                                                || x.PhoneNumber.Contains(keyword)));
+            query = query.OrderByDescending(x => x.UserName);
+            return await _mapper.ProjectTo<AppUserViewModel>(query).ToListAsync();
         }
 
         public async Task<AppUserViewModel> GetUserById(string userId)

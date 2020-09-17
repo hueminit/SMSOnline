@@ -1,0 +1,137 @@
+﻿<!-- begin::chat block -->
+<div class="container-fluid h-100">
+
+    <div class="row no-gutters chat-block">
+
+        <!-- begin::chat sidebar -->
+        @Html.Partial("_ChatSearch")
+        <!-- end::chat sidebar -->
+        <!-- begin::chat content -->
+        @* <div class="col-lg-8 chat-content"> *@
+        <div class="col-lg-12 chat-content">
+
+            <!-- begin::chat header -->
+            <div class="chat-header border-bottom">
+                <div class="d-flex align-items-center">
+                    <div class="pr-3">
+                        <div class="avatar avatar-sm avatar-state-warning">
+                            <img src="https://via.placeholder.com/128X128" class="rounded-circle"
+                                 alt="image">
+                        </div>
+                    </div>
+                    <div>
+                        <h6 class="mb-1">Orelie Rockhall</h6>
+                        <div class="m-0 small text-success">typing...</div>
+                    </div>
+                    <div class="ml-auto">
+                        <ul class="nav align-items-center">
+                            <li class="mr-4 d-sm-inline d-none">
+                                <a href="#" title="Start Video Call" data-toggle="tooltip">
+                                    <i data-feather="video" class="width-18 height-18"></i>
+                                </a>
+                            </li>
+                            <li class="mr-4 d-sm-inline d-none">
+                                <a href="#" title="Start Voice Call" data-toggle="tooltip">
+                                    <i data-feather="phone-call" class="width-18 height-18"></i>
+                                </a>
+                            </li>
+                            <li class="d-sm-inline d-none">
+                                <a href="#" title="Add to Contact" data-toggle="tooltip">
+                                    <i data-feather="user-plus" class="width-18 height-18"></i>
+                                </a>
+                            </li>
+                            <li class="ml-4 mobile-chat-close-btn">
+                                <a href="#" class="btn btn-sm btn-danger">
+                                    <i data-feather="x" class="width-18 height-18"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- end::chat header -->
+            <!-- begin::messages -->
+            <div class="messages">
+                <div class="message-item">
+                    <div class="message-item-content">Hi!</div>
+                    <span class="time small text-muted font-italic">02:30 PM</span>
+                </div>
+                <div class="message-item me">
+                    <div class="message-item-content">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Exercitationem fuga iure iusto libero, possimus quasi quis repellat sint tempora ullam!
+                    </div>
+                    <span class="time small text-muted font-italic">Yesterday</span>
+                </div>
+                <div class="message-item">
+                    <div class="message-item-content">Hello! How are you today?</div>
+                    <span class="time small text-muted font-italic">02:30 PM</span>
+                </div>
+                <div class="message-item me">
+                    <div class="message-item-content">Lorem ipsum dolor sit.</div>
+                    <span class="time small text-muted font-italic">02:30 PM</span>
+                </div>
+                <div class="message-item">
+                    <div class="message-item-content d-flex">
+                        <i class="ti-file mr-2 font-size-20 mt-2"></i>
+                        <div>
+                            <div>important_documents.pdf <i class="text-muted small">(50KB)</i></div>
+                            <ul class="list-inline small">
+                                <li class="list-inline-item"><a href="#">Download</a></li>
+                                <li class="list-inline-item"><a href="#">View</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="small text-muted font-italic">02:30 PM</span>
+                </div>
+                <div class="message-item me">
+                    <div class="message-item-content">Lorem ipsum dolor sit.</div>
+                    <span class="time small text-muted font-italic">02:30 PM</span>
+                </div>
+                <div class="message-item">
+                    <div class="message-item-content">Lorem ipsum dolor sit.</div>
+                    <span class="time small text-muted font-italic">02:30 PM</span>
+                </div>
+                <div class="message-item me message-media">
+                    <img src="https://via.placeholder.com/600X600" alt="image">
+                    <span class="time small text-muted font-italic">02:30 PM</span>
+                </div>
+                <div class="message-item message-item-divider">
+                    <span>Today</span>
+                </div>
+                <div class="message-item">
+                    <div class="message-item-content">Lorem ipsum dolor sit.</div>
+                    <span class="time small text-muted font-italic">02:30 PM</span>
+                </div>
+            </div>
+            <!-- end::messages -->
+            <!-- begin::chat footer -->
+            <div class="chat-footer border-top">
+                <form class="d-flex">
+                    <button class="btn btn-outline-light mr-2" type="button" title="Emoji"
+                            data-toggle="tooltip">
+                        <i data-feather="smile" class="width-15 height-15"></i>
+                    </button>
+                    <div class="flex-grow-1">
+                        <input type="text" class="form-control" placeholder="Write your message">
+                    </div>
+                    <div class="chat-footer-buttons d-flex">
+                        <button class="btn btn-primary" type="submit">
+                            <i data-feather="send" class="width-15 height-15"></i>
+                        </button>
+                        @* <button class="btn btn-outline-light" type="button" title="Attach files" *@
+                        @*         data-toggle="tooltip"> *@
+                        @*     <i data-feather="paperclip" class="width-15 height-15"></i> *@
+                        @* </button> *@
+                    </div>
+                </form>
+            </div>
+            <!-- end::chat footer -->
+
+        </div>
+        <!-- begin::chat content -->
+
+    </div>
+
+</div>
+<!-- begin::chat block -->

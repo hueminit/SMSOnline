@@ -13,10 +13,10 @@ namespace Models.ViewModel
         public int Id { set; get; }
 
         [Required]
-        public string UserId { set; get; }
+        public string UserSentId { set; get; }
 
         [Required]
-        public string ContactId { set; get; }
+        public string UserReceivedId { set; get; }
 
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace Services
         public async Task<List<TestViewModel>> GetAllAsync()
         {
             var res = await GetAll();
-            return  _mapper.ProjectTo<TestViewModel>(res).ToList();
+            return  await _mapper.ProjectTo<TestViewModel>(res).ToListAsync();
         }
 
         public async Task AddAsync(TestViewModel test)

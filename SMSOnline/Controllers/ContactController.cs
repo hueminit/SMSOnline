@@ -6,23 +6,20 @@ using System.Web.Mvc;
 
 namespace SMSOnline.Controllers
 {
-    public class TestController : Controller
+    public class ContactController : Controller
     {
-        public ActionResult FindFriend()
+        // GET: Contact
+        public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult InfoUser()
-        {
-            return View();
-        }
-        public ActionResult Chat()
+        public ActionResult Profile()
         {
             return View();
         }
 
-        public ActionResult ListFriendAndContact()
+        public ActionResult FindUser()
         {
             return View();
         }
