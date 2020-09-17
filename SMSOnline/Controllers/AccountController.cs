@@ -11,6 +11,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Models.Entities;
 using Models.Enums;
 using Models.ViewModel;
+using Models.ViewModel.Others;
 using Services;
 using ExternalLoginConfirmationViewModel = SMSOnline.Models.ExternalLoginConfirmationViewModel;
 using ForgotPasswordViewModel = SMSOnline.Models.ForgotPasswordViewModel;

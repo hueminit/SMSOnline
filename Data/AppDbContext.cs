@@ -15,8 +15,11 @@ namespace Data
         }
 
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Deposit> Deposits { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
-        //public DbSet<Message> Messages { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         public DbSet<Test> Tests { get; set; }
 
@@ -32,17 +35,17 @@ namespace Data
             builder.Entity<IdentityUserLogin>().ToTable("AppUserLogins").HasKey(x => x.UserId);
             builder.Entity<IdentityUserRole>().ToTable("AppUserRoles").HasKey(x => new { x.RoleId, x.UserId });
 
-            //builder.Entity<Message>()
-            //    .HasOne(p => p.Receiver)
-            //    .WithMany(t => t.MessagesReceived)
-            //    .HasForeignKey(m => m.UserId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Message>()
+                .HasRequired(m => m.User)
+                .WithMany(t => t.MessagesSent)
+                .HasForeignKey(m => m.UserId)
+                .WillCascadeOnDelete(false);
 
-            //builder.Entity<Message>()
-            //    .HasOne(p => p.Sender)
-            //    .WithMany(t => t.MessagesSent)
-            //    .HasForeignKey(m => m.ContactId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Message>()
+                .HasRequired(m => m.Contact)
+                .WithMany(t => t.MessagesReceived)
+                .HasForeignKey(m => m.ContactId)
+                .WillCascadeOnDelete(false);
 
             base.OnModelCreating(builder);
         }

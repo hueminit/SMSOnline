@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Models.ViewModel;
+using Models.ViewModel.Others;
 
 namespace Services
 {
