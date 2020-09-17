@@ -232,6 +232,8 @@
     <Content Include="Content\app\assets\css\app.css" />
     <Content Include="Content\app\assets\css\app.min.css" />
     <Content Include="Content\app\assets\css\custom.css" />
+    <Content Include="Content\app\assets\css\customidentity.css" />
+    <Content Include="Content\app\assets\css\customclient.css" />
     <Content Include="Content\app\assets\fonts\inter-ui\inter.css" />
     <Content Include="Content\app\assets\icons\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\app\assets\icons\font-awesome\fonts\fontawesome-webfont.svg" />
