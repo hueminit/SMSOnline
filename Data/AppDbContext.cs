@@ -23,6 +23,8 @@ namespace Data
 
         public DbSet<Test> Tests { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+
         public static AppDbContext Create()
         {
             return new AppDbContext();

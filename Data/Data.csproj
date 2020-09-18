@@ -98,6 +98,10 @@
     <Compile Include="Migrations\202009171519175_updatedatabase.Designer.cs">
       <DependentUpon>202009171519175_updatedatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009181420371_AddProduct.cs" />
+    <Compile Include="Migrations\202009181420371_AddProduct.Designer.cs">
+      <DependentUpon>202009181420371_AddProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -134,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009171519175_updatedatabase.resx">
       <DependentUpon>202009171519175_updatedatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009181420371_AddProduct.resx">
+      <DependentUpon>202009181420371_AddProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,9 @@ namespace Models.AutoMapper
 
                 cfg.CreateMap<Test, TestViewModel>().ReverseMap();
                 cfg.CreateMap<TestViewModel, Test>().ReverseMap();
+                
+                cfg.CreateMap<Product, ProductViewModel>().ReverseMap();
+                cfg.CreateMap<ProductViewModel, Product>().ReverseMap();
 
             });
 
