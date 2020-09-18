@@ -6,9 +6,11 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Data.Helpers;
 using Data.Infrastructure;
 using Models.AutoMapper;
 using Models.Entities;
+using Models.Shared;
 using Models.ViewModel;
 using PagedList;
 
@@ -17,7 +19,7 @@ namespace Services
     public interface IContactService : IRepository<Contact>
     {
         Task<bool> CreateContact(string contactSentId, string contactReceivedId);
-        //Task<List<ContactViewModel>> GetAllContact(bool isFriend,string contactSentId,int page = 1,int pageSize = 8);
+        Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend,string contactSentId,int page = 1,int pageSize = 8);
         Task<List<ContactViewModel>> GetAllRequestFriend(string currentUserId);
         Task<List<ContactViewModel>> GetAllUserLocked(string currentUserId);
         Task<bool> DeleteContact(string contactSentId, string contactReceivedId);
@@ -64,23 +66,21 @@ namespace Services
             return false;
         }
 
-        //public async Task<IPagedList<ContactViewModel>> GetAllContact(bool isFriend, string contactSentId, int page = 1, int pageSize = 8)
-        //{
-        //    var query = await GetMulti(x => x.ContactSentId == contactSentId && x.IsFriend);
-        //    // get your original paged list
-        //    //IPagedList<Foo> pagedFoos = _repository.GetFoos(pageNumber, pageSize);
-        //    //// map to IEnumerable
-        //    //IEnumerable<Bar> bars = Mapper.Map<IEnumerable<Bar>>(pagedFoos);
-        //    //// create an instance of StaticPagedList with the mapped IEnumerable and original IPagedList metadata
-        //    //IPagedList<Bar> pagedBars = new StaticPagedList<Bar>(bars, pagedFoos.GetMetaData());
-        //    var res = query.ToPagedList(page, pageSize);
-
-        //    IEnumerable<Contact> contacts = Mapper.Map<IEnumerable<ContactViewModel>>(pagedFoos);
-
-        //    IPagedList<Bar> pagedBars = new StaticPagedList<Bar>(bars, pagedFoos.GetMetaData());
-        //    //var res = _mapper.Map<IPagedList<Contact>, IPagedList<ContactViewModel>>(query).ToPagedList(page, pageSize);
-        //    return res;
-        //}
+        public async Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend, string contactSentId, int page = 1, int pageSize = 8)
+        {
+            var query = await GetMulti(x => x.ContactSentId == contactSentId && x.IsFriend);
+            query = query.OrderByDescending(x => x.FullName).Skip(page * pageSize).Take(pageSize);
+            int totalRow = query.Count();
+            var res = new PaginationSet<ContactViewModel>()
+            {
+                Page = page,
+                TotalCount = totalRow,
+                TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
+                Items = _mapper.ProjectTo<ContactViewModel>(query).ToList(),
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
+            };
+            return res;
+        }
 
         public async Task<List<ContactViewModel>> GetAllRequestFriend(string currentUserId)
         {

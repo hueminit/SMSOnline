@@ -103,6 +103,9 @@
     <Compile Include="Shared\IDateTracking.cs" />
     <Compile Include="Shared\IsDelete.cs" />
     <Compile Include="Shared\ISwitchable.cs" />
+    <Compile Include="Shared\PagedResult.cs" />
+    <Compile Include="Shared\PagedResultBase.cs" />
+    <Compile Include="Shared\PaginationSet.cs" />
     <Compile Include="ViewModel\AppUserViewModel.cs" />
     <Compile Include="ViewModel\ContactViewModel.cs" />
     <Compile Include="ViewModel\CreditCardViewModel.cs" />
@@ -122,6 +125,7 @@
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

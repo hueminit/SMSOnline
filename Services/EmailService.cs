@@ -27,7 +27,8 @@ namespace Services
                     UseDefaultCredentials = false,
                     Port = mailSetting.Port,
                     EnableSsl = mailSetting.EnableSsl,
-                    Credentials = new NetworkCredential(mailSetting.UserName, mailSetting.Password)
+                    Credentials = new NetworkCredential(mailSetting.UserName, mailSetting.Password),
+                    Timeout = 5
                 };
 
                 MailMessage mailMessage = new MailMessage

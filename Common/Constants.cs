@@ -9,5 +9,6 @@ namespace Common
     public static class Constants
     {
         public static decimal Price = 100;
+        public static string AvatarDefault = "/Content/uploads/avatar.png";
     }
 }

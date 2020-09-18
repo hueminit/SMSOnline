@@ -174,6 +174,12 @@ namespace SMSOnline.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            bool isAuthenticated = (System.Web.HttpContext.Current.User != null) &&
+                                   System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            if (isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             RegisterViewModel model = new RegisterViewModel();
             return View(model);
         }
@@ -203,7 +209,7 @@ namespace SMSOnline.Controllers
                     Address = string.Empty,
                     Status = Status.Active,
                     Gender = model.Gender,
-                    Avatar = "/Content/uploads/avatar.png",
+                    Avatar = Common.Constants.AvatarDefault,
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
                     Balance = (Common.Constants.Price * 5)
@@ -215,11 +221,10 @@ namespace SMSOnline.Controllers
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await _emailService.SendEmailAsync(model.Email, "Confirm your account",
-                        "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await _emailService.SendEmailAsync(model.Email, "Confirm your account",
+                    //    "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -274,10 +279,10 @@ namespace SMSOnline.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                string code =  UserManager.GeneratePasswordResetToken(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await _emailService.SendEmailAsync(user.Email, "Reset Password",
-                    "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //string code =  UserManager.GeneratePasswordResetToken(user.Id);
+                //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                //await _emailService.SendEmailAsync(user.Email, "Reset Password",
+                //    "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }

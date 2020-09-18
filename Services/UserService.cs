@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Models.Shared;
 using Models.ViewModel;
 using Models.ViewModel.Others;
 
@@ -19,7 +20,7 @@ namespace Services
     public interface IUserService : IRepository<AppUser>
     {
         Task<AppUserViewModel> FindUserByEmailOrUserNameOrPhoneNumber(CheckAccountViewModel model);
-        Task<List<AppUserViewModel>> FindUser(string keyword);
+        Task<PaginationSet<AppUserViewModel>> FindUser(string keyword, int page = 1, int pageSize = 8);
         Task<AppUserViewModel> GetUserById(string userId);
         Task<bool> Save();
     }
@@ -48,15 +49,42 @@ namespace Services
             return null;
         }
 
-        public async Task<List<AppUserViewModel>> FindUser(string keyword)
+        public async Task<PaginationSet<AppUserViewModel>> FindUser(string keyword,int page = 1,int pageSize = 8)
         {
-            var query = await GetMulti(x => x.IsDelete == false
-                                            && (x.FullName.Contains(keyword)
-                                                || x.Email.Contains(keyword)
-                                                || x.UserName.Contains(keyword)
-                                                || x.PhoneNumber.Contains(keyword)));
-            query = query.OrderByDescending(x => x.UserName);
-            return await _mapper.ProjectTo<AppUserViewModel>(query).ToListAsync();
+            try
+            {
+                var query = await GetMulti(x => x.IsDelete == false);
+                if (!string.IsNullOrWhiteSpace(keyword))
+                {
+                    query = query.Where(x => x.FullName.Contains(keyword)
+                                             || x.Email.Contains(keyword)
+                                             || x.UserName.Contains(keyword)
+                                             || x.PhoneNumber.Contains(keyword));
+                }
+                int totalRow = query.Count();
+                var totalPage = (int) Math.Ceiling((decimal) totalRow / pageSize);
+                query = query.OrderByDescending(x => x.DateCreated)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize);
+                var users = query.ToList();
+                var data = _mapper.Map<List<AppUser>, List<AppUserViewModel>>(users);
+                var res = new PaginationSet<AppUserViewModel>()
+                {
+                    Page = page,
+                    TotalCount = totalRow,
+                    TotalPages = totalPage,
+                    Items = data,
+                    MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
+                };
+                return res;
+            }
+            catch (Exception e)
+            {
+                var test = e;
+            }
+
+            return null;
+
         }
 
         public async Task<AppUserViewModel> GetUserById(string userId)
