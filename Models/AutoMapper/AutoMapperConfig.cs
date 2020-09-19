@@ -29,8 +29,6 @@ namespace Models.AutoMapper
                 cfg.CreateMap<Transaction, TransactionViewModel>().ReverseMap();
                 cfg.CreateMap<TransactionViewModel, Transaction>().ReverseMap();
 
-                cfg.CreateMap<Test, TestViewModel>().ReverseMap();
-                cfg.CreateMap<TestViewModel, Test>().ReverseMap();
 
             });
 

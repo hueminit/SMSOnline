@@ -23,6 +23,7 @@ namespace Services
         Task<PaginationSet<AppUserViewModel>> FindUser(string currentUserId,string keyword, int page = 1, int pageSize = 8);
         Task<AppUserViewModel> GetUserById(string userId, string currentUserId);
         RequestFriendModel CheckRequestFriendModel(string currentUserId, string profileId);
+        Task<bool> UpdateUser(AppUserViewModel user);
         Task<bool> Save();
     }
 
@@ -135,6 +136,12 @@ namespace Services
             return model;
         }
 
+        public async Task<bool> UpdateUser(AppUserViewModel user)
+        {
+            var model = _mapper.Map<AppUserViewModel,AppUser>(user);
+            await Update(model);
+            return await _unitOfWork.Commit();
+        }
 
 
         public Task<bool> Save()

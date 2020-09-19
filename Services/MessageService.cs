@@ -17,12 +17,12 @@ namespace Services
     public interface IMessageService : IRepository<Message>
     {
         Task<bool> CreateMessage(MessageViewModel message);
+        Task<bool> GetAndDeleteMessage(MessageViewModel message);
+
         Task<List<MessageViewModel>> GetMessagesByUserReceivedAsync(string userSent, string userReceived);
         Task<List<MessageCustomViewModel>> GetNewMessages(string userSent);
-
         List<MessageViewModel> GetMessagesByUserReceived(string userSent, string userReceived);
-
-        Task<bool> DeleteMessage(string contactSentId, string contactReceivedId);
+        //Task<bool> DeleteMessage(string contactSentId, string contactReceivedId);
         Task<bool> Save();
     }
 
@@ -50,6 +50,17 @@ namespace Services
                 //todo
             }
             return false;
+        }
+
+        public async Task<bool> GetAndDeleteMessage(MessageViewModel message)
+        {
+            var model = await GetSingleByConditionAsync(x => x.DateCreated == message.DateCreated
+                                                            && x.DateModified == message.DateModified 
+                                                            && x.Content == message.Content
+                                                            && x.UserSentId == message.UserSentId
+                                                            && x.UserReceivedId == message.UserReceivedId);
+            await Delete(model);
+            return await _unitOfWork.Commit();
         }
 
         public async Task<List<MessageViewModel>> GetMessagesByUserReceivedAsync(string userSent, string userReceived)

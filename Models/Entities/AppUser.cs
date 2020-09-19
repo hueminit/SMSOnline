@@ -28,6 +28,7 @@ namespace Models.Entities
         public Status Status { set; get; } = Status.Active;
 
         public bool IsDelete { get; set; }
+        public int TotalFreeMessage { get; set; }
 
         //[InverseProperty("UserSent")]
         //public  ICollection<Message> MessagesSent { get; set; }

@@ -110,6 +110,14 @@
     <Compile Include="Migrations\202009191325307_RemoveIsCancel.Designer.cs">
       <DependentUpon>202009191325307_RemoveIsCancel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009192124074_TotalFreeMessage.cs" />
+    <Compile Include="Migrations\202009192124074_TotalFreeMessage.Designer.cs">
+      <DependentUpon>202009192124074_TotalFreeMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009192128092_RemoveTest.cs" />
+    <Compile Include="Migrations\202009192128092_RemoveTest.Designer.cs">
+      <DependentUpon>202009192128092_RemoveTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -155,6 +163,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009191325307_RemoveIsCancel.resx">
       <DependentUpon>202009191325307_RemoveIsCancel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009192124074_TotalFreeMessage.resx">
+      <DependentUpon>202009192124074_TotalFreeMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009192128092_RemoveTest.resx">
+      <DependentUpon>202009192128092_RemoveTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

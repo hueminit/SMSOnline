@@ -212,7 +212,8 @@ namespace SMSOnline.Controllers
                     Avatar = Common.Constants.AvatarDefault,
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
-                    Balance = (Common.Constants.Price * 5)
+                    Balance = 0,
+                    TotalFreeMessage = Common.Constants.FreeMessageDefault
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

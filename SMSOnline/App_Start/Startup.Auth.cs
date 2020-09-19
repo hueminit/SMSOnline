@@ -95,7 +95,7 @@ namespace SMSOnline
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
 
-            builder.RegisterAssemblyTypes(typeof(TestService).Assembly)
+            builder.RegisterAssemblyTypes(typeof(ContactService).Assembly)
                .Where(t => t.Name.EndsWith("Service"))
                .AsImplementedInterfaces().InstancePerRequest();
 

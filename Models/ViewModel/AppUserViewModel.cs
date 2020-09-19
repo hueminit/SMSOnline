@@ -52,5 +52,6 @@ namespace Models.ViewModel
         public bool IsFriendWithCurrentUser { get; set; }
         public bool IsCurrentUserSendRequest { get; set; }
         public bool StatustRequest { get; set; }
+        public int TotalFreeMessage { get; set; }
     }
 }

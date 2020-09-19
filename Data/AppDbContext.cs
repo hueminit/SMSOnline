@@ -21,8 +21,6 @@ namespace Data
 
         public DbSet<Message> Messages { get; set; }
 
-        public DbSet<Test> Tests { get; set; }
-
         public static AppDbContext Create()
         {
             return new AppDbContext();

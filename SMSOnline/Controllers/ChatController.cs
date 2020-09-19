@@ -74,28 +74,65 @@ namespace SMSOnline.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var model = new MessageViewModel()
+                    var user = await _userService.GetUserById(currentUser, currentUser);
+                    if (user.TotalFreeMessage > 0 && user.TotalFreeMessage <= Common.Constants.FreeMessageDefault)
                     {
-                        UserSentId = currentUser,
-                        UserReceivedId = message.UserReceivedId,
-                        Content = message.Content,
-                        DateCreated = DateTime.Now,
-                        DateModified = DateTime.Now,
-                        Status = Status.Active
-                    };
-                    var res = await _messageService.CreateMessage(model);
-                    if (res)
+                        await CreateMessageProcess(message, user, false);
+                    }
+                    else
                     {
-                        //Notify to all
-                        SMSOnlineHub.BroadcastData();
+                        if (user.Balance <= Common.Constants.MessagePrice)
+                        {
+                            ViewBag.Error = "Account insufficient to continue ";
+                            return RedirectToAction("Index", "Chat", new { profileId = @message.UserReceivedId });
+                        }
+                        else
+                        {
+                            await CreateMessageProcess(message, user, true);
+                        }
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-
+                return RedirectToAction("Error", "Response", new { message = ex.Message });
             }
             return RedirectToAction("Index","Chat", new { profileId = @message.UserReceivedId });
+        }
+
+        private async Task CreateMessageProcess(MessageRequest message, AppUserViewModel user, bool deductingFromAccount)
+        {
+            var model = new MessageViewModel()
+            {
+                UserSentId = currentUser,
+                UserReceivedId = message.UserReceivedId,
+                Content = message.Content,
+                DateCreated = DateTime.Now,
+                DateModified = DateTime.Now,
+                Status = Status.Active
+            };
+            var res = await _messageService.CreateMessage(model);
+            if (res)
+            {
+                if (deductingFromAccount)
+                {
+                    user.Balance = user.Balance - Common.Constants.MessagePrice;
+                }
+                else
+                {
+                    user.TotalFreeMessage = user.TotalFreeMessage - 1;
+                }
+                var isUpdated = await _userService.UpdateUser(user);
+                if (isUpdated)
+                {
+                    //Notify to all
+                    SMSOnlineHub.BroadcastData();
+                }
+                else
+                {
+                    await _messageService.GetAndDeleteMessage(model);
+                }
+            }
         }
     }
 }
