@@ -24,7 +24,6 @@ namespace Services
         Task<List<ContactViewModel>> GetAllUserLocked(string currentUserId);
         Task<bool> AcceptRequestFriend(string currentUserId,string contactReceivedId);
         Task<bool> CancelRequestFriend(string currentUserId,string contactReceivedId);
-        Task<bool> DeleteContact(string contactSentId, string contactReceivedId);
         Task<bool> BlockUser(string contactSentId, string contactBlockId,string currentUserId, string currentUserName);
         Task<bool> Save();
     }
@@ -133,7 +132,7 @@ namespace Services
             var contact = await GetSingleByConditionAsync(x =>  (x.ContactReceivedId == currentUserId
                                                                && x.ContactSentId == contactReceivedId) 
                                                                 || (x.ContactReceivedId == contactReceivedId
-                                                                    && x.ContactSentId == contactReceivedId));
+                                                                    && x.ContactSentId == currentUserId));
             if (contact != null)
             {
                 contact.IsFriend = false;
@@ -145,25 +144,6 @@ namespace Services
             return false;
         }
 
-        public async Task<bool> DeleteContact(string contactSentId, string contactReceivedId)
-        {
-            try
-            {
-                var contact = await GetSingleByConditionAsync(x => x.IsFriend
-                                                              && x.ContactReceivedId == contactReceivedId
-                                                              && x.ContactSentId == contactSentId);
-                if (contact != null)
-                {
-                    await Delete(contact);
-                    return await _unitOfWork.Commit();
-                }
-            }
-            catch (Exception e)
-            {
-                //todo
-            }
-            return false;
-        }
 
         public async Task<bool> BlockUser(string contactSentId, string contactBlockId, string currentUserId,string currentUserName)
         {
