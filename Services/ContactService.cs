@@ -18,12 +18,14 @@ namespace Services
 {
     public interface IContactService : IRepository<Contact>
     {
-        Task<bool> CreateContact(string contactSentId, string contactReceivedId);
+        Task<bool> CreateContact(string contactSentId, AppUserViewModel userReceived, string currentUserName);
         Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend,string contactSentId,int page = 1,int pageSize = 8);
         Task<List<ContactViewModel>> GetAllRequestFriend(string currentUserId);
         Task<List<ContactViewModel>> GetAllUserLocked(string currentUserId);
+        Task<bool> AcceptRequestFriend(string currentUserId,string contactReceivedId);
+        Task<bool> CancelRequestFriend(string currentUserId,string contactReceivedId);
         Task<bool> DeleteContact(string contactSentId, string contactReceivedId);
-        Task<bool> BlockUser(string contactSentId, string contactBlockId,string currentUserId);
+        Task<bool> BlockUser(string contactSentId, string contactBlockId,string currentUserId, string currentUserName);
         Task<bool> Save();
     }
 
@@ -40,22 +42,38 @@ namespace Services
             _mapper = AutoMapperConfig.Mapper;
         }
 
-        public async Task<bool> CreateContact(string contactSentId, string contactReceivedId)
+        public async Task<bool> CreateContact(string contactSentId, AppUserViewModel userReceived, string currentUserName)
         {
             try
             {
-                var user = await _userService.GetUserById(contactReceivedId, contactSentId);
-                if (user != null)
+                var model = await GetSingleByConditionAsync(x => (x.ContactReceivedId == userReceived.Id
+                                                                    && x.ContactSentId == contactSentId)
+                                                                   || (x.ContactReceivedId == contactSentId
+                                                                       && x.ContactSentId == userReceived.Id));
+                if (model == null)
                 {
                     Contact contact = new Contact()
                     {
-                        FullName = user.FullName,
-                        PhoneNumber = user.PhoneNumber,
+                        FullNameContactReceived = userReceived.FullName,
+                        FullNameContactSent = currentUserName,
+                        PhoneNumber = userReceived.PhoneNumber,
                         StatusRequest = true,
                         ContactSentId = contactSentId,
-                        ContactReceivedId = contactReceivedId
+                        ContactReceivedId = userReceived.Id
                     };
                     await Add(contact);
+                    return await _unitOfWork.Commit();
+                }
+                else
+                {
+                    model.FullNameContactReceived = userReceived.FullName;
+                    model.FullNameContactSent = currentUserName;
+                    model.PhoneNumber = userReceived.PhoneNumber;
+                    model.StatusRequest = true;
+                    model.ContactSentId = contactSentId;
+                    model.ContactReceivedId = userReceived.Id;
+
+                    await Update(model);
                     return await _unitOfWork.Commit();
                 }
             }
@@ -69,7 +87,7 @@ namespace Services
         public async Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend, string contactSentId, int page = 1, int pageSize = 8)
         {
             var query = await GetMulti(x => x.ContactSentId == contactSentId && x.IsFriend);
-            query = query.OrderByDescending(x => x.FullName).Skip(page * pageSize).Take(pageSize);
+            query = query.OrderByDescending(x => x.FullNameContactReceived).Skip(page * pageSize).Take(pageSize);
             int totalRow = query.Count();
             var res = new PaginationSet<ContactViewModel>()
             {
@@ -84,7 +102,8 @@ namespace Services
 
         public async Task<List<ContactViewModel>> GetAllRequestFriend(string currentUserId)
         {
-            var query = await GetMulti(x => x.ContactReceivedId == currentUserId && x.IsFriend == false);
+            var query = await GetMulti(x => x.ContactReceivedId == currentUserId
+                                            && x.IsFriend == false);
             return await _mapper.ProjectTo<ContactViewModel>(query).ToListAsync();
         }
 
@@ -94,6 +113,37 @@ namespace Services
             return await _mapper.ProjectTo<ContactViewModel>(query).ToListAsync();
         }
 
+        public async Task<bool> AcceptRequestFriend(string currentUserId, string contactReceivedId)
+        {
+            var contact = await GetSingleByConditionAsync(x => x.IsFriend == false
+                                                               && x.ContactReceivedId == currentUserId
+                                                               && x.ContactSentId == contactReceivedId);
+            if (contact != null)
+            {
+                contact.IsFriend = true;
+                await Update(contact);
+                return await _unitOfWork.Commit();
+            }
+
+            return false;
+        }
+
+        public async Task<bool> CancelRequestFriend(string currentUserId, string contactReceivedId)
+        {
+            var contact = await GetSingleByConditionAsync(x =>  (x.ContactReceivedId == currentUserId
+                                                               && x.ContactSentId == contactReceivedId) 
+                                                                || (x.ContactReceivedId == contactReceivedId
+                                                                    && x.ContactSentId == contactReceivedId));
+            if (contact != null)
+            {
+                contact.IsFriend = false;
+                contact.StatusRequest = false;
+                await Update(contact);
+                return await _unitOfWork.Commit();
+            }
+
+            return false;
+        }
 
         public async Task<bool> DeleteContact(string contactSentId, string contactReceivedId)
         {
@@ -115,24 +165,24 @@ namespace Services
             return false;
         }
 
-        public async Task<bool> BlockUser(string contactSentId, string contactBlockId, string currentUserId)
+        public async Task<bool> BlockUser(string contactSentId, string contactBlockId, string currentUserId,string currentUserName)
         {
             try
             {
-                var user = await _userService.GetUserById(contactBlockId,currentUserId);
-                if (user != null)
-                {
-                    Contact contact = new Contact()
-                    {
-                        FullName = user.FullName,
-                        PhoneNumber = user.PhoneNumber,
-                        ContactSentId = contactSentId,
-                        ContactReceivedId = contactBlockId,
-                        IsBlock = true
-                    };
-                    await Add(contact);
-                    return await _unitOfWork.Commit();
-                }
+                //var user = await _userService.GetUserById(contactBlockId,currentUserId);
+                //if (user != null)
+                //{
+                //    Contact contact = new Contact()
+                //    {
+                //        F = user.FullName,
+                //        PhoneNumber = user.PhoneNumber,
+                //        ContactSentId = contactSentId,
+                //        ContactReceivedId = contactBlockId,
+                //        IsBlock = true
+                //    };
+                //    await Add(contact);
+                //    return await _unitOfWork.Commit();
+                //}
 
             }
             catch (Exception e)

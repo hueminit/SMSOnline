@@ -22,7 +22,7 @@ namespace Services
         Task<AppUserViewModel> FindUserByEmailOrUserNameOrPhoneNumber(CheckAccountViewModel model);
         Task<PaginationSet<AppUserViewModel>> FindUser(string currentUserId,string keyword, int page = 1, int pageSize = 8);
         Task<AppUserViewModel> GetUserById(string userId, string currentUserId);
-        bool CheckIsFriend(string currentUserId, string profileId);
+        RequestFriendModel CheckRequestFriendModel(string currentUserId, string profileId);
         Task<bool> Save();
     }
 
@@ -72,7 +72,10 @@ namespace Services
                 var updateData = data.Select(
                     c =>
                     {
-                        c.IsFriendWithCurrentUser = CheckIsFriend(currentUserId, c.Id);
+                        var request = CheckRequestFriendModel(currentUserId, c.Id);
+                        c.IsFriendWithCurrentUser = request.IsFriend;
+                        c.IsCurrentUserSendRequest = request.IsCurrentUserSendRequest;
+                        c.StatustRequest = request.StatustRequest;
                     return c;
                 }).ToList();
                 var res = new PaginationSet<AppUserViewModel>()
@@ -101,21 +104,37 @@ namespace Services
             if (user != null)
             {
                 var model = _mapper.Map<AppUser, AppUserViewModel>(user);
-                model.IsFriendWithCurrentUser = CheckIsFriend(currentUserId, model.Id);
+                var request = CheckRequestFriendModel(currentUserId, model.Id);
+                model.IsCurrentUserSendRequest = request.IsCurrentUserSendRequest;
+                model.StatustRequest = request.StatustRequest;
+                model.IsFriendWithCurrentUser = request.IsFriend;
                 return model;
             }
 
             return null;
         }
 
-        public bool CheckIsFriend(string currentUserId, string profileId)
+        public RequestFriendModel CheckRequestFriendModel(string currentUserId, string profileId)
         {
-            var contact = DbContext.Contacts.AsNoTracking().FirstOrDefault(x => (x.ContactReceivedId == profileId
+            var model = new RequestFriendModel();
+            var query = DbContext.Contacts.AsNoTracking();
+            var contact = query.FirstOrDefault(x => (x.ContactReceivedId == profileId
                                                      && x.ContactSentId == currentUserId)
                                                     || (x.ContactReceivedId == currentUserId
                                                         && x.ContactSentId == profileId));
-            return contact != null && contact.IsFriend;
+            if (contact != null)
+            {
+                if (contact.ContactSentId.Equals(currentUserId) && contact.ContactReceivedId.Equals(profileId))
+                {
+                    model.IsCurrentUserSendRequest = true;
+                }
+                model.IsFriend = contact.IsFriend;
+                model.StatustRequest = contact.StatusRequest;
+            }
+
+            return model;
         }
+
 
 
         public Task<bool> Save()

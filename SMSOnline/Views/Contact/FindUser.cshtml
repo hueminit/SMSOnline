@@ -79,7 +79,29 @@
                                                     <p class="m-b-0">Tax Accountant</p>
                                                 </div>
                                                 <div class="contact-action">
-                                                    @if (!user.IsFriendWithCurrentUser)
+                                                    @if (user.IsFriendWithCurrentUser)
+                                                    {
+                                                        <a href="" class="btn btn-primary">Chat</a>
+                                                    }
+                                                    else if (user.IsCurrentUserSendRequest && user.StatustRequest)
+                                                    {
+                                                        <form method="post" action="/Contact/CancelRequest" id="contact-cancel">
+                                                            <input type="text" hidden name="profileId" value="@user.Id">
+                                                            <a href="javascript:document.getElementById('contact-cancel').submit()" type="submit" class="btn btn-primary">Cancel</a>
+                                                        </form>
+                                                    }
+                                                    else if (!user.IsCurrentUserSendRequest && user.StatustRequest)
+                                                    {
+                                                        <form method="post" action="/Contact/AcceptRequest" id="contact-accept">
+                                                            <input type="text" hidden name="profileId" value="@user.Id">
+                                                            <a href="javascript:document.getElementById('contact-accept').submit()" type="submit" class="btn btn-primary">Accept</a>
+                                                        </form>
+                                                        <form method="post" action="/Contact/CancelRequest" id="contact-cancel">
+                                                            <input type="text" hidden name="profileId" value="@user.Id">
+                                                            <a href="javascript:document.getElementById('contact-cancel').submit()" type="submit" class="btn btn-primary">Cancel</a>
+                                                        </form>
+                                                    }
+                                                    else
                                                     {
                                                         <form method="post" action="/Contact/AddContact" id="contact-add">
                                                             <input type="text" hidden name="profileId" value="@user.Id">

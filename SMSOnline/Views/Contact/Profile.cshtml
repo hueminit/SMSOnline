@@ -1,5 +1,9 @@
 ﻿ <!-- begin::page-header -->
-@using Microsoft.AspNet.Identity @model Models.ViewModel.AppUserViewModel
+ @using Microsoft.AspNet.Identity 
+ @model Models.ViewModel.AppUserViewModel
+ @{
+     var isCurrentUser = Model.Id.Equals(System.Web.HttpContext.Current.User.Identity.GetUserId());
+ }
  <div class="page-header">
     <div class="container-fluid d-sm-flex justify-content-between">
         <h4>Profile</h4>
@@ -34,17 +38,33 @@
                         harum.
                     </p>
 
-                    <a href="#" class="btn btn-outline-primary">
+                    <a href="@Model.Id" class="btn btn-outline-primary">
                         Chat
                     </a>
-                    @if (!Model.IsFriendWithCurrentUser)
+                    @if (Model.IsFriendWithCurrentUser && !isCurrentUser)
                     {
-                        <a href="#" class="btn btn-outline-primary">
-                            Add Contact
-                        </a>
-                        <a href="#" class="btn btn-outline-primary">
-                            Remove Contact
-                        </a>
+                        <form method="post" action="/Contact/RemoveFriend" id="contact-remove-friend">
+                            <input type="text" hidden name="profileId" value="@Model.Id">
+                            <a href="javascript:document.getElementById('contact-remove-friend').submit()" type="submit" class="btn btn-primary">Remove Contact</a>
+                        </form>
+                    }
+                    else if (!Model.IsCurrentUserSendRequest && Model.StatustRequest && !isCurrentUser)
+                    {
+                        <form method="post" action="/Contact/AcceptRequest" id="contact-accept">
+                            <input type="text" hidden name="profileId" value="@Model.Id">
+                            <a href="javascript:document.getElementById('contact-accept').submit()" type="submit" class="btn btn-primary">Accept</a>
+                        </form>
+                        <form method="post" action="/Contact/CancelRequest" id="contact-cancel">
+                            <input type="text" hidden name="profileId" value="@Model.Id">
+                            <a href="javascript:document.getElementById('contact-cancel').submit()" type="submit" class="btn btn-primary">Cancel</a>
+                        </form>
+                    }
+                    else if(!isCurrentUser)
+                    {
+                        <form method="post" action="/Contact/AddContact" id="contact-add">
+                            <input type="text" hidden name="profileId" value="@Model.Id">
+                            <a href="javascript:document.getElementById('contact-add').submit()" type="submit" class="btn btn-primary">Add Contact</a>
+                        </form>
                     }
                 </div>
 
@@ -55,7 +75,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    @if (Model.Id.Equals(System.Web.HttpContext.Current.User.Identity.GetUserId()))
+                    @if (isCurrentUser)
                     {
                         <h6 class="card-title d-flex justify-content-between align-items-center">
                             Information

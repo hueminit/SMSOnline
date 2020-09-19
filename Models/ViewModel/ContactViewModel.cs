@@ -13,7 +13,11 @@ namespace Models.ViewModel
 
         [Required]
         [StringLength(255)]
-        public string FullName { set; get; }
+        public string FullNameContactSent { set; get; }
+
+        [StringLength(255)]
+        [Required]
+        public string FullNameContactReceived { set; get; }
 
         [Required]
         public string ContactSentId { set; get; }

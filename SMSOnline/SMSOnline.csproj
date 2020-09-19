@@ -983,6 +983,7 @@
     <Content Include="Views\Contact\FindUser.cshtml" />
     <Content Include="Views\Response\Success.cshtml" />
     <Content Include="Views\Response\Error.cshtml" />
+    <Content Include="Views\Contact\RequestFriend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -50,5 +50,7 @@ namespace Models.ViewModel
 
         public bool IsDelete { get; set; }
         public bool IsFriendWithCurrentUser { get; set; }
+        public bool IsCurrentUserSendRequest { get; set; }
+        public bool StatustRequest { get; set; }
     }
 }

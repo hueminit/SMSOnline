@@ -12,6 +12,7 @@ namespace SMSOnline.Controllers
     {
         private readonly IContactService _contactService;
         private readonly IUserService _userService;
+        private  string currentUser => System.Web.HttpContext.Current.User.Identity.GetUserId();
 
         public ContactController(IContactService contactService, IUserService userService)
         {
@@ -20,17 +21,55 @@ namespace SMSOnline.Controllers
         }
         public async Task<ActionResult> Index()
         {
-            var currentUser = System.Web.HttpContext.Current.User.Identity.GetUserId();
             var data = await _contactService.GetAllContact(true, currentUser);
             return View(data);
         }
+
+        public async Task<ActionResult> RequestFriend()
+        {
+            var data = await _contactService.GetAllRequestFriend(currentUser);
+            return View(data);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AcceptRequest(string profileId)
+        {
+            var isSuccess = await _contactService.AcceptRequestFriend(currentUser,profileId);
+            if (isSuccess)
+            {
+                return RedirectToAction("Success", "Response", new { message = "Accept request friend successful" });
+            }
+            return RedirectToAction("Error", "Response", new { message = "Accept request friend failure" });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CancelRequest(string profileId)
+        {
+            var isSuccess = await _contactService.CancelRequestFriend(currentUser, profileId);
+            if (isSuccess)
+            {
+                return RedirectToAction("Success", "Response", new { message = "Cancel request friend successful" });
+            }
+            return RedirectToAction("Error", "Response", new { message = "Cancel request friend failure" });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RemoveFriend(string profileId)
+        {
+            var isSuccess = await _contactService.CancelRequestFriend(currentUser, profileId);
+            if (isSuccess)
+            {
+                return RedirectToAction("Success", "Response", new { message = "Remove friend successful" });
+            }
+            return RedirectToAction("Error", "Response", new { message = "Remove friend failure" });
+        }
+
 
         public async Task<ActionResult> Profile(string profileId)
         {
             ViewBag.IsFriend = false;
             if (!string.IsNullOrWhiteSpace(profileId))
             {
-                var currentUser = System.Web.HttpContext.Current.User.Identity.GetUserId();
                 var user = await _userService.GetUserById(profileId, currentUser);
                 if (user != null)
                 {
@@ -43,11 +82,16 @@ namespace SMSOnline.Controllers
         [HttpPost]
         public async Task<ActionResult> AddContact(string profileId)
         {
-            var currentUser = System.Web.HttpContext.Current.User.Identity.GetUserId();
             var user = await _userService.GetUserById(profileId, currentUser);
             if (user != null)
             {
-                var isSuccess = await _contactService.CreateContact(currentUser, user.Id);
+                var request = _userService.CheckRequestFriendModel(currentUser, user.Id);
+                if (request.IsCurrentUserSendRequest && request.StatustRequest)
+                {
+                    return RedirectToAction("Error", "Response", new { message = "invitation has been sent" });
+                }
+                var currentUserName = System.Web.HttpContext.Current.User.Identity.GetUserName();
+                var isSuccess = await _contactService.CreateContact(currentUser, user, currentUserName);
                 if (isSuccess)
                 {
                     return RedirectToAction("Success", "Response", new { message = "Add friend successful" });
@@ -58,7 +102,6 @@ namespace SMSOnline.Controllers
 
         public async Task<ActionResult> FindUser(string keyword, int page = 1)
         {
-            var currentUser = System.Web.HttpContext.Current.User.Identity.GetUserId();
             ViewBag.Keyword = keyword;
             var users = await _userService.FindUser(currentUser,keyword, page, 3);
             return View(users);

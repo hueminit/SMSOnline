@@ -1,4 +1,5 @@
-﻿<!-- begin::page-header -->
+﻿@model List<Models.ViewModel.ContactViewModel>
+<!-- begin::page-header -->
 <div class="page-header">
     <div class="container-fluid d-sm-flex justify-content-between">
         <h4>All Contact</h4>
@@ -7,7 +8,7 @@
                 <li class="breadcrumb-item">
                     <a href="/">Home</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">All Contact</li>
+                <li class="breadcrumb-item active" aria-current="page">Request Friend</li>
             </ol>
         </nav>
     </div>
@@ -23,12 +24,13 @@
                 </div>
                 <div class="app-sidebar-menu">
                     <div class="list-group list-group-flush">
-                        <a href="" class="list-group-item active d-flex align-items-center">
+                        <a href="" class="list-group-item d-flex align-items-center">
                             <i data-feather="folder" class="width-15 height-15 mr-2"></i>
                             All Friends
                             <span class="small ml-auto">45</span>
                         </a>
-                        <a onclick="window.location.href='/Contact/RequestFriend'" class="list-group-item d-flex align-items-center">
+                        <a onclick="window.location.href='/Contact/RequestFriend'"
+                           class="list-group-item active d-flex align-items-center">
                             <i data-feather="folder" class="width-15 height-15 mr-2"></i>
                             Request Friends
                             <span class="small ml-auto">45</span>
@@ -102,84 +104,50 @@
 
                 <div class="card-body">
 
+
                     <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="card app-file-list">
-                                <div class="app-file-icon">
-                                    <i class="fa fa-file-pdf-o text-danger"></i>
-                                    <div class="dropdown position-absolute top-0 right-0 mr-3">
-                                        <a href="#" class="font-size-14" data-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item">View Details</a>
-                                            <a href="#" class="dropdown-item">Share</a>
-                                            <a href="#" class="dropdown-item">Download</a>
-                                            <a href="#" class="dropdown-item">Copy to</a>
-                                            <a href="#" class="dropdown-item">Move to</a>
-                                            <a href="#" class="dropdown-item">Rename</a>
-                                            <a href="#" class="dropdown-item">Delete</a>
+                        @if (Model.Any())
+                        {
+                            foreach (var user in Model)
+                            {
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card app-file-list">
+                                        <div class="app-file-icon">
+                                            <i class="fa fa-file-pdf-o text-danger"></i>
+                                            <div class="dropdown position-absolute top-0 right-0 mr-3">
+                                            </div>
+                                        </div>
+                                        <div class="p-2 small">
+                                            <div><h6><a href="">@user.FullNameContactSent</a></h6></div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">Accept</button>
+                                                <button type="submit" class="btn btn-primary">Cancel</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="p-2 small">
-                                    <div>resume.pdf</div>
-                                    <div class="text-muted">1.2mb</div>
-                                </div>
-                            </div>
-                        </div>
+                            }
+
+                        }
+
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                             <div class="card app-file-list">
                                 <div class="app-file-icon">
                                     <i class="fa fa-file-excel-o text-success"></i>
                                     <div class="dropdown position-absolute top-0 right-0 mr-3">
-                                        <a href="#" class="font-size-14" data-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item">View Details</a>
-                                            <a href="#" class="dropdown-item">Share</a>
-                                            <a href="#" class="dropdown-item">Download</a>
-                                            <a href="#" class="dropdown-item">Copy to</a>
-                                            <a href="#" class="dropdown-item">Move to</a>
-                                            <a href="#" class="dropdown-item">Rename</a>
-                                            <a href="#" class="dropdown-item">Delete</a>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="p-2 small">
-                                    <div>last-months-report.xlsx</div>
-                                    <div class="text-muted">120.85kb</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="card app-file-list">
-                                <div class="app-file-icon">
-                                    <i class="fa fa-file-text-o text-warning"></i>
-                                    <div class="dropdown position-absolute top-0 right-0 mr-3">
-                                        <a href="#" class="font-size-14" data-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item">View Details</a>
-                                            <a href="#" class="dropdown-item">Share</a>
-                                            <a href="#" class="dropdown-item">Download</a>
-                                            <a href="#" class="dropdown-item">Copy to</a>
-                                            <a href="#" class="dropdown-item">Move to</a>
-                                            <a href="#" class="dropdown-item">Rename</a>
-                                            <a href="#" class="dropdown-item">Delete</a>
-                                        </div>
+                                    <div><h6><a href="">UserName</a></h6></div>
+                                    <div>
+                                        <button type="submit" class="btn btn-primary">Accept</button>
+                                        <button type="submit" class="btn btn-primary">Cancel</button>
                                     </div>
-                                </div>
-                                <div class="p-2 small">
-                                    <div>todo-list.txt</div>
-                                    <div class="text-muted">1.85kb</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
                 </div>
 

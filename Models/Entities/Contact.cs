@@ -10,7 +10,10 @@ namespace Models.Entities
     public class Contact : DomainEntity<int>
     {
         [StringLength(255)]
-        public string FullName { set; get; }
+        public string FullNameContactSent { set; get; }
+
+        [StringLength(255)]
+        public string FullNameContactReceived { set; get; }
 
         public string ContactSentId { set; get; }
         //public virtual AppUser ContactSentRequest { set; get; }

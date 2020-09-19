@@ -98,6 +98,18 @@
     <Compile Include="Migrations\202009171519175_updatedatabase.Designer.cs">
       <DependentUpon>202009171519175_updatedatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009191119033_UpdateContact.cs" />
+    <Compile Include="Migrations\202009191119033_UpdateContact.Designer.cs">
+      <DependentUpon>202009191119033_UpdateContact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009191149322_AddIsCancel.cs" />
+    <Compile Include="Migrations\202009191149322_AddIsCancel.Designer.cs">
+      <DependentUpon>202009191149322_AddIsCancel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009191325307_RemoveIsCancel.cs" />
+    <Compile Include="Migrations\202009191325307_RemoveIsCancel.Designer.cs">
+      <DependentUpon>202009191325307_RemoveIsCancel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -134,6 +146,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009171519175_updatedatabase.resx">
       <DependentUpon>202009171519175_updatedatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009191119033_UpdateContact.resx">
+      <DependentUpon>202009191119033_UpdateContact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009191149322_AddIsCancel.resx">
+      <DependentUpon>202009191149322_AddIsCancel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009191325307_RemoveIsCancel.resx">
+      <DependentUpon>202009191325307_RemoveIsCancel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
