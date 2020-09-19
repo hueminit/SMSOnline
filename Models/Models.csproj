@@ -114,6 +114,7 @@
     <Compile Include="ViewModel\Others\MailSettingModel.cs" />
     <Compile Include="ViewModel\MessageViewModel.cs" />
     <Compile Include="ViewModel\Others\MessageCustomViewModel.cs" />
+    <Compile Include="ViewModel\Others\MessageRequest.cs" />
     <Compile Include="ViewModel\Others\RequestFriendModel.cs" />
     <Compile Include="ViewModel\Others\UserLoginModel.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />

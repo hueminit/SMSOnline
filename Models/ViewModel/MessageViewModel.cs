@@ -19,10 +19,14 @@ namespace Models.ViewModel
         public string UserReceivedId { set; get; }
 
         public DateTime DateCreated { get; set; }
+        public string DateCreatedFormat => DateCreated.ToString("hh:mm tt");
+        public bool IsToDay => (DateCreated.Date == DateTime.Today.Date);
         public DateTime DateModified { get; set; }
 
         [Required]
         public string Content { get; set; }
         public Status Status { get; set; }
+
+        public bool IsCurrentUserSent { set; get; }
     }
 }

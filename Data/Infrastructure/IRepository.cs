@@ -24,7 +24,9 @@ namespace Data.Infrastructure
 
         Task<IQueryable<T>> GetAll(string[] includes = null);
 
-        Task<IQueryable<T>> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null);
+        Task<IQueryable<T>> GetMultiAsync(Expression<Func<T, bool>> predicate, string[] includes = null);
+
+        IQueryable<T> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null);
 
         Task<IQueryable<T>> GetMultiPaging(Expression<Func<T, bool>> filter, int index = 0, int size = 50, string[] includes = null);
 

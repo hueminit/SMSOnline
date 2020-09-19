@@ -1,23 +1,21 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Services;
+using SMSOnline.Helpers;
 
 namespace SMSOnline.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        private readonly ITestService _testService;
-        public HomeController(ITestService testService)
+        public HomeController()
         {
-            _testService = testService;
+
         }
         public async Task<ActionResult> Index()
         {
-            bool isAuthenticated = (System.Web.HttpContext.Current.User != null) &&
-                        System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
-            if (isAuthenticated)
+            if (IdentityHelper.CurrentUserLogged)
             {
-                var res = await _testService.GetAllAsync();
                 return View();
             }
             return RedirectToAction("Login", "Account");

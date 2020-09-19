@@ -54,7 +54,7 @@ namespace Services
         {
             try
             {
-                var query = await GetMulti(x => x.IsDelete == false && x.Id != currentUserId);
+                var query = await GetMultiAsync(x => x.IsDelete == false && x.Id != currentUserId);
                 if (!string.IsNullOrWhiteSpace(keyword))
                 {
                     query = query.Where(x => x.FullName.Contains(keyword)
@@ -69,7 +69,7 @@ namespace Services
                     .Take(pageSize);
                 var users = query.ToList();
                 var data = _mapper.Map<List<AppUser>, List<AppUserViewModel>>(users);
-                var updateData = data.Select(
+                var updateData = data?.Select(
                     c =>
                     {
                         var request = CheckRequestFriendModel(currentUserId, c.Id);

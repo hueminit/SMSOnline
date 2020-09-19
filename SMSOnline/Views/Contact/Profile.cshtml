@@ -37,8 +37,7 @@
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repudiandae eveniet
                         harum.
                     </p>
-
-                    <a href="@Model.Id" class="btn btn-outline-primary">
+                    <a href="/Chat/Index?profileId=@Model.Id" class="btn btn-outline-primary">
                         Chat
                     </a>
                     @if (Model.IsFriendWithCurrentUser && !isCurrentUser)
@@ -59,7 +58,7 @@
                             <a href="javascript:document.getElementById('contact-cancel').submit()" type="submit" class="btn btn-primary">Cancel</a>
                         </form>
                     }
-                    else if(!isCurrentUser)
+                    else if (!isCurrentUser)
                     {
                         <form method="post" action="/Contact/AddContact" id="contact-add">
                             <input type="text" hidden name="profileId" value="@Model.Id">

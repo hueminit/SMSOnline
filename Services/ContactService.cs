@@ -85,7 +85,7 @@ namespace Services
 
         public async Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend, string contactSentId, int page = 1, int pageSize = 8)
         {
-            var query = await GetMulti(x => x.ContactSentId == contactSentId && x.IsFriend);
+            var query = await GetMultiAsync(x => x.ContactSentId == contactSentId && x.IsFriend);
             query = query.OrderByDescending(x => x.FullNameContactReceived).Skip(page * pageSize).Take(pageSize);
             int totalRow = query.Count();
             var res = new PaginationSet<ContactViewModel>()
@@ -101,14 +101,14 @@ namespace Services
 
         public async Task<List<ContactViewModel>> GetAllRequestFriend(string currentUserId)
         {
-            var query = await GetMulti(x => x.ContactReceivedId == currentUserId
+            var query = await GetMultiAsync(x => x.ContactReceivedId == currentUserId
                                             && x.IsFriend == false);
             return await _mapper.ProjectTo<ContactViewModel>(query).ToListAsync();
         }
 
         public async Task<List<ContactViewModel>> GetAllUserLocked(string currentUserId)
         {
-            var query = await GetMulti(x => x.ContactReceivedId == currentUserId && x.IsFriend == false);
+            var query = await GetMultiAsync(x => x.ContactReceivedId == currentUserId && x.IsFriend == false);
             return await _mapper.ProjectTo<ContactViewModel>(query).ToListAsync();
         }
 

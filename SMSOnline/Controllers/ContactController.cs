@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Models.ViewModel;
 using Services;
+using SMSOnline.Helpers;
 
 namespace SMSOnline.Controllers
 {
@@ -12,7 +13,7 @@ namespace SMSOnline.Controllers
     {
         private readonly IContactService _contactService;
         private readonly IUserService _userService;
-        private  string currentUser => System.Web.HttpContext.Current.User.Identity.GetUserId();
+        private  string currentUser => IdentityHelper.CurrentUserId;
 
         public ContactController(IContactService contactService, IUserService userService)
         {

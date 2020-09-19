@@ -79,9 +79,10 @@
                                                     <p class="m-b-0">Tax Accountant</p>
                                                 </div>
                                                 <div class="contact-action">
+                                                    <a href="/Chat/Index?profileId=@user.Id" class="btn btn-primary">Chat</a>
                                                     @if (user.IsFriendWithCurrentUser)
                                                     {
-                                                        <a href="" class="btn btn-primary">Chat</a>
+
                                                     }
                                                     else if (user.IsCurrentUserSendRequest && user.StatustRequest)
                                                     {

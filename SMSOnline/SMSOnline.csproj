@@ -224,6 +224,7 @@
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ResponseController.cs" />
+    <Compile Include="Helpers\IdentityHelper.cs" />
     <Compile Include="Hub\SMSOnlineHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -984,6 +985,7 @@
     <Content Include="Views\Response\Success.cshtml" />
     <Content Include="Views\Response\Error.cshtml" />
     <Content Include="Views\Contact\RequestFriend.cshtml" />
+    <Content Include="Views\Chat\_Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

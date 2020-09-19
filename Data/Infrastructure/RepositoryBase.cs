@@ -119,7 +119,7 @@ namespace Data.Infrastructure
             return  _dataContext.Set<T>().FirstOrDefault(expression);
         }
 
-        public virtual async Task<IQueryable<T>> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null)
+        public virtual async Task<IQueryable<T>> GetMultiAsync(Expression<Func<T, bool>> predicate, string[] includes = null)
         {
             if (includes != null && includes.Any())
             {
@@ -130,6 +130,19 @@ namespace Data.Infrastructure
             }
 
             return await Task.FromResult(_dataContext.Set<T>().Where<T>(predicate).AsNoTracking<T>());
+        }
+
+        public virtual IQueryable<T> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null)
+        {
+            if (includes != null && includes.Any())
+            {
+                var query = _dataContext.Set<T>().Include(includes.First());
+                foreach (var include in includes.Skip(1))
+                    query = query.Include(include);
+                return query.Where<T>(predicate).AsNoTracking<T>();
+            }
+
+            return _dataContext.Set<T>().Where<T>(predicate).AsNoTracking<T>();
         }
 
         public virtual async Task<IQueryable<T>> GetMultiPaging(Expression<Func<T, bool>> predicate, int index = 0, int size = 20, string[] includes = null)

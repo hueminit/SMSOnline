@@ -17,8 +17,10 @@ namespace Services
     public interface IMessageService : IRepository<Message>
     {
         Task<bool> CreateMessage(MessageViewModel message);
-        Task<List<MessageViewModel>> GetMessagesByUserReceived(string userSent, string userReceived);
+        Task<List<MessageViewModel>> GetMessagesByUserReceivedAsync(string userSent, string userReceived);
         Task<List<MessageCustomViewModel>> GetNewMessages(string userSent);
+
+        List<MessageViewModel> GetMessagesByUserReceived(string userSent, string userReceived);
 
         Task<bool> DeleteMessage(string contactSentId, string contactReceivedId);
         Task<bool> Save();
@@ -43,7 +45,6 @@ namespace Services
                 await Add(model);
                 return await _unitOfWork.Commit();
             }
-
             catch (Exception e)
             {
                 //todo
@@ -51,16 +52,47 @@ namespace Services
             return false;
         }
 
-        public async Task<List<MessageViewModel>> GetMessagesByUserReceived(string userSent, string userReceived)
+        public async Task<List<MessageViewModel>> GetMessagesByUserReceivedAsync(string userSent, string userReceived)
         {
-            var query = await GetMulti(x => x.UserSentId == userSent && x.UserReceivedId == userReceived);
-            query = query.OrderByDescending(x=>x.DateCreated);
-            return await _mapper.ProjectTo<MessageViewModel>(query).ToListAsync();
+            var query = await GetMultiAsync(x => (x.UserSentId == userSent && x.UserReceivedId == userReceived) 
+                                            || (x.UserSentId == userReceived  && x.UserReceivedId == userSent));
+            query = query.OrderBy(x=>x.DateCreated);
+            var message = _mapper.ProjectTo<MessageViewModel>(query).ToListAsync();
+
+            var res = message.Result?.Select(
+                c =>
+                {
+                    if (userSent == c.UserSentId)
+                    {
+                        c.IsCurrentUserSent = true;
+                    }
+                    return c;
+                }).ToList();
+            return res;
+        }
+
+        public List<MessageViewModel> GetMessagesByUserReceived(string userSent, string userReceived)
+        {
+            var query = GetMulti(x => (x.UserSentId == userSent && x.UserReceivedId == userReceived)
+                                                 || (x.UserSentId == userReceived && x.UserReceivedId == userSent));
+            query = query.OrderBy(x => x.DateCreated);
+            var message = _mapper.ProjectTo<MessageViewModel>(query).ToList();
+
+            var res = message.Select(
+                c =>
+                {
+                    if (userSent == c.UserSentId)
+                    {
+                        c.IsCurrentUserSent = true;
+                    }
+                    return c;
+                }).ToList();
+            return res;
         }
 
         public async Task<List<MessageCustomViewModel>> GetNewMessages(string userSent)
         {
-            var query = await GetMulti(x => x.UserSentId == userSent);
+           // var query = await GetMultiAsync(x => x.UserSentId == userSent);
             //todo
            // query = query.GroupJoin()
            return null;
