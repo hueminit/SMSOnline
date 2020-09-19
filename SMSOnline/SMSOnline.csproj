@@ -223,6 +223,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Hub\SMSOnlineHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -980,9 +981,12 @@
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Contact\Profile.cshtml" />
     <Content Include="Views\Contact\FindUser.cshtml" />
+    <Content Include="Views\Response\Success.cshtml" />
+    <Content Include="Views\Response\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Success\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

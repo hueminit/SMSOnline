@@ -20,8 +20,9 @@ namespace Services
     public interface IUserService : IRepository<AppUser>
     {
         Task<AppUserViewModel> FindUserByEmailOrUserNameOrPhoneNumber(CheckAccountViewModel model);
-        Task<PaginationSet<AppUserViewModel>> FindUser(string keyword, int page = 1, int pageSize = 8);
-        Task<AppUserViewModel> GetUserById(string userId);
+        Task<PaginationSet<AppUserViewModel>> FindUser(string currentUserId,string keyword, int page = 1, int pageSize = 8);
+        Task<AppUserViewModel> GetUserById(string userId, string currentUserId);
+        bool CheckIsFriend(string currentUserId, string profileId);
         Task<bool> Save();
     }
 
@@ -39,7 +40,7 @@ namespace Services
         public async Task<AppUserViewModel> FindUserByEmailOrUserNameOrPhoneNumber(CheckAccountViewModel model)
         {
 
-            var user = await GetSingleByCondition(x => x.Email == model.Email
+            var user = await GetSingleByConditionAsync(x => x.Email == model.Email
                                                      || x.UserName == model.UserName || x.PhoneNumber == model.PhoneNumber);
             if (user != null)
             {
@@ -49,11 +50,11 @@ namespace Services
             return null;
         }
 
-        public async Task<PaginationSet<AppUserViewModel>> FindUser(string keyword,int page = 1,int pageSize = 8)
+        public async Task<PaginationSet<AppUserViewModel>> FindUser(string currentUserId, string keyword,int page = 1,int pageSize = 8)
         {
             try
             {
-                var query = await GetMulti(x => x.IsDelete == false);
+                var query = await GetMulti(x => x.IsDelete == false && x.Id != currentUserId);
                 if (!string.IsNullOrWhiteSpace(keyword))
                 {
                     query = query.Where(x => x.FullName.Contains(keyword)
@@ -68,12 +69,18 @@ namespace Services
                     .Take(pageSize);
                 var users = query.ToList();
                 var data = _mapper.Map<List<AppUser>, List<AppUserViewModel>>(users);
+                var updateData = data.Select(
+                    c =>
+                    {
+                        c.IsFriendWithCurrentUser = CheckIsFriend(currentUserId, c.Id);
+                    return c;
+                }).ToList();
                 var res = new PaginationSet<AppUserViewModel>()
                 {
                     Page = page,
                     TotalCount = totalRow,
                     TotalPages = totalPage,
-                    Items = data,
+                    Items = updateData,
                     MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
                 };
                 return res;
@@ -87,17 +94,29 @@ namespace Services
 
         }
 
-        public async Task<AppUserViewModel> GetUserById(string userId)
+        public async Task<AppUserViewModel> GetUserById(string userId,string currentUserId)
         {
-            var user = await GetSingleByCondition(x => x.Id == userId);
+            var user = await GetSingleByConditionAsync(x => x.Id == userId);
 
             if (user != null)
             {
-                return _mapper.Map<AppUser, AppUserViewModel>(user);
+                var model = _mapper.Map<AppUser, AppUserViewModel>(user);
+                model.IsFriendWithCurrentUser = CheckIsFriend(currentUserId, model.Id);
+                return model;
             }
 
             return null;
         }
+
+        public bool CheckIsFriend(string currentUserId, string profileId)
+        {
+            var contact = DbContext.Contacts.AsNoTracking().FirstOrDefault(x => (x.ContactReceivedId == profileId
+                                                     && x.ContactSentId == currentUserId)
+                                                    || (x.ContactReceivedId == currentUserId
+                                                        && x.ContactSentId == profileId));
+            return contact != null && contact.IsFriend;
+        }
+
 
         public Task<bool> Save()
         {

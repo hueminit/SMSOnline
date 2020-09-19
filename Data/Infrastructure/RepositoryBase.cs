@@ -95,7 +95,7 @@ namespace Data.Infrastructure
             return await Task.FromResult(_dataContext.Set<T>().AsNoTracking());
         }
 
-        public async Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null)
+        public async Task<T> GetSingleByConditionAsync(Expression<Func<T, bool>> expression, string[] includes = null)
         {
             if (includes != null && includes.Any())
             {
@@ -105,6 +105,18 @@ namespace Data.Infrastructure
                 return await query.FirstOrDefaultAsync(expression);
             }
             return await _dataContext.Set<T>().FirstOrDefaultAsync(expression);
+        }
+
+        public T GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null)
+        {
+            if (includes != null && includes.Any())
+            {
+                var query = _dataContext.Set<T>().Include(includes.First());
+                foreach (var include in includes.Skip(1))
+                    query = query.Include(include);
+                return  query.FirstOrDefault(expression);
+            }
+            return  _dataContext.Set<T>().FirstOrDefault(expression);
         }
 
         public virtual async Task<IQueryable<T>> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null)

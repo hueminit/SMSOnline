@@ -25,28 +25,42 @@ namespace SMSOnline.Controllers
             return View(data);
         }
 
-        public ActionResult Profile(string profileId)
+        public async Task<ActionResult> Profile(string profileId)
         {
+            ViewBag.IsFriend = false;
             if (!string.IsNullOrWhiteSpace(profileId))
             {
-                var user = _userService.GetUserById(profileId);
+                var currentUser = System.Web.HttpContext.Current.User.Identity.GetUserId();
+                var user = await _userService.GetUserById(profileId, currentUser);
                 if (user != null)
                 {
                     return View(user);
                 }
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Error", "Response", new { message = "Get profile failure" });
         }
 
-        public JsonResult AddContact(string profileId)
+        [HttpPost]
+        public async Task<ActionResult> AddContact(string profileId)
         {
-            return Json(new { Data = true }, JsonRequestBehavior.AllowGet);
+            var currentUser = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var user = await _userService.GetUserById(profileId, currentUser);
+            if (user != null)
+            {
+                var isSuccess = await _contactService.CreateContact(currentUser, user.Id);
+                if (isSuccess)
+                {
+                    return RedirectToAction("Success", "Response", new { message = "Add friend successful" });
+                }
+            }
+            return RedirectToAction("Error", "Response", new { message = "Add friend failure" });
         }
 
         public async Task<ActionResult> FindUser(string keyword, int page = 1)
         {
+            var currentUser = System.Web.HttpContext.Current.User.Identity.GetUserId();
             ViewBag.Keyword = keyword;
-            var users = await _userService.FindUser(keyword, page, 3);
+            var users = await _userService.FindUser(currentUser,keyword, page, 3);
             return View(users);
         }
     }

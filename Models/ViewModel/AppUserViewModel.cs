@@ -49,5 +49,6 @@ namespace Models.ViewModel
         public List<string> Roles { get; set; }
 
         public bool IsDelete { get; set; }
+        public bool IsFriendWithCurrentUser { get; set; }
     }
 }

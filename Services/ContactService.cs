@@ -23,7 +23,7 @@ namespace Services
         Task<List<ContactViewModel>> GetAllRequestFriend(string currentUserId);
         Task<List<ContactViewModel>> GetAllUserLocked(string currentUserId);
         Task<bool> DeleteContact(string contactSentId, string contactReceivedId);
-        Task<bool> BlockUser(string contactSentId, string contactBlockId);
+        Task<bool> BlockUser(string contactSentId, string contactBlockId,string currentUserId);
         Task<bool> Save();
     }
 
@@ -44,7 +44,7 @@ namespace Services
         {
             try
             {
-                var user = await _userService.GetUserById(contactReceivedId);
+                var user = await _userService.GetUserById(contactReceivedId, contactSentId);
                 if (user != null)
                 {
                     Contact contact = new Contact()
@@ -94,11 +94,12 @@ namespace Services
             return await _mapper.ProjectTo<ContactViewModel>(query).ToListAsync();
         }
 
+
         public async Task<bool> DeleteContact(string contactSentId, string contactReceivedId)
         {
             try
             {
-                var contact = await GetSingleByCondition(x => x.IsFriend
+                var contact = await GetSingleByConditionAsync(x => x.IsFriend
                                                               && x.ContactReceivedId == contactReceivedId
                                                               && x.ContactSentId == contactSentId);
                 if (contact != null)
@@ -114,11 +115,11 @@ namespace Services
             return false;
         }
 
-        public async Task<bool> BlockUser(string contactSentId, string contactBlockId)
+        public async Task<bool> BlockUser(string contactSentId, string contactBlockId, string currentUserId)
         {
             try
             {
-                var user = await _userService.GetUserById(contactBlockId);
+                var user = await _userService.GetUserById(contactBlockId,currentUserId);
                 if (user != null)
                 {
                     Contact contact = new Contact()
