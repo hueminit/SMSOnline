@@ -50,7 +50,7 @@ namespace SMSOnline.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(DepositRequestModel model)
         {
-            var user = await _userService.GetUserById(IdentityHelper.CurrentUserId, IdentityHelper.CurrentUserId);
+            var user = await _userService.GetUserByIdAsync(IdentityHelper.CurrentUserId, IdentityHelper.CurrentUserId);
             if (user != null)
             {
                 DepositViewModel deposit = new DepositViewModel();

@@ -37,9 +37,12 @@
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repudiandae eveniet
                         harum.
                     </p>
-                    <a href="/Chat/Index?profileId=@Model.Id" class="btn btn-outline-primary">
-                        Chat
-                    </a>
+                    @if (!isCurrentUser)
+                    {
+                        <a href="/Chat/Index?profileId=@Model.Id" class="btn btn-outline-primary">
+                            Chat
+                        </a>
+                    }
                     @if (Model.IsFriendWithCurrentUser && !isCurrentUser)
                     {
                         <form method="post" action="/Contact/RemoveFriend" id="contact-remove-friend">

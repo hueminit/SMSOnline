@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Models.Entities;
+using Models.ViewModel;
+using Services;
+using SMSOnline.Models;
 
 namespace SMSOnline.Helpers
 {
@@ -31,7 +36,7 @@ namespace SMSOnline.Helpers
 
         }
 
-        public static bool UserLogged(string userId)
+        public static bool IsUserLogged(string userId)
         {
             var users = GetLoggedInUsers();
             if (users != null && users.Count > 0)
@@ -39,6 +44,17 @@ namespace SMSOnline.Helpers
                 return users.ContainsKey(userId);
             }
             return false;
+        }
+
+        public static AppUser GetAllInfoCurrentLogged()
+        {
+            AppUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
+                .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user;
+            }
+            return null;
         }
 
 

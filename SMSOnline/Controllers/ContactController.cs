@@ -71,7 +71,7 @@ namespace SMSOnline.Controllers
             ViewBag.IsFriend = false;
             if (!string.IsNullOrWhiteSpace(profileId))
             {
-                var user = await _userService.GetUserById(profileId, currentUser);
+                var user = await _userService.GetUserByIdAsync(profileId, currentUser);
                 if (user != null)
                 {
                     return View(user);
@@ -83,7 +83,7 @@ namespace SMSOnline.Controllers
         [HttpPost]
         public async Task<ActionResult> AddContact(string profileId)
         {
-            var user = await _userService.GetUserById(profileId, currentUser);
+            var user = await _userService.GetUserByIdAsync(profileId, currentUser);
             if (user != null)
             {
                 var request = _userService.CheckRequestFriendModel(currentUser, user.Id);

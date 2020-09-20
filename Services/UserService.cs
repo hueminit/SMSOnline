@@ -21,7 +21,8 @@ namespace Services
     {
         Task<AppUserViewModel> FindUserByEmailOrUserNameOrPhoneNumber(CheckAccountViewModel model);
         Task<PaginationSet<AppUserViewModel>> FindUser(string currentUserId,string keyword, int page = 1, int pageSize = 8);
-        Task<AppUserViewModel> GetUserById(string userId, string currentUserId);
+        Task<AppUserViewModel> GetUserByIdAsync(string userId, string currentUserId);
+        AppUserViewModel GetUserById(string userId, string currentUserId);
         RequestFriendModel CheckRequestFriendModel(string currentUserId, string profileId);
         Task<bool> UpdateUser(AppUserViewModel user);
         Task<bool> Save();
@@ -98,9 +99,26 @@ namespace Services
 
         }
 
-        public async Task<AppUserViewModel> GetUserById(string userId,string currentUserId)
+        public async Task<AppUserViewModel> GetUserByIdAsync(string userId,string currentUserId)
         {
             var user = await GetSingleByConditionAsync(x => x.Id == userId);
+
+            if (user != null)
+            {
+                var model = _mapper.Map<AppUser, AppUserViewModel>(user);
+                var request = CheckRequestFriendModel(currentUserId, model.Id);
+                model.IsCurrentUserSendRequest = request.IsCurrentUserSendRequest;
+                model.StatustRequest = request.StatustRequest;
+                model.IsFriendWithCurrentUser = request.IsFriend;
+                return model;
+            }
+
+            return null;
+        }
+
+        public AppUserViewModel GetUserById(string userId, string currentUserId)
+        {
+            var user =  GetSingleByCondition(x => x.Id == userId);
 
             if (user != null)
             {

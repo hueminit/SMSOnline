@@ -1,0 +1,40 @@
+﻿<nav class="mt-3">
+    <ul class="pagination justify-content-center">
+
+        @if (Model.TotalPages > 1)
+        {
+            var startPageIndex = Math.Max(1, Model.Page - Model.MaxPage / 2);
+            var endPageIndex = Math.Min(Model.TotalPages, Model.Page + Model.MaxPage / 2);
+
+
+            if (Model.Page > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?page=@(Model.Page-1)">Previous</a>
+                </li>
+            }
+
+            for (int i = startPageIndex; i <= endPageIndex; i++)
+            {
+                if (Model.Page == i)
+                {
+                    <li class="page-item active"><a class="page-link" href="?page=@i">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
+                }
+            }
+            if (Model.Page < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?page=@(Model.Page+1)">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page=@Model.TotalPages">Last</a>
+                </li>
+            }
+
+        }
+    </ul>
+</nav>

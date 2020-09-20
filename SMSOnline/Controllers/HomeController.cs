@@ -8,9 +8,10 @@ namespace SMSOnline.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly IUserService _userService;
+        public HomeController(IUserService userService)
         {
-
+            _userService = userService;
         }
         public async Task<ActionResult> Index()
         {
@@ -35,5 +36,6 @@ namespace SMSOnline.Controllers
 
             return View();
         }
+
     }
 }

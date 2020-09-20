@@ -33,7 +33,7 @@ namespace SMSOnline.Controllers
             {
                 return RedirectToAction("Error", "Response", new { message = "You cannot converse with yourself" });
             }
-            var user = await _userService.GetUserById(profileId, currentUser);
+            var user = await _userService.GetUserByIdAsync(profileId, currentUser);
             if (user != null)
             {
                 return View(user);
@@ -74,7 +74,7 @@ namespace SMSOnline.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = await _userService.GetUserById(currentUser, currentUser);
+                    var user = await _userService.GetUserByIdAsync(currentUser, currentUser);
                     if (user.TotalFreeMessage > 0 && user.TotalFreeMessage <= Common.Constants.FreeMessageDefault)
                     {
                         var isCreated =   await _messageService.CreateMessageProcess(message, user, false, currentUser);

@@ -9,7 +9,7 @@ namespace SMSOnline
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigAutofac(app);
+            ContainerResolve.ConfigAutofac(app);
             ConfigureAuth(app);
             app.MapSignalR();
         }

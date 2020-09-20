@@ -20,7 +20,7 @@ namespace Services
     {
         Task<bool> CreateContact(string contactSentId, AppUserViewModel userReceived, string currentUserName);
         Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend,string contactSentId,int page = 1,int pageSize = 8);
-        Task<List<ContactViewModel>> GetAllRequestFriend(string currentUserId);
+        Task<PaginationSet<ContactViewModel>> GetAllRequestFriend(string currentUserId, int page = 1, int pageSize = 8);
         Task<List<ContactViewModel>> GetAllUserLocked(string currentUserId);
         Task<bool> AcceptRequestFriend(string currentUserId,string contactReceivedId);
         Task<bool> CancelRequestFriend(string currentUserId,string contactReceivedId);
@@ -97,11 +97,21 @@ namespace Services
             return res;
         }
 
-        public async Task<List<ContactViewModel>> GetAllRequestFriend(string currentUserId)
+        public async Task<PaginationSet<ContactViewModel>> GetAllRequestFriend(string currentUserId,int page = 1, int pageSize = 8)
         {
             var query = await GetMultiAsync(x => x.ContactReceivedId == currentUserId
-                                            && x.IsFriend == false);
-            return await _mapper.ProjectTo<ContactViewModel>(query).ToListAsync();
+                                                 && x.IsFriend == false);
+            query = query?.OrderByDescending(x => x.FullNameContactReceived).Skip(page * pageSize).Take(pageSize);
+            int totalRow = query.Count();
+            var res = new PaginationSet<ContactViewModel>()
+            {
+                Page = page,
+                TotalCount = totalRow,
+                TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
+                Items = _mapper.ProjectTo<ContactViewModel>(query).ToList(),
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
+            };
+            return res;
         }
 
         public async Task<List<ContactViewModel>> GetAllUserLocked(string currentUserId)

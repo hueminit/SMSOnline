@@ -1,4 +1,9 @@
-﻿<!-- begin::page-header -->
+﻿@using Microsoft.AspNet.Identity
+@model Models.Shared.PaginationSet<Models.ViewModel.ContactViewModel>
+@{
+    var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+}
+<!-- begin::page-header -->
 <div class="page-header">
     <div class="container-fluid d-sm-flex justify-content-between">
         <h4>All Contact</h4>
@@ -103,81 +108,49 @@
                 <div class="card-body">
 
                     <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="card app-file-list">
-                                <div class="app-file-icon">
-                                    <i class="fa fa-file-pdf-o text-danger"></i>
-                                    <div class="dropdown position-absolute top-0 right-0 mr-3">
-                                        <a href="#" class="font-size-14" data-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item">View Details</a>
-                                            <a href="#" class="dropdown-item">Share</a>
-                                            <a href="#" class="dropdown-item">Download</a>
-                                            <a href="#" class="dropdown-item">Copy to</a>
-                                            <a href="#" class="dropdown-item">Move to</a>
-                                            <a href="#" class="dropdown-item">Rename</a>
-                                            <a href="#" class="dropdown-item">Delete</a>
+                        @if (Model.Items.Any())
+                        {
+                            foreach (var user in Model.Items)
+                            {
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card app-file-list">
+                                        <div class="app-file-icon">
+                                            <i class="fa fa-file-pdf-o text-danger"></i>
+                                            <div class="dropdown position-absolute top-0 right-0 mr-3">
+                                            </div>
+                                        </div>
+                                        <div class="p-2 small">
+                                            <div>
+                                                <h6>
+                                                    @if (currentUserId.Equals(user.ContactSentId))
+                                                    {
+                                                        <a href="">@user.FullNameContactReceived</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="">@user.FullNameContactSent</a>
+                                                    }
+
+                                                </h6>
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">Chat</button>
+                                                <button type="submit" class="btn btn-primary">View Profile</button>
+                                                <button type="submit" class="btn btn-primary">Remove Contact</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="p-2 small">
-                                    <div>resume.pdf</div>
-                                    <div class="text-muted">1.2mb</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="card app-file-list">
-                                <div class="app-file-icon">
-                                    <i class="fa fa-file-excel-o text-success"></i>
-                                    <div class="dropdown position-absolute top-0 right-0 mr-3">
-                                        <a href="#" class="font-size-14" data-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item">View Details</a>
-                                            <a href="#" class="dropdown-item">Share</a>
-                                            <a href="#" class="dropdown-item">Download</a>
-                                            <a href="#" class="dropdown-item">Copy to</a>
-                                            <a href="#" class="dropdown-item">Move to</a>
-                                            <a href="#" class="dropdown-item">Rename</a>
-                                            <a href="#" class="dropdown-item">Delete</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="p-2 small">
-                                    <div>last-months-report.xlsx</div>
-                                    <div class="text-muted">120.85kb</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="card app-file-list">
-                                <div class="app-file-icon">
-                                    <i class="fa fa-file-text-o text-warning"></i>
-                                    <div class="dropdown position-absolute top-0 right-0 mr-3">
-                                        <a href="#" class="font-size-14" data-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item">View Details</a>
-                                            <a href="#" class="dropdown-item">Share</a>
-                                            <a href="#" class="dropdown-item">Download</a>
-                                            <a href="#" class="dropdown-item">Copy to</a>
-                                            <a href="#" class="dropdown-item">Move to</a>
-                                            <a href="#" class="dropdown-item">Rename</a>
-                                            <a href="#" class="dropdown-item">Delete</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="p-2 small">
-                                    <div>todo-list.txt</div>
-                                    <div class="text-muted">1.85kb</div>
-                                </div>
-                            </div>
-                        </div>
+                            }
+                            {
+                                Html.RenderPartial("_Paging", Model);
+                            }
+
+                        }
+                        else
+                        {
+                            <h4>Not Found Contact</h4>
+                        }
                     </div>
 
 
