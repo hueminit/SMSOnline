@@ -28,7 +28,8 @@ namespace SMSOnline.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            CreditCardRequestModel creditCard = new CreditCardRequestModel();
+            return View(creditCard);
         }
 
         [HttpPost]

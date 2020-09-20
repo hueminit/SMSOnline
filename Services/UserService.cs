@@ -140,7 +140,7 @@ namespace Services
         {
             var model = _mapper.Map<AppUserViewModel,AppUser>(user);
             await Update(model);
-            return await _unitOfWork.Commit();
+            return true;
         }
 
 

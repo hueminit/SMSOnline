@@ -77,7 +77,12 @@ namespace SMSOnline.Controllers
                     var user = await _userService.GetUserById(currentUser, currentUser);
                     if (user.TotalFreeMessage > 0 && user.TotalFreeMessage <= Common.Constants.FreeMessageDefault)
                     {
-                        await CreateMessageProcess(message, user, false);
+                        var isCreated =   await _messageService.CreateMessageProcess(message, user, false, currentUser);
+                        if (isCreated)
+                        {
+                            //Notify to all
+                            SMSOnlineHub.BroadcastData();
+                        }
                     }
                     else
                     {
@@ -88,7 +93,12 @@ namespace SMSOnline.Controllers
                         }
                         else
                         {
-                            await CreateMessageProcess(message, user, true);
+                            var isCreated = await _messageService.CreateMessageProcess(message, user, true, currentUser);
+                            if (isCreated)
+                            {
+                                //Notify to all
+                                SMSOnlineHub.BroadcastData();
+                            }
                         }
                     }
                 }
@@ -100,39 +110,5 @@ namespace SMSOnline.Controllers
             return RedirectToAction("Index","Chat", new { profileId = @message.UserReceivedId });
         }
 
-        private async Task CreateMessageProcess(MessageRequest message, AppUserViewModel user, bool deductingFromAccount)
-        {
-            var model = new MessageViewModel()
-            {
-                UserSentId = currentUser,
-                UserReceivedId = message.UserReceivedId,
-                Content = message.Content,
-                DateCreated = DateTime.Now,
-                DateModified = DateTime.Now,
-                Status = Status.Active
-            };
-            var res = await _messageService.CreateMessage(model);
-            if (res)
-            {
-                if (deductingFromAccount)
-                {
-                    user.Balance = user.Balance - Common.Constants.MessagePrice;
-                }
-                else
-                {
-                    user.TotalFreeMessage = user.TotalFreeMessage - 1;
-                }
-                var isUpdated = await _userService.UpdateUser(user);
-                if (isUpdated)
-                {
-                    //Notify to all
-                    SMSOnlineHub.BroadcastData();
-                }
-                else
-                {
-                    await _messageService.GetAndDeleteMessage(model);
-                }
-            }
-        }
     }
 }

@@ -13,6 +13,7 @@ namespace Models.ViewModel.Others
         public DepositRequestModel()
         {
             CreditCardItems = new List<SelectListItem>();
+            Deposit = new DepositViewModel();
         }
         public DepositViewModel Deposit { set; get; }
         public List<SelectListItem> CreditCardItems  { set; get; }

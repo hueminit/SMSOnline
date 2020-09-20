@@ -99,12 +99,12 @@ namespace Data.Infrastructure
         {
             if (includes != null && includes.Any())
             {
-                var query = _dataContext.Set<T>().Include(includes.First());
+                var query = _dataContext.Set<T>().Include(includes.First()).AsNoTracking();
                 foreach (var include in includes.Skip(1))
                     query = query.Include(include);
                 return await query.FirstOrDefaultAsync(expression);
             }
-            return await _dataContext.Set<T>().FirstOrDefaultAsync(expression);
+            return await _dataContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(expression);
         }
 
         public T GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null)

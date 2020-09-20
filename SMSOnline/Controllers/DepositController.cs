@@ -11,16 +11,18 @@ using SMSOnline.Helpers;
 
 namespace SMSOnline.Controllers
 {
+    [Authorize]
     public class DepositController : Controller
     {
         private readonly IDepositService _depositService;
         private readonly ICreditCardService _creditCardService;
         private readonly IUserService _userService;
 
-        public DepositController(IDepositService depositService, ICreditCardService creditCardService)
+        public DepositController(IDepositService depositService, ICreditCardService creditCardService, IUserService userService)
         {
             _depositService = depositService;
             _creditCardService = creditCardService;
+            _userService = userService;
         }
 
         // GET: Deposit
@@ -46,15 +48,18 @@ namespace SMSOnline.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Index(DepositViewModel model)
+        public async Task<ActionResult> Index(DepositRequestModel model)
         {
             var user = await _userService.GetUserById(IdentityHelper.CurrentUserId, IdentityHelper.CurrentUserId);
             if (user != null)
             {
-                var res = await _depositService.CreateDepositAsync(model, user);
+                DepositViewModel deposit = new DepositViewModel();
+                deposit.CreditCardId = model.Deposit.CreditCardId;
+                deposit.Amount = model.Deposit.Amount;
+                var res = await _depositService.CreateDepositAsync(deposit, user);
                 if (res)
                 {
-                    return RedirectToAction("Success", "Response", new {message = "successful"});
+                    return RedirectToAction("Success", "Response", new { message = "successful" });
                 }
             }
 
