@@ -14,7 +14,7 @@
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
                 <div class="p-3 text-center" data-backround-image="https://via.placeholder.com/1000X563">
                     <figure class="avatar mb-3">
-                        <img src="@(string.IsNullOrWhiteSpace(currentUser.Avatar) ? Common.Constants.AvatarDefault : currentUser.Avatar)" 
+                        <img src="@(string.IsNullOrWhiteSpace(currentUser.Avatar) ? Common.Constants.AvatarDefault : currentUser.Avatar)"
                              class="rounded-circle" alt="image" width="128" height="128">
                     </figure>
                     <h6 class="d-flex align-items-center justify-content-center">
@@ -36,14 +36,12 @@
                             Inbox <span class="text-muted ml-auto">18</span>
                         </a>
 
-
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
                             @Html.AntiForgeryToken()
                             <a href="javascript:document.getElementById('logoutForm').submit()" class="list-group-item text-danger" data-sidebar-target="#settings">Sign Out!</a>
 
                         }
-
                     </div>
                 </div>
             </div>
@@ -90,4 +88,3 @@
         </ul>
     </div>
 </div>
-

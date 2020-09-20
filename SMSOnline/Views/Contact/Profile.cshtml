@@ -1,10 +1,10 @@
 ﻿ <!-- begin::page-header -->
- @using Microsoft.AspNet.Identity 
- @model Models.ViewModel.AppUserViewModel
- @{
-     var isCurrentUser = Model.Id.Equals(System.Web.HttpContext.Current.User.Identity.GetUserId());
- }
- <div class="page-header">
+@using Microsoft.AspNet.Identity
+@model Models.ViewModel.AppUserViewModel
+@{
+    var isCurrentUser = Model.Id.Equals(System.Web.HttpContext.Current.User.Identity.GetUserId());
+}
+<div class="page-header">
     <div class="container-fluid d-sm-flex justify-content-between">
         <h4>Profile</h4>
         <nav aria-label="breadcrumb">
@@ -69,9 +69,7 @@
                         </form>
                     }
                 </div>
-
             </div>
-
         </div>
         <div class="col-md-8">
 
@@ -108,9 +106,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>
-

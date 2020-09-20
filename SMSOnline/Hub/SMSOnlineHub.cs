@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using SMSOnline.Helpers;
 using SMSOnline.Models;
 using System.Threading.Tasks;
-using SMSOnline.Helpers;
 
 namespace SMSOnline.Hub
 {
@@ -17,7 +17,7 @@ namespace SMSOnline.Hub
 
         public override Task OnConnected()
         {
-            ConnectedUser.Ids.Add(Context.ConnectionId,IdentityHelper.CurrentUserId);
+            ConnectedUser.Ids.Add(Context.ConnectionId, IdentityHelper.CurrentUserId);
             return base.OnConnected();
         }
 

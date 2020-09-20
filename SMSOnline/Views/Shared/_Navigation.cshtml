@@ -1,33 +1,33 @@
 ﻿@using Microsoft.AspNet.Identity
 
-    <div class="navigation">
-        @if (Request.IsAuthenticated)
-        {
-            @Html.Partial("_LoginPartial")
-        }
-        <!-- begin::navigation menu -->
-        <div class="navigation-menu-body">
+<div class="navigation">
+    @if (Request.IsAuthenticated)
+    {
+        @Html.Partial("_LoginPartial")
+    }
+    <!-- begin::navigation menu -->
+    <div class="navigation-menu-body">
 
-            <!-- begin::navigation-logo -->
-            <div>
-                <div id="navigation-logo">
-                    <a href="index.html">
-                        <img class="logo" src="~/Content/app/assets/media/image/logo.png" alt="logo">
-                        <img class="logo-light" src="~/Content/app/assets/media/image/logo-light.png" alt="light logo">
-                    </a>
-                </div>
+        <!-- begin::navigation-logo -->
+        <div>
+            <div id="navigation-logo">
+                <a href="index.html">
+                    <img class="logo" src="~/Content/app/assets/media/image/logo.png" alt="logo">
+                    <img class="logo-light" src="~/Content/app/assets/media/image/logo-light.png" alt="light logo">
+                </a>
             </div>
-            <!-- end::navigation-logo -->
+        </div>
+        <!-- end::navigation-logo -->
 
-            <div class="navigation-menu-group">
+        <div class="navigation-menu-group">
 
-                <div class="open" id="dashboards">
-                    <ul>
-                        <li class="navigation-divider">Dashboards</li>
-                        <li><a onclick="window.location.href='/Contact/FindUser'">FindUser</a></li>
-                        <li><a class="active" onclick="window.location.href='/Contact/Index'">Contacts<span class="badge badge-danger">10</span></a></li>
-                        <li><a href="dashboard-three.html">Chat</a></li>
-                        @*<li class="navigation-divider">Contacts</li>
+            <div class="open" id="dashboards">
+                <ul>
+                    <li class="navigation-divider">Dashboards</li>
+                    <li><a onclick="window.location.href='/Contact/FindUser'">FindUser</a></li>
+                    <li><a class="active" onclick="window.location.href='/Contact/Index'">Contacts<span class="badge badge-danger">10</span></a></li>
+                    <li><a href="dashboard-three.html">Chat</a></li>
+                    @*<li class="navigation-divider">Contacts</li>
                         <li>
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item d-flex align-items-center">
@@ -76,11 +76,9 @@
                                 </a>
                             </div>
                         </li>*@
-                    </ul>
-                </div>
-               
+                </ul>
             </div>
         </div>
-        <!-- end::navigation menu -->
-
     </div>
+    <!-- end::navigation menu -->
+</div>

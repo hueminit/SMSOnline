@@ -11,21 +11,21 @@
     {
         <table class="table table-hover table-striped table-bordered">
             <thead>
-            <tr>
-                <th>Number</th>
-                <th>CVV</th>
-                <th>Expiration Date</th>
-            </tr>
+                <tr>
+                    <th>Number</th>
+                    <th>CVV</th>
+                    <th>Expiration Date</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var card in Model)
-            {
-                <tr>
-                    <td>@card.Number</td>
-                    <td>@card.CVV</td>
-                    <td>@card.ExpirationDate</td>
-                </tr>
-            }
+                @foreach (var card in Model)
+                {
+                    <tr>
+                        <td>@card.Number</td>
+                        <td>@card.CVV</td>
+                        <td>@card.ExpirationDate</td>
+                    </tr>
+                }
             </tbody>
         </table>
     }

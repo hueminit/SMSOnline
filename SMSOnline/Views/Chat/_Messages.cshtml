@@ -4,20 +4,19 @@
 {
     foreach (var message in Model)
     {
-        <div class="message-item @(message.IsCurrentUserSent ? "me" : string.Empty )">
-            <div class="message-item-content">@message.Content</div>
-            <span class="time small text-muted font-italic">@message.DateCreatedFormat</span>
+<div class="message-item @(message.IsCurrentUserSent ? "me" : string.Empty )">
+    <div class="message-item-content">@message.Content</div>
+    <span class="time small text-muted font-italic">@message.DateCreatedFormat</span>
+</div>
+@*if (!message.IsToDay)
+    {
+        <div class="message-item message-item-divider">
+            <span>Today</span>
         </div>
-        @*if (!message.IsToDay)
-        {
-            <div class="message-item message-item-divider">
-                <span>Today</span>
-            </div>
-        }*@
+    }*@
     }
 }
 else
 {
-    <p>not found message</p>
+<p>not found message</p>
 }
-

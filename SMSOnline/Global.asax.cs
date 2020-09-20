@@ -1,9 +1,8 @@
-using System.Web.Http;
+using Models.AutoMapper;
+using SMSOnline.Filters;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Models.AutoMapper;
-using SMSOnline.Filters;
 
 namespace SMSOnline
 {
