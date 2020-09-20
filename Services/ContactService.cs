@@ -30,14 +30,12 @@ namespace Services
 
     public class ContactService : RepositoryBase<Contact>, IContactService
     {
-        private readonly IUserService _userService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public ContactService(IDbFactory dbFactory, IUnitOfWork unitOfWork, IUserService userService) : base(dbFactory)
+        public ContactService(IDbFactory dbFactory, IUnitOfWork unitOfWork) : base(dbFactory)
         {
             _unitOfWork = unitOfWork;
-            _userService = userService;
             _mapper = AutoMapperConfig.Mapper;
         }
 
@@ -149,20 +147,7 @@ namespace Services
         {
             try
             {
-                //var user = await _userService.GetUserById(contactBlockId,currentUserId);
-                //if (user != null)
-                //{
-                //    Contact contact = new Contact()
-                //    {
-                //        F = user.FullName,
-                //        PhoneNumber = user.PhoneNumber,
-                //        ContactSentId = contactSentId,
-                //        ContactReceivedId = contactBlockId,
-                //        IsBlock = true
-                //    };
-                //    await Add(contact);
-                //    return await _unitOfWork.Commit();
-                //}
+                
 
             }
             catch (Exception e)

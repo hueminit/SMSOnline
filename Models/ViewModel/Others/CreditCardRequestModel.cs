@@ -5,25 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.ViewModel
+namespace Models.ViewModel.Others
 {
-    public class CreditCardViewModel
+    public class CreditCardRequestModel
     {
-        public int Id { get; set; }
-
         [Required]
+        [StringLength(16, MinimumLength = 12)]
+        [Display(Name = "Card Number")]
         public string Number { get; set; }
 
         [Required]
+        [StringLength(9, MinimumLength = 3)]
+        [Display(Name = "Card CVV")]
         public string CVV { get; set; }
 
         [Required]
-        public DateTime DateRegistered { get; set; }
-
-        [Required]
         public DateTime ExpirationDate { get; set; }
-
-        [Required]
-        public string UserId { get; set; }
     }
 }

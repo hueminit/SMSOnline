@@ -68,9 +68,9 @@ namespace Services
             var query = await GetMultiAsync(x => (x.UserSentId == userSent && x.UserReceivedId == userReceived) 
                                             || (x.UserSentId == userReceived  && x.UserReceivedId == userSent));
             query = query.OrderBy(x=>x.DateCreated);
-            var message = _mapper.ProjectTo<MessageViewModel>(query).ToListAsync();
+            var message = await _mapper.ProjectTo<MessageViewModel>(query).ToListAsync();
 
-            var res = message.Result?.Select(
+            var res = message?.Select(
                 c =>
                 {
                     if (userSent == c.UserSentId)
