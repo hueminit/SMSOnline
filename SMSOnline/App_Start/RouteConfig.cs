@@ -15,7 +15,6 @@ namespace SMSOnline
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-
             routes.MapRoute(
                 name: "Login",
                 url: "login",

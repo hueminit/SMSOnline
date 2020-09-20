@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using System.Web;
-using System.Web.Mvc;
-using Autofac;
+﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Data;
 using Data.Infrastructure;
@@ -10,6 +7,9 @@ using Microsoft.Owin.Security.DataProtection;
 using Models.Entities;
 using Owin;
 using Services;
+using System.Reflection;
+using System.Web;
+using System.Web.Mvc;
 
 namespace SMSOnline
 {
@@ -31,14 +31,12 @@ namespace SMSOnline
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
-
             builder.RegisterAssemblyTypes(typeof(ContactService).Assembly)
                 .Where(t => t.Name.EndsWith("Service"))
                 .AsImplementedInterfaces().InstancePerRequest();
 
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
         }
     }
 }

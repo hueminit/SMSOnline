@@ -52,12 +52,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\SMSOnline\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <HintPath>..\SMSOnline\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
-    </Reference>
-    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <HintPath>..\SMSOnline\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -102,8 +96,6 @@
     <Compile Include="Shared\IDateTracking.cs" />
     <Compile Include="Shared\IsDelete.cs" />
     <Compile Include="Shared\ISwitchable.cs" />
-    <Compile Include="Shared\PagedResult.cs" />
-    <Compile Include="Shared\PagedResultBase.cs" />
     <Compile Include="Shared\PaginationSet.cs" />
     <Compile Include="ViewModel\AppUserViewModel.cs" />
     <Compile Include="ViewModel\ContactViewModel.cs" />

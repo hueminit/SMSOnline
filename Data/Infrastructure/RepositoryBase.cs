@@ -114,9 +114,9 @@ namespace Data.Infrastructure
                 var query = _dataContext.Set<T>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
                     query = query.Include(include);
-                return  query.FirstOrDefault(expression);
+                return query.FirstOrDefault(expression);
             }
-            return  _dataContext.Set<T>().FirstOrDefault(expression);
+            return _dataContext.Set<T>().FirstOrDefault(expression);
         }
 
         public virtual async Task<IQueryable<T>> GetMultiAsync(Expression<Func<T, bool>> predicate, string[] includes = null)

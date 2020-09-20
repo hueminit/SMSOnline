@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Data.Infrastructure;
 using Models.AutoMapper;
 using Models.Entities;
 using Models.ViewModel;
 using Models.ViewModel.Others;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace Services
 {
@@ -30,6 +28,7 @@ namespace Services
             _unitOfWork = unitOfWork;
             _mapper = AutoMapperConfig.Mapper;
         }
+
         public async Task<bool> Create(CreditCardRequestModel model, string userId)
         {
             try
@@ -42,7 +41,6 @@ namespace Services
             }
             catch (Exception e)
             {
-
             }
 
             return false;
@@ -53,6 +51,5 @@ namespace Services
             var query = await GetMultiAsync(x => x.UserId == customerId);
             return await _mapper.ProjectTo<CreditCardViewModel>(query).ToListAsync();
         }
-
     }
 }

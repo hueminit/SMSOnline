@@ -1,8 +1,6 @@
-﻿using Model.Shared;
-using System;
+﻿using Models.Shared;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Models.Shared;
 
 namespace Models.Entities
 {

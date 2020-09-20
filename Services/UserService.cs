@@ -1,30 +1,32 @@
 ﻿using AutoMapper;
 using Data.Helpers;
 using Data.Infrastructure;
-using Microsoft.AspNet.Identity;
 using Models.AutoMapper;
 using Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Models.Shared;
 using Models.ViewModel;
 using Models.ViewModel.Others;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Services
 {
     public interface IUserService : IRepository<AppUser>
     {
         Task<AppUserViewModel> FindUserByEmailOrUserNameOrPhoneNumber(CheckAccountViewModel model);
-        Task<PaginationSet<AppUserViewModel>> FindUser(string currentUserId,string keyword, int page = 1, int pageSize = 8);
+
+        Task<PaginationSet<AppUserViewModel>> FindUser(string currentUserId, string keyword, int page = 1, int pageSize = 8);
+
         Task<AppUserViewModel> GetUserByIdAsync(string userId, string currentUserId);
+
         AppUserViewModel GetUserById(string userId, string currentUserId);
+
         RequestFriendModel CheckRequestFriendModel(string currentUserId, string profileId);
+
         Task<bool> UpdateUser(AppUserViewModel user);
+
         Task<bool> Save();
     }
 
@@ -41,7 +43,6 @@ namespace Services
 
         public async Task<AppUserViewModel> FindUserByEmailOrUserNameOrPhoneNumber(CheckAccountViewModel model)
         {
-
             var user = await GetSingleByConditionAsync(x => x.Email == model.Email
                                                      || x.UserName == model.UserName || x.PhoneNumber == model.PhoneNumber);
             if (user != null)
@@ -52,7 +53,7 @@ namespace Services
             return null;
         }
 
-        public async Task<PaginationSet<AppUserViewModel>> FindUser(string currentUserId, string keyword,int page = 1,int pageSize = 8)
+        public async Task<PaginationSet<AppUserViewModel>> FindUser(string currentUserId, string keyword, int page = 1, int pageSize = 8)
         {
             try
             {
@@ -65,7 +66,7 @@ namespace Services
                                              || x.PhoneNumber.Contains(keyword));
                 }
                 int totalRow = query.Count();
-                var totalPage = (int) Math.Ceiling((decimal) totalRow / pageSize);
+                var totalPage = (int)Math.Ceiling((decimal)totalRow / pageSize);
                 query = query.OrderByDescending(x => x.DateCreated)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize);
@@ -78,8 +79,8 @@ namespace Services
                         c.IsFriendWithCurrentUser = request.IsFriend;
                         c.IsCurrentUserSendRequest = request.IsCurrentUserSendRequest;
                         c.StatustRequest = request.StatustRequest;
-                    return c;
-                }).ToList();
+                        return c;
+                    }).ToList();
                 var res = new PaginationSet<AppUserViewModel>()
                 {
                     Page = page,
@@ -96,10 +97,9 @@ namespace Services
             }
 
             return null;
-
         }
 
-        public async Task<AppUserViewModel> GetUserByIdAsync(string userId,string currentUserId)
+        public async Task<AppUserViewModel> GetUserByIdAsync(string userId, string currentUserId)
         {
             var user = await GetSingleByConditionAsync(x => x.Id == userId);
 
@@ -118,7 +118,7 @@ namespace Services
 
         public AppUserViewModel GetUserById(string userId, string currentUserId)
         {
-            var user =  GetSingleByCondition(x => x.Id == userId);
+            var user = GetSingleByCondition(x => x.Id == userId);
 
             if (user != null)
             {
@@ -156,11 +156,10 @@ namespace Services
 
         public async Task<bool> UpdateUser(AppUserViewModel user)
         {
-            var model = _mapper.Map<AppUserViewModel,AppUser>(user);
+            var model = _mapper.Map<AppUserViewModel, AppUser>(user);
             await Update(model);
             return true;
         }
-
 
         public Task<bool> Save()
         {

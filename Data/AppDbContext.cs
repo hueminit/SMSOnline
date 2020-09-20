@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Models.Entities;
+using System.Data.Entity;
 
 namespace Data
 {
@@ -56,7 +55,6 @@ namespace Data
                 .WithMany(t => t.ContactReceived)
                 .HasForeignKey(m => m.ContactReceivedId)
                 .WillCascadeOnDelete(false);
-
 
             base.OnModelCreating(builder);
         }

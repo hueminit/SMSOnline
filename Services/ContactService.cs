@@ -1,30 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Data.Helpers;
 using Data.Infrastructure;
 using Models.AutoMapper;
 using Models.Entities;
 using Models.Shared;
 using Models.ViewModel;
-using PagedList;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Services
 {
     public interface IContactService : IRepository<Contact>
     {
         Task<bool> CreateContact(string contactSentId, AppUserViewModel userReceived, string currentUserName);
-        Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend,string contactSentId,int page = 1,int pageSize = 8);
+
+        Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend, string contactSentId, int page = 1, int pageSize = 8);
+
         Task<PaginationSet<ContactViewModel>> GetAllRequestFriend(string currentUserId, int page = 1, int pageSize = 8);
+
         Task<List<ContactViewModel>> GetAllUserLocked(string currentUserId);
-        Task<bool> AcceptRequestFriend(string currentUserId,string contactReceivedId);
-        Task<bool> CancelRequestFriend(string currentUserId,string contactReceivedId);
-        Task<bool> BlockUser(string contactSentId, string contactBlockId,string currentUserId, string currentUserName);
+
+        Task<bool> AcceptRequestFriend(string currentUserId, string contactReceivedId);
+
+        Task<bool> CancelRequestFriend(string currentUserId, string contactReceivedId);
+
+        Task<bool> BlockUser(string contactSentId, string contactBlockId, string currentUserId, string currentUserName);
+
         Task<bool> Save();
     }
 
@@ -97,7 +101,7 @@ namespace Services
             return res;
         }
 
-        public async Task<PaginationSet<ContactViewModel>> GetAllRequestFriend(string currentUserId,int page = 1, int pageSize = 8)
+        public async Task<PaginationSet<ContactViewModel>> GetAllRequestFriend(string currentUserId, int page = 1, int pageSize = 8)
         {
             var query = await GetMultiAsync(x => x.ContactReceivedId == currentUserId
                                                  && x.IsFriend == false);
@@ -137,8 +141,8 @@ namespace Services
 
         public async Task<bool> CancelRequestFriend(string currentUserId, string contactReceivedId)
         {
-            var contact = await GetSingleByConditionAsync(x =>  (x.ContactReceivedId == currentUserId
-                                                               && x.ContactSentId == contactReceivedId) 
+            var contact = await GetSingleByConditionAsync(x => (x.ContactReceivedId == currentUserId
+                                                               && x.ContactSentId == contactReceivedId)
                                                                 || (x.ContactReceivedId == contactReceivedId
                                                                     && x.ContactSentId == currentUserId));
             if (contact != null)
@@ -152,13 +156,10 @@ namespace Services
             return false;
         }
 
-
-        public async Task<bool> BlockUser(string contactSentId, string contactBlockId, string currentUserId,string currentUserName)
+        public async Task<bool> BlockUser(string contactSentId, string contactBlockId, string currentUserId, string currentUserName)
         {
             try
             {
-                
-
             }
             catch (Exception e)
             {

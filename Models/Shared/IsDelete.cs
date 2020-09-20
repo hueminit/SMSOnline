@@ -1,4 +1,4 @@
-﻿namespace Model.Shared
+﻿namespace Models.Shared
 {
     public interface IsDelete
     {

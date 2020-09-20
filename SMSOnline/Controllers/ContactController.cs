@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Models.ViewModel;
+﻿using Microsoft.AspNet.Identity;
 using Services;
 using SMSOnline.Helpers;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace SMSOnline.Controllers
 {
@@ -13,13 +11,14 @@ namespace SMSOnline.Controllers
     {
         private readonly IContactService _contactService;
         private readonly IUserService _userService;
-        private  string currentUser => IdentityHelper.CurrentUserId;
+        private string currentUser => IdentityHelper.CurrentUserId;
 
         public ContactController(IContactService contactService, IUserService userService)
         {
             _contactService = contactService;
             _userService = userService;
         }
+
         public async Task<ActionResult> Index()
         {
             var data = await _contactService.GetAllContact(true, currentUser);
@@ -35,7 +34,7 @@ namespace SMSOnline.Controllers
         [HttpPost]
         public async Task<ActionResult> AcceptRequest(string profileId)
         {
-            var isSuccess = await _contactService.AcceptRequestFriend(currentUser,profileId);
+            var isSuccess = await _contactService.AcceptRequestFriend(currentUser, profileId);
             if (isSuccess)
             {
                 return RedirectToAction("Success", "Response", new { message = "Accept request friend successful" });
@@ -64,7 +63,6 @@ namespace SMSOnline.Controllers
             }
             return RedirectToAction("Error", "Response", new { message = "Remove friend failure" });
         }
-
 
         public async Task<ActionResult> Profile(string profileId)
         {
@@ -104,7 +102,7 @@ namespace SMSOnline.Controllers
         public async Task<ActionResult> FindUser(string keyword, int page = 1)
         {
             ViewBag.Keyword = keyword;
-            var users = await _userService.FindUser(currentUser,keyword, page, 3);
+            var users = await _userService.FindUser(currentUser, keyword, page, 3);
             return View(users);
         }
     }

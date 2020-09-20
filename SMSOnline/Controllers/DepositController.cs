@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Models.ViewModel;
+﻿using Models.ViewModel;
 using Models.ViewModel.Others;
 using Services;
 using SMSOnline.Helpers;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace SMSOnline.Controllers
 {
@@ -28,7 +24,6 @@ namespace SMSOnline.Controllers
         // GET: Deposit
         public async Task<ActionResult> Index()
         {
-
             DepositRequestModel depositRequest = new DepositRequestModel();
             var cardsFromDb = await _creditCardService.GetAllCreditCardsAsync(IdentityHelper.CurrentUserId);
 
@@ -44,7 +39,6 @@ namespace SMSOnline.Controllers
             }
 
             return View(depositRequest);
-
         }
 
         [HttpPost]
@@ -63,7 +57,7 @@ namespace SMSOnline.Controllers
                 }
             }
 
-            return RedirectToAction("Error", "Response", new {message = "Error when process "});
+            return RedirectToAction("Error", "Response", new { message = "Error when process " });
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Models.Enums;
 
-namespace Model.Shared
+namespace Models.Shared
 {
     public interface ISwitchable
     {// thuộc  tính ,đối tượng đã được kích hoạt hay ko???

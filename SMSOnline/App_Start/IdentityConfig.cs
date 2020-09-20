@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Data;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using SMSOnline.Models;
+using Models.Entities;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Data;
-using Microsoft.Owin.Security.DataProtection;
-using Models.Entities;
 
 namespace SMSOnline
 {
@@ -44,7 +42,6 @@ namespace SMSOnline
         public ApplicationUserManager(IUserStore<AppUser> store)
             : base(store)
         {
-            
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)

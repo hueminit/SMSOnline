@@ -1,10 +1,9 @@
-﻿using System;
+﻿using SMSOnline.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Owin.Security.Infrastructure;
-using SMSOnline.Helpers;
 
 namespace SMSOnline.Filters
 {
@@ -24,7 +23,6 @@ namespace SMSOnline.Filters
                 {
                     loggedInUsers.Add(HttpContext.Current.User.Identity.Name, System.DateTime.Now);
                 }
-
             }
 
             // remove users where time exceeds session timeout
@@ -34,7 +32,6 @@ namespace SMSOnline.Filters
             {
                 loggedInUsers.Remove(key);
             }
-
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using Models.Enums;
-using Model.Shared;
+using Models.Shared;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Models.Shared;
 
 namespace Models.Entities
 {

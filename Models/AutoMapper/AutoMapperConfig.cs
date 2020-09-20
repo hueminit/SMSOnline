@@ -5,9 +5,10 @@ using Models.ViewModel.Others;
 
 namespace Models.AutoMapper
 {
-    public class AutoMapperConfig 
+    public class AutoMapperConfig
     {
-       public static IMapper Mapper { get; private set; }
+        public static IMapper Mapper { get; private set; }
+
         public static void Init()
         {
             var config = new MapperConfiguration(cfg =>
@@ -31,8 +32,6 @@ namespace Models.AutoMapper
 
                 cfg.CreateMap<Transaction, TransactionViewModel>().ReverseMap();
                 cfg.CreateMap<TransactionViewModel, Transaction>().ReverseMap();
-
-
             });
 
             Mapper = config.CreateMapper();

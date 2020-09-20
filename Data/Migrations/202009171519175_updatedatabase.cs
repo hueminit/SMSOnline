@@ -1,8 +1,7 @@
 namespace Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class updatedatabase : DbMigration
     {
         public override void Up()
@@ -19,7 +18,7 @@ namespace Data.Migrations
             CreateIndex("dbo.Contacts", "ContactReceivedId");
             DropColumn("dbo.Messages", "UserId");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.Messages", "UserId", c => c.String(nullable: false, maxLength: 128));

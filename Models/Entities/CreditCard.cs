@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Models.Shared;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Models.Shared;
 
 namespace Models.Entities
 {
@@ -20,6 +16,7 @@ namespace Models.Entities
         public DateTime ExpirationDate { get; set; }
 
         public string UserId { get; set; }
+
         [ForeignKey("UserId")]
         public virtual AppUser User { get; set; }
     }

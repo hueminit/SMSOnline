@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Models.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Models.Enums;
 
 namespace Models.ViewModel
 {

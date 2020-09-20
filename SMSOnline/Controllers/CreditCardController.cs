@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Models.ViewModel.Others;
+﻿using Models.ViewModel.Others;
 using Services;
 using SMSOnline.Helpers;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace SMSOnline.Controllers
 {
@@ -14,6 +10,7 @@ namespace SMSOnline.Controllers
     public class CreditCardController : Controller
     {
         private readonly ICreditCardService _creditCardService;
+
         public CreditCardController(ICreditCardService creditCardService)
         {
             _creditCardService = creditCardService;

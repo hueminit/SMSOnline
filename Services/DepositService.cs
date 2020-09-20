@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Data.Infrastructure;
 using Models.AutoMapper;
 using Models.Entities;
 using Models.Enums;
 using Models.ViewModel;
+using System;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace Services
 {
@@ -56,7 +53,6 @@ namespace Services
             }
             catch (Exception e)
             {
-
             }
 
             return false;

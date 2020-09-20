@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Models.Enums;
-using Model.Shared;
+using Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Models.Shared;
 
 namespace Models.Entities
 {
@@ -34,7 +33,7 @@ namespace Models.Entities
         //public  ICollection<Message> MessagesSent { get; set; }
 
         [InverseProperty("UserReceived")]
-        public  ICollection<Message> MessagesReceived { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
 
         //[InverseProperty("ContactSentRequest")]
         //public ICollection<Contact> ContactSent { get; set; }
@@ -47,7 +46,7 @@ namespace Models.Entities
         public ICollection<Transaction> Transactions { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="manager"></param>
         /// <param name="authenticationType"></param>

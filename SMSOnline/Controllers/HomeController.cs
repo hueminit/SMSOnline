@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using System.Web.Mvc;
-using Services;
+﻿using Services;
 using SMSOnline.Helpers;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace SMSOnline.Controllers
 {
@@ -9,15 +9,17 @@ namespace SMSOnline.Controllers
     public class HomeController : Controller
     {
         private readonly IUserService _userService;
+
         public HomeController(IUserService userService)
         {
             _userService = userService;
         }
+
         public async Task<ActionResult> Index()
         {
             if (IdentityHelper.CurrentUserLogged)
             {
-               var user = IdentityHelper.GetLoggedInUsers();
+                var user = IdentityHelper.GetLoggedInUsers();
                 return View();
             }
             return RedirectToAction("Login", "Account");
@@ -36,6 +38,5 @@ namespace SMSOnline.Controllers
 
             return View();
         }
-
     }
 }

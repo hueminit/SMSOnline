@@ -1,27 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Data.Infrastructure;
 using Models.AutoMapper;
 using Models.Entities;
 using Models.Enums;
 using Models.ViewModel;
 using Models.ViewModel.Others;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Services
 {
-
     public interface IMessageService : IRepository<Message>
     {
         Task<bool> CreateMessage(MessageViewModel message);
+
         Task<bool> CreateMessageProcess(MessageRequest message, AppUserViewModel user, bool deductingFromAccount, string currentUserId);
+
         Task<List<MessageViewModel>> GetMessagesByUserReceivedAsync(string userSent, string userReceived);
+
         Task<List<MessageCustomViewModel>> GetNewMessages(string userSent);
+
         List<MessageViewModel> GetMessagesByUserReceived(string userSent, string userReceived);
+
         //Task<bool> DeleteMessage(string contactSentId, string contactReceivedId);
         Task<bool> Save();
     }
@@ -52,10 +55,8 @@ namespace Services
             return false;
         }
 
-
         public async Task<bool> CreateMessageProcess(MessageRequest message, AppUserViewModel user, bool deductingFromAccount, string currentUserId)
         {
-
             var model = new MessageViewModel()
             {
                 UserSentId = currentUserId,

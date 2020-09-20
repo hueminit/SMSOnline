@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Models.Enums;
 
 namespace SMSOnline.Models
 {
@@ -81,7 +81,6 @@ namespace SMSOnline.Models
         [Display(Name = "User Name")]
         public string UserName { set; get; }
 
-
         [Display(Name = "DOB")]
         public DateTime? BirthDay { set; get; }
 
@@ -100,7 +99,6 @@ namespace SMSOnline.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
 
         [Display(Name = "Phone number")]
         [Required(ErrorMessage = "Phone Number Required!")]

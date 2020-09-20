@@ -20,6 +20,7 @@ namespace Data.Infrastructure
         Task<T> GetSingleById(int id);
 
         Task<T> GetSingleByConditionAsync(Expression<Func<T, bool>> expression, string[] includes = null);
+
         T GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null);
 
         Task<IQueryable<T>> GetAll(string[] includes = null);

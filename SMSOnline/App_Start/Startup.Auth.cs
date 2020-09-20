@@ -1,23 +1,12 @@
-﻿using Autofac;
-using Autofac.Integration.Mvc;
-using Autofac.Integration.WebApi;
-using Data;
-using Data.Infrastructure;
+﻿using Data;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.DataProtection;
-using Owin;
-using SMSOnline.Models;
-using System;
-using System.Reflection;
-using System.Web;
-using System.Web.Http;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Models.Entities;
-using Services;
+using Owin;
+using System;
 
 namespace SMSOnline
 {
@@ -45,7 +34,7 @@ namespace SMSOnline
                     // This is a security feature which is used when you change a password or add an external login to your account.
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, AppUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager,DefaultAuthenticationTypes.ApplicationCookie))
+                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
                 }
             });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
@@ -84,6 +73,5 @@ namespace SMSOnline
             var owinManager = new UserManager<AppUser>(userStore);
             return owinManager;
         }
-
     }
 }

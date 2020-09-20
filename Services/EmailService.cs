@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Models.ViewModel.Others;
+using System;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
-using Models.ViewModel;
-using Models.ViewModel.Others;
 
 namespace Services
 {
@@ -42,12 +38,11 @@ namespace Services
                 mailMessage.IsBodyHtml = true;
                 client.Send(mailMessage);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // todo
             }
             return Task.CompletedTask;
-
         }
     }
 }

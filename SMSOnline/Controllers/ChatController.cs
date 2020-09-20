@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Models.ViewModel;
+using Models.ViewModel.Others;
+using Services;
+using SMSOnline.Helpers;
+using SMSOnline.Hub;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Models.Enums;
-using Models.ViewModel;
-using Models.ViewModel.Others;
-using Services;
-using SMSOnline.Helpers;
-using SMSOnline.Hub;
 
 namespace SMSOnline.Controllers
 {
@@ -20,11 +18,13 @@ namespace SMSOnline.Controllers
         private string currentUser => IdentityHelper.CurrentUserId;
         private readonly IMessageService _messageService;
         private readonly IUserService _userService;
+
         public ChatController(IMessageService messageService, IUserService userService)
         {
             _messageService = messageService;
             _userService = userService;
         }
+
         // GET: Chat
         public async Task<ActionResult> Index(string profileId)
         {
@@ -40,6 +40,7 @@ namespace SMSOnline.Controllers
             }
             return RedirectToAction("Error", "Response", new { message = "Not Found User" });
         }
+
         [HttpGet]
         public async Task<ActionResult> GetMessageByByUserReceived()
         {
@@ -49,7 +50,7 @@ namespace SMSOnline.Controllers
             {
                 return await GetMessagesByUserReceivedAsync(profileId);
             }
-            else if(!string.IsNullOrWhiteSpace(currentRquest))
+            else if (!string.IsNullOrWhiteSpace(currentRquest))
             {
                 Uri myUri = new Uri(currentRquest);
                 profileId = HttpUtility.ParseQueryString(myUri.Query).Get("profileId");
@@ -77,7 +78,7 @@ namespace SMSOnline.Controllers
                     var user = await _userService.GetUserByIdAsync(currentUser, currentUser);
                     if (user.TotalFreeMessage > 0 && user.TotalFreeMessage <= Common.Constants.FreeMessageDefault)
                     {
-                        var isCreated =   await _messageService.CreateMessageProcess(message, user, false, currentUser);
+                        var isCreated = await _messageService.CreateMessageProcess(message, user, false, currentUser);
                         if (isCreated)
                         {
                             //Notify to all
@@ -103,12 +104,11 @@ namespace SMSOnline.Controllers
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return RedirectToAction("Error", "Response", new { message = ex.Message });
             }
-            return RedirectToAction("Index","Chat", new { profileId = @message.UserReceivedId });
+            return RedirectToAction("Index", "Chat", new { profileId = @message.UserReceivedId });
         }
-
     }
 }
