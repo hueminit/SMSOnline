@@ -16,6 +16,7 @@ namespace SMSOnline.Controllers
         {
             if (IdentityHelper.CurrentUserLogged)
             {
+               var user = IdentityHelper.GetLoggedInUsers();
                 return View();
             }
             return RedirectToAction("Login", "Account");

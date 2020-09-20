@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using SMSOnline.Models;
 
 namespace SMSOnline.Hub
 {
@@ -10,6 +12,16 @@ namespace SMSOnline.Hub
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SMSOnlineHub>();
             context.Clients.All.refreshSMSOnlineData();
+        }
+        public override Task OnConnected()
+        {
+            ConnectedUser.Ids.Add(Context.ConnectionId);
+            return base.OnConnected();
+        }
+        public Task OnDisconnected()
+        {
+            ConnectedUser.Ids.Remove(Context.ConnectionId);
+            return base.OnDisconnected(false);
         }
     }
 }

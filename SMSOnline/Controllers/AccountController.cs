@@ -13,6 +13,7 @@ using Models.Enums;
 using Models.ViewModel;
 using Models.ViewModel.Others;
 using Services;
+using SMSOnline.Helpers;
 using ExternalLoginConfirmationViewModel = SMSOnline.Models.ExternalLoginConfirmationViewModel;
 using ForgotPasswordViewModel = SMSOnline.Models.ForgotPasswordViewModel;
 using LoginViewModel = SMSOnline.Models.LoginViewModel;
@@ -465,6 +466,7 @@ namespace SMSOnline.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            IdentityHelper.GetLoggedInUsers().Remove(IdentityHelper.CurrentUserName);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

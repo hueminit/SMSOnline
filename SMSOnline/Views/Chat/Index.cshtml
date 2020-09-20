@@ -1,6 +1,8 @@
-﻿@model Models.ViewModel.AppUserViewModel
+﻿@using SMSOnline.Helpers
+@model Models.ViewModel.AppUserViewModel
 @{
     ViewBag.Profile = Model.Id;
+    var isLogged = IdentityHelper.IsUserLogged(Model.Id);
 }
 <!-- begin::chat block -->
 <div class="container-fluid h-100">
@@ -18,14 +20,14 @@
             <div class="chat-header border-bottom">
                 <div class="d-flex align-items-center">
                     <div class="pr-3">
-                        <div class="avatar avatar-sm avatar-state-warning">
-                            <img src="@(string.IsNullOrWhiteSpace(Model.Avatar) ? Common.Constants.AvatarDefault : Model.Avatar)" width="128" height="128" class="rounded-circle"
-                                 alt="image">
+                        <div class="avatar avatar-sm  @(isLogged ? "avatar-state-success" : "avatar-state-warning")">
+                            <img src="@(string.IsNullOrWhiteSpace(Model.Avatar) ? Common.Constants.AvatarDefault : Model.Avatar)" 
+                                 width="128" height="128" class="rounded-circle" alt="image">
                         </div>
                     </div>
                     <div>
                         <h6 class="mb-1">@Model.FullName</h6>
-                        <div class="m-0 small text-success">typing...</div>
+                        <div class="m-0 small text-success"></div>
                     </div>
                     <div class="ml-auto">
 

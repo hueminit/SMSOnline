@@ -227,6 +227,7 @@
     <Compile Include="Controllers\DepositController.cs" />
     <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
+    <Compile Include="Filters\TrackLoginsFilter.cs" />
     <Compile Include="Helpers\IdentityHelper.cs" />
     <Compile Include="Hub\SMSOnlineHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConnectedUser.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
