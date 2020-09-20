@@ -981,10 +981,13 @@
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Contact\Profile.cshtml" />
     <Content Include="Views\Contact\FindUser.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Product\" />
+    <Folder Include="Views\ProductTest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

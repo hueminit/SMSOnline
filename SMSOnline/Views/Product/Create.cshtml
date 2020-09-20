@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create New Product</h2>
+<form action="/Product/Create" method="post">
+    <div class="container">
+        <div class="form-group row">
+            <label class="control-label col-md-2">Product Name</label>
+            <div class="col-md-10">
+                <input name="ProductName" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-md-2">ProductPrice</label>
+            <div class="col-md-10">
+                <input name="ProductPrice" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-md-2">ProductQuantity</label>
+            <div class="col-md-10">
+                <input name="ProductQuantity" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -34,11 +34,13 @@ namespace Services
         {
             var model = _mapper.Map<ProductViewModel, Product>(product);
             await Add(model);
+            await Save();
         }
 
         public async Task DeleteAsync(int productId)
         {
             await Delete(productId);
+            await Save();
         }
 
         public async Task<List<ProductViewModel>> GetAllAsync()
@@ -56,6 +58,7 @@ namespace Services
         {
             var model = _mapper.Map<ProductViewModel, Product>(product);
             await Update(model);
+            await Save();
         }
     }
 }

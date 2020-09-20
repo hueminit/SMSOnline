@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Models.Entities.Product product = ViewBag.product;
+}
+
+<h2>Edit Product</h2>
+
+<form action="/Product/Update" method="post">
+    <div class="container">
+        <input name="Id" type="hidden" value="@product.Id" />
+        <div class="form-group row">
+            <label class="control-label col-md-2">Product Name</label>
+            <div class="col-md-10">
+                <input name="ProductName" value="@product.ProductName" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-md-2">ProductPrice</label>
+            <div class="col-md-10">
+                <input name="ProductPrice" value="@product.ProductPrice" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-md-2">ProductQuantity</label>
+            <div class="col-md-10">
+                <input name="ProductQuantity" value="@product.ProductQuantity" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save changes" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

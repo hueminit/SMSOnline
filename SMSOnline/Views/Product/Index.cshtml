@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Product Price
+        </th>
+        <th>
+            Product Quantity
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.data)
+    {
+        <tr>
+            <td>
+                @item.ProductName
+            </td>
+            <td>
+                @item.ProductPrice
+            </td>
+            <td>
+                @item.ProductQuantity
+            </td>
+            <td>
+                <a href="/product/update?id=@item.Id" class="btn btn-warning">Edit</a>
+                <a href="/product/delete?id=@item.Id" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
