@@ -5,7 +5,7 @@
     var isLogged = IdentityHelper.IsUserLogged(Model.UserReceived.UserName);
 }
 <!-- begin::chat block -->
-<div class="container-fluid h-100">
+<div class="container-fluid h-100" style="min-height: 80vh">
     <input type="text" hidden id="profile" value="@Model.UserReceived.Id">
     <div class="row no-gutters chat-block">
 
@@ -22,13 +22,13 @@
             <div class="chat-header border-bottom">
                 <div class="d-flex align-items-center">
                     <div class="pr-3">
-                        <div class="avatar avatar-sm  @(isLogged ? "avatar-state-success" : "avatar-state-danger")">
+                        <div class="avatar avatar-md  @(isLogged ? "avatar-state-success" : "avatar-state-danger")">
                             <img src="@(string.IsNullOrWhiteSpace(Model.UserReceived.Avatar) ? Common.Constants.AvatarDefault : Model.UserReceived.Avatar)"
                                  width="128" height="128" class="rounded-circle" alt="image">
                         </div>
                     </div>
                     <div>
-                        <h6 class="mb-1">@Model.UserReceived.FullName</h6>
+                        <h5 class="mb-1">@Model.UserReceived.FullName</h5>
                         <div class="m-0 small text-success"></div>
                     </div>
                     <div class="ml-auto">

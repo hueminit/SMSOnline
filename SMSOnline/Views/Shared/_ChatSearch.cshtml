@@ -8,13 +8,13 @@
     <div class="chat-sidebar-header">
         <div class="d-flex">
             <div class="pr-3">
-                <div class="avatar avatar-sm">
+                <div class="avatar avatar-md">
                     <img src="@(string.IsNullOrWhiteSpace(currentUser.Avatar) ? Common.Constants.AvatarDefault : currentUser.Avatar)" class="rounded-circle"
                          height="128" width="128" alt="image">
                 </div>
             </div>
-            <div>
-                <h6 class="mb-1">@currentUser.FullName</h6>
+            <div class="d-flex align-items-center">
+                <h5 class="mb-1">@currentUser.FullName</h5>
             </div>
             <div class="ml-auto">
                 <div class="dropdown">
