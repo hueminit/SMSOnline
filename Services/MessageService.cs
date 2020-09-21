@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Data.Helpers;
 
 namespace Services
 {
@@ -17,9 +18,10 @@ namespace Services
     {
         Task<bool> CreateMessage(MessageViewModel message);
 
-        Task<bool> CreateMessageProcess(MessageRequest message, AppUserViewModel user, bool deductingFromAccount, string currentUserId);
+        Task<bool> CreateMessageProcess(MessageRequest message, AppUserViewModel currentUser, bool deductingFromAccount);
 
         Task<List<MessageViewModel>> GetMessagesByUserReceivedAsync(string userSent, string userReceived);
+        Task<List<MessageViewModel>> GetAllMessagesOfCurrentUser(string currentUserId);
 
         Task<List<MessageCustomViewModel>> GetNewMessages(string userSent);
 
@@ -55,11 +57,13 @@ namespace Services
             return false;
         }
 
-        public async Task<bool> CreateMessageProcess(MessageRequest message, AppUserViewModel user, bool deductingFromAccount, string currentUserId)
+        public async Task<bool> CreateMessageProcess(MessageRequest message, AppUserViewModel currentUser, bool deductingFromAccount)
         {
             var model = new MessageViewModel()
             {
-                UserSentId = currentUserId,
+                FullNameSent = currentUser.UserName,
+                FullNameReceived = message.FullNameReceived,
+                UserSentId = currentUser.Id,
                 UserReceivedId = message.UserReceivedId,
                 Content = message.Content,
                 DateCreated = DateTime.Now,
@@ -71,13 +75,13 @@ namespace Services
             {
                 if (deductingFromAccount)
                 {
-                    user.Balance = user.Balance - Common.Constants.MessagePrice;
+                    currentUser.Balance = currentUser.Balance - Common.Constants.MessagePrice;
                 }
                 else
                 {
-                    user.TotalFreeMessage = user.TotalFreeMessage - 1;
+                    currentUser.TotalFreeMessage = currentUser.TotalFreeMessage - 1;
                 }
-                var userMap = _mapper.Map<AppUserViewModel, AppUser>(user);
+                var userMap = _mapper.Map<AppUserViewModel, AppUser>(currentUser);
                 DbContext.Users.Attach(userMap);
                 DbContext.Entry(userMap).State = EntityState.Modified;
                 return await _unitOfWork.Commit();
@@ -104,6 +108,36 @@ namespace Services
                 }).ToList();
             return res;
         }
+
+        public async Task<List<MessageViewModel>> GetAllMessagesOfCurrentUser(string currentUserId)
+        {
+            var query = await GetMultiAsync(x => x.UserReceivedId == currentUserId || x.UserSentId == currentUserId);
+            query = query.OrderByDescending(x => x.DateCreated);
+            var data = query.AsEnumerable().DistinctBy(x => new { x.UserSentId, x.UserReceivedId });
+            var res = _mapper.ProjectTo<MessageViewModel>(data.AsQueryable()).ToList();
+            var listMessage = new List<MessageViewModel>();
+            var listMessageRemove = new List<MessageViewModel>();
+            foreach (var message in res)
+            {
+                var model = res.FirstOrDefault(x => x.UserReceivedId == message.UserSentId && x.UserSentId == message.UserReceivedId);
+                if (model != null && message.DateCreated > model.DateCreated)
+                {
+                    //two way : a=>b and b=>a
+                    listMessage.Add(message);
+                    listMessageRemove.Add(model);
+                }
+                else
+                {  //one way : a=>b or b=>a
+                    listMessage.Add(message);
+                }
+            }
+
+            listMessage = listMessage.Except(listMessageRemove).ToList();
+            return listMessage;
+        }
+
+
+
 
         public List<MessageViewModel> GetMessagesByUserReceived(string userSent, string userReceived)
         {

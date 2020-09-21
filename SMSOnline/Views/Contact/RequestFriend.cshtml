@@ -1,4 +1,8 @@
-﻿@model List<Models.ViewModel.ContactViewModel>
+﻿@using Microsoft.AspNet.Identity
+@model Models.Shared.PaginationSet<Models.ViewModel.ContactViewModel>
+@{
+    var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+}
 <!-- begin::page-header -->
 <div class="page-header">
     <div class="container-fluid d-sm-flex justify-content-between">
@@ -24,21 +28,13 @@
                 </div>
                 <div class="app-sidebar-menu">
                     <div class="list-group list-group-flush">
-                        <a href="" class="list-group-item d-flex align-items-center">
+                        <a onclick="window.location.href='/Contact/Index'" class="list-group-item d-flex align-items-center">
                             <i data-feather="folder" class="width-15 height-15 mr-2"></i>
                             All Friends
-                            <span class="small ml-auto">45</span>
                         </a>
-                        <a onclick="window.location.href='/Contact/RequestFriend'"
-                           class="list-group-item active d-flex align-items-center">
+                        <a onclick="window.location.href='/Contact/RequestFriend'" class="list-group-item active d-flex align-items-center">
                             <i data-feather="folder" class="width-15 height-15 mr-2"></i>
                             Request Friends
-                            <span class="small ml-auto">45</span>
-                        </a>
-                        <a href="" class="list-group-item d-flex align-items-center">
-                            <i data-feather="folder" class="width-15 height-15 mr-2"></i>
-                            Blocks
-                            <span class="small ml-auto">45</span>
                         </a>
                     </div>
                 </div>
@@ -104,10 +100,11 @@
                 <div class="card-body">
 
                     <div class="row">
-                        @if (Model.Any())
+                        @if (Model.Items.Any())
                         {
-                            foreach (var user in Model)
+                            foreach (var user in Model.Items)
                             {
+                                var profileId = string.Empty;
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                     <div class="card app-file-list">
                                         <div class="app-file-icon">
@@ -116,11 +113,29 @@
                                             </div>
                                         </div>
                                         <div class="p-2 small">
-                                            <div><h6><a href="">@user.FullNameContactSent</a></h6></div>
                                             <div>
-                                                <button type="submit" class="btn btn-primary">Chat</button>
-                                                <button type="submit" class="btn btn-primary">Accept</button>
-                                                <button type="submit" class="btn btn-primary">Cancel</button>
+                                                @if (currentUserId.Equals(user.ContactSentId))
+                                                {
+                                                    profileId = user.ContactReceivedId;
+                                                    <a onclick="window.location.href='/Chat/Index?profileId=@profileId'">@user.FullNameContactReceived</a>
+                                                }
+                                                else
+                                                {
+                                                    profileId = user.ContactSentId;
+                                                    <a onclick="window.location.href='/Chat/Index?profileId=@profileId'">@user.FullNameContactSent</a>
+                                                }
+                                            </div>
+                                            <div>
+                                                <a onclick="window.location.href='/Chat/Index?profileId=@profileId'" class="btn btn-primary">Chat</a>
+                                                <a onclick="window.location.href = '/Contact/Profile?profileId=@profileId'" class="btn btn-primary">View Profile</a>
+                                                <form method="post" action="/Contact/AcceptRequest" id="contact-accept">
+                                                    <input type="text" hidden name="profileId" value="@profileId">
+                                                    <a href="javascript:document.getElementById('contact-accept').submit()" type="submit" class="btn btn-primary">Accept</a>
+                                                </form>
+                                                <form method="post" action="/Contact/CancelRequest" id="contact-cancel">
+                                                    <input type="text" hidden name="profileId" value="@profileId">
+                                                    <a href="javascript:document.getElementById('contact-cancel').submit()" type="submit" class="btn btn-primary">Cancel</a>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

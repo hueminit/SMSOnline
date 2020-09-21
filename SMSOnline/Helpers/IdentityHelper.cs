@@ -31,12 +31,15 @@ namespace SMSOnline.Helpers
             return loggedInUsers;
         }
 
-        public static bool IsUserLogged(string userId)
+        public static bool IsUserLogged(string userName)
         {
             var users = GetLoggedInUsers();
             if (users != null && users.Count > 0)
             {
-                return users.ContainsKey(userId);
+                //var id = users.Keys.ToList().FirstOrDefault(x => x.Contains(userId));
+                //if (!string.IsNullOrWhiteSpace(id))
+                //    return true;
+                return users.ContainsKey(userName);
             }
             return false;
         }
@@ -45,6 +48,14 @@ namespace SMSOnline.Helpers
         {
             AppUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
                 .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+            return user;
+        }
+
+        public static AppUser GetUserById(string userId)
+        {
+            AppUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
+                .FindById(userId);
 
             return user;
         }

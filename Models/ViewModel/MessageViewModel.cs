@@ -14,6 +14,12 @@ namespace Models.ViewModel
         [Required]
         public string UserReceivedId { set; get; }
 
+        [StringLength(255)]
+        public string FullNameSent { set; get; }
+
+        [StringLength(255)]
+        public string FullNameReceived { set; get; }
+
         public DateTime DateCreated { get; set; }
         public string DateCreatedFormat => DateCreated.ToString("hh:mm tt");
         public bool IsToDay => (DateCreated.Date == DateTime.Today.Date);

@@ -18,16 +18,20 @@ namespace SMSOnline.Controllers
         private string currentUser => IdentityHelper.CurrentUserId;
         private readonly IMessageService _messageService;
         private readonly IUserService _userService;
+        private readonly IContactService _contactService;
 
-        public ChatController(IMessageService messageService, IUserService userService)
+
+        public ChatController(IMessageService messageService, IUserService userService, IContactService contactService)
         {
             _messageService = messageService;
             _userService = userService;
+            _contactService = contactService;
         }
 
         // GET: Chat
         public async Task<ActionResult> Index(string profileId)
         {
+            ChatViewModel chat = new ChatViewModel();
             ViewBag.Profile = profileId;
             if (currentUser.Equals(profileId))
             {
@@ -36,7 +40,10 @@ namespace SMSOnline.Controllers
             var user = await _userService.GetUserByIdAsync(profileId, currentUser);
             if (user != null)
             {
-                return View(user);
+                chat.UserReceived = user;
+                chat.Chat.ListChat = await _messageService.GetAllMessagesOfCurrentUser(IdentityHelper.CurrentUserId);
+                chat.Chat.Contact = await _contactService.GetAllContactOfCurrentUser(true,IdentityHelper.CurrentUserId);
+                return View(chat);
             }
             return RedirectToAction("Error", "Response", new { message = "Not Found User" });
         }
@@ -78,7 +85,7 @@ namespace SMSOnline.Controllers
                     var user = await _userService.GetUserByIdAsync(currentUser, currentUser);
                     if (user.TotalFreeMessage > 0 && user.TotalFreeMessage <= Common.Constants.FreeMessageDefault)
                     {
-                        var isCreated = await _messageService.CreateMessageProcess(message, user, false, currentUser);
+                        var isCreated = await _messageService.CreateMessageProcess(message, user, false);
                         if (isCreated)
                         {
                             //Notify to all
@@ -87,14 +94,14 @@ namespace SMSOnline.Controllers
                     }
                     else
                     {
-                        if (user.Balance <= Common.Constants.MessagePrice)
+                        if (user.Balance < Common.Constants.MessagePrice)
                         {
                             ViewBag.Error = "Account insufficient to continue ";
                             return RedirectToAction("Index", "Chat", new { profileId = @message.UserReceivedId });
                         }
                         else
                         {
-                            var isCreated = await _messageService.CreateMessageProcess(message, user, true, currentUser);
+                            var isCreated = await _messageService.CreateMessageProcess(message, user, true);
                             if (isCreated)
                             {
                                 //Notify to all

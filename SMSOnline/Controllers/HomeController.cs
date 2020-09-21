@@ -9,17 +9,19 @@ namespace SMSOnline.Controllers
     public class HomeController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IMessageService _messageService;
 
-        public HomeController(IUserService userService)
+        public HomeController(IUserService userService, IMessageService messageService)
         {
             _userService = userService;
+            _messageService = messageService;
         }
 
         public async Task<ActionResult> Index()
         {
             if (IdentityHelper.CurrentUserLogged)
             {
-                var user = IdentityHelper.GetLoggedInUsers();
+               var res = await  _messageService.GetAllMessagesOfCurrentUser(IdentityHelper.CurrentUserId);
                 return View();
             }
             return RedirectToAction("Login", "Account");

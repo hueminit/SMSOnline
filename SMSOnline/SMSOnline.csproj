@@ -990,6 +990,7 @@
     <Content Include="Views\Transaction\Index.cshtml" />
     <Content Include="Views\Deposit\Index.cshtml" />
     <Content Include="Views\Shared\_Paging.cshtml" />
+    <Content Include="Views\Contact\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

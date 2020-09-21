@@ -9,5 +9,7 @@ namespace Models.ViewModel.Others
 
         [Required]
         public string Content { set; get; }
+
+        public string FullNameReceived { set; get; }
     }
 }

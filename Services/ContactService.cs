@@ -17,7 +17,8 @@ namespace Services
     {
         Task<bool> CreateContact(string contactSentId, AppUserViewModel userReceived, string currentUserName);
 
-        Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend, string contactSentId, int page = 1, int pageSize = 8);
+        Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend, string currentUser, int page = 1, int pageSize = 8);
+        Task<List<ContactViewModel>> GetAllContactOfCurrentUser(bool isFriend, string currentUser, int page = 1, int pageSize = 8);
 
         Task<PaginationSet<ContactViewModel>> GetAllRequestFriend(string currentUserId, int page = 1, int pageSize = 8);
 
@@ -85,10 +86,12 @@ namespace Services
             return false;
         }
 
-        public async Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend, string contactSentId, int page = 1, int pageSize = 8)
+        public async Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend, string currentUser, int page = 1, int pageSize = 8)
         {
-            var query = await GetMultiAsync(x => x.ContactSentId == contactSentId && x.IsFriend);
-            query = query.OrderByDescending(x => x.FullNameContactReceived).Skip(page * pageSize).Take(pageSize);
+            var query = await GetMultiAsync(x => (x.ContactSentId == currentUser || x.ContactReceivedId == currentUser) && x.IsFriend);
+            query = query
+                .OrderByDescending(x => x.FullNameContactReceived)
+                .Skip((page - 1) * pageSize).Take(pageSize);
             int totalRow = query.Count();
             var res = new PaginationSet<ContactViewModel>()
             {
@@ -101,11 +104,19 @@ namespace Services
             return res;
         }
 
+        public async Task<List<ContactViewModel>> GetAllContactOfCurrentUser(bool isFriend, string currentUser, int page = 1, int pageSize = 8)
+        {
+            var query = await GetMultiAsync(x => (x.ContactSentId == currentUser || x.ContactReceivedId == currentUser)  && x.IsFriend);
+            return _mapper.ProjectTo<ContactViewModel>(query).ToList();
+        }
+
         public async Task<PaginationSet<ContactViewModel>> GetAllRequestFriend(string currentUserId, int page = 1, int pageSize = 8)
         {
             var query = await GetMultiAsync(x => x.ContactReceivedId == currentUserId
                                                  && x.IsFriend == false);
-            query = query?.OrderByDescending(x => x.FullNameContactReceived).Skip(page * pageSize).Take(pageSize);
+            query = query?.OrderByDescending(x => x.FullNameContactReceived)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
             int totalRow = query.Count();
             var res = new PaginationSet<ContactViewModel>()
             {

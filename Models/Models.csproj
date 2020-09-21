@@ -101,6 +101,7 @@
     <Compile Include="ViewModel\ContactViewModel.cs" />
     <Compile Include="ViewModel\CreditCardViewModel.cs" />
     <Compile Include="ViewModel\DepositViewModel.cs" />
+    <Compile Include="ViewModel\Others\ChatViewModel.cs" />
     <Compile Include="ViewModel\Others\CheckAccountViewModel.cs" />
     <Compile Include="ViewModel\Others\CreditCardRequestModel.cs" />
     <Compile Include="ViewModel\Others\DepositRequestModel.cs" />
@@ -115,9 +116,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\PagedList.css" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -28,9 +28,12 @@ namespace SMSOnline.Filters
             // remove users where time exceeds session timeout
             var keys = loggedInUsers.Where(u => DateTime.Now.Subtract(u.Value).Minutes >
                                                 HttpContext.Current.Session.Timeout).Select(u => u.Key);
-            foreach (var key in keys)
+            if (keys != null && keys.Any())
             {
-                loggedInUsers.Remove(key);
+                foreach (var key in keys)
+                {
+                    loggedInUsers.Remove(key);
+                }
             }
         }
     }
