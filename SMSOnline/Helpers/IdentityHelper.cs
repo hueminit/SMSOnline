@@ -36,9 +36,6 @@ namespace SMSOnline.Helpers
             var users = GetLoggedInUsers();
             if (users != null && users.Count > 0)
             {
-                //var id = users.Keys.ToList().FirstOrDefault(x => x.Contains(userId));
-                //if (!string.IsNullOrWhiteSpace(id))
-                //    return true;
                 return users.ContainsKey(userName);
             }
             return false;
