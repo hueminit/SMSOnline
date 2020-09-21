@@ -26,6 +26,7 @@ namespace Models.ViewModel
         public DateTime DateModified { get; set; }
 
         [Required]
+        [StringLength(120)]
         public string Content { get; set; }
 
         public Status Status { get; set; }

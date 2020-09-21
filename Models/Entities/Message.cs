@@ -16,7 +16,6 @@ namespace Models.Entities
         public string FullNameReceived { set; get; }
 
         public string UserSentId { set; get; }
-        //public AppUser UserSent { set; get; }
 
         public string UserReceivedId { set; get; }
         public AppUser UserReceived { set; get; }
@@ -24,6 +23,7 @@ namespace Models.Entities
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
 
+        [StringLength(120)]
         public string Content { get; set; }
         public Status Status { get; set; }
     }

@@ -28,8 +28,14 @@ namespace SMSOnline.Controllers
             _contactService = contactService;
         }
 
+        public async Task<ActionResult> AllMessage()
+        {
+            var model = await _messageService.GetAllMessagesOfCurrentUserPaging(IdentityHelper.CurrentUserId);
+            return View(model);
+        }
+
         // GET: Chat
-        public async Task<ActionResult> Index(string profileId)
+            public async Task<ActionResult> Index(string profileId)
         {
             ChatViewModel chat = new ChatViewModel();
             ViewBag.Profile = profileId;

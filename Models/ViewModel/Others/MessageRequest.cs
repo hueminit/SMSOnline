@@ -8,6 +8,7 @@ namespace Models.ViewModel.Others
         public string UserReceivedId { set; get; }
 
         [Required]
+        [StringLength(120)]
         public string Content { set; get; }
 
         public string FullNameReceived { set; get; }

@@ -62,7 +62,7 @@
                     hideDuration: 200,
                     positionClass: "toast-top-center",
                 };
-                toastr.success('Welcome Roxana Roussell.');
+                toastr.success('Welcome to smsonline.');
 
                 $('.theme-switcher').removeClass('open');
             }, 500);

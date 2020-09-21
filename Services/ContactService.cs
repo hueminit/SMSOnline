@@ -18,6 +18,7 @@ namespace Services
         Task<bool> CreateContact(string contactSentId, AppUserViewModel userReceived, string currentUserName);
 
         Task<PaginationSet<ContactViewModel>> GetAllContact(bool isFriend, string currentUser, int page = 1, int pageSize = 8);
+
         Task<List<ContactViewModel>> GetAllContactOfCurrentUser(bool isFriend, string currentUser, int page = 1, int pageSize = 8);
 
         Task<PaginationSet<ContactViewModel>> GetAllRequestFriend(string currentUserId, int page = 1, int pageSize = 8);

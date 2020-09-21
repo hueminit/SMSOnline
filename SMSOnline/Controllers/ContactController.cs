@@ -64,29 +64,6 @@ namespace SMSOnline.Controllers
             return RedirectToAction("Error", "Response", new { message = "Remove friend failure" });
         }
 
-        public async Task<ActionResult> Profile(string profileId)
-        {
-            ViewBag.IsFriend = false;
-            if (!string.IsNullOrWhiteSpace(profileId))
-            {
-                var user = await _userService.GetUserByIdAsync(profileId, currentUser);
-                if (user != null)
-                {
-                    return View(user);
-                }
-            }
-            return RedirectToAction("Error", "Response", new { message = "Get profile failure" });
-        }
-
-        public async Task<ActionResult> EditProfile()
-        {
-            var user = await _userService.GetUserByIdAsync(currentUser, currentUser);
-            if (user != null)
-            {
-                return View(user);
-            }
-            return RedirectToAction("Error", "Response", new { message = "Get profile failure" });
-        }
 
         [HttpPost]
         public async Task<ActionResult> AddContact(string profileId)

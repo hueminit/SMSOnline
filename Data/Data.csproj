@@ -116,6 +116,10 @@
     <Compile Include="Migrations\202009210327053_AddMessageFullName.Designer.cs">
       <DependentUpon>202009210327053_AddMessageFullName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009211744312_UpdateData.cs" />
+    <Compile Include="Migrations\202009211744312_UpdateData.Designer.cs">
+      <DependentUpon>202009211744312_UpdateData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -170,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009210327053_AddMessageFullName.resx">
       <DependentUpon>202009210327053_AddMessageFullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009211744312_UpdateData.resx">
+      <DependentUpon>202009211744312_UpdateData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

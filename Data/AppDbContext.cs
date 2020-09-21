@@ -32,23 +32,11 @@ namespace Data
             builder.Entity<IdentityUserLogin>().ToTable("AppUserLogins").HasKey(x => x.UserId);
             builder.Entity<IdentityUserRole>().ToTable("AppUserRoles").HasKey(x => new { x.RoleId, x.UserId });
 
-            //builder.Entity<Message>()
-            //    .HasRequired(m => m.UserSent)
-            //    .WithMany(t => t.MessagesSent)
-            //    .HasForeignKey(m => m.UserSentId)
-            //    .WillCascadeOnDelete(false);
-
             builder.Entity<Message>()
                 .HasRequired(m => m.UserReceived)
                 .WithMany(t => t.MessagesReceived)
                 .HasForeignKey(m => m.UserReceivedId)
                 .WillCascadeOnDelete(false);
-
-            //builder.Entity<Contact>()
-            //   .HasRequired(m => m.ContactSentRequest)
-            //   .WithMany(t => t.ContactSent)
-            //   .HasForeignKey(m => m.ContactSentId)
-            //   .WillCascadeOnDelete(false);
 
             builder.Entity<Contact>()
                 .HasRequired(m => m.ContactReceivedRequest)
