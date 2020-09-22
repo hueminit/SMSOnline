@@ -3,34 +3,59 @@
     ViewData["Title"] = "Transactions";
 }
 
-<div class="container">
-    <h1>@ViewData["Title"]</h1>
+<!-- begin::page-header -->
+<div class="page-header">
+    <div class="container-fluid d-sm-flex justify-content-between">
+        <h4>Transactions</h4>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Transactions</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- end::page-header -->
 
-    <hr class="hr-2" />
-    @if (Model.Any())
-    {
-        <table class="table table-hover table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Created On</th>
-                    <th>Transation Type</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var transaction in Model)
-                {
-                    <tr>
-                        <td>@transaction.CreatedAt</td>
-                        <td>@transaction.Type</td>
-                        <td>@transaction.Price</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <h4><i>You haven't made any transactions yet.</i></h4>
-    }
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        @if (Model.Any())
+                        {
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Transation Type</th>
+                                        <th scope="col">Created On</th>
+                                        <th scope="col">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var transaction in Model)
+                                    {
+                                        <tr>
+                                            <td><span class="badge badge-success">@transaction.Type</span></td>
+                                            <th>@transaction.CreatedAt</th>
+                                            <td>$@transaction.Price</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info" role="alert">You haven't made any transactions yet.</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

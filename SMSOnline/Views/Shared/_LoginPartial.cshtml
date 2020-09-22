@@ -32,8 +32,8 @@
                         <a onclick="window.location.href = '/Manage/ChangePassword'" class="list-group-item d-flex"> Change Password  </a>
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
-                            @Html.AntiForgeryToken()
-                            <a href="javascript:document.getElementById('logoutForm').submit()" class="list-group-item text-danger" data-sidebar-target="#settings">Sign Out!</a>
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="list-group-item text-danger" data-sidebar-target="#settings">Sign Out!</a>
 
                         }
                     </div>
@@ -56,8 +56,8 @@
             <li>
                 @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                 {
-                    @Html.AntiForgeryToken()
-                    <a href="javascript:document.getElementById('logoutForm').submit()" data-toggle="tooltip" data-placement="right" title="Logout"> <i data-feather="log-out"></i></a>
+                @Html.AntiForgeryToken()
+                <a href="javascript:document.getElementById('logoutForm').submit()" data-toggle="tooltip" data-placement="right" title="Logout"> <i data-feather="log-out"></i></a>
 
                 }
             </li>

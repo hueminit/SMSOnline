@@ -10,10 +10,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="#">Pages</a>
+                    <a href="/">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Profile</li>
             </ol>
@@ -34,8 +31,7 @@
                     </figure>
                     <h5 class="mb-1">@Model.FullName</h5>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repudiandae eveniet
-                        harum.
+                        @Model.Description
                     </p>
                     @if (!isCurrentUser)
                     {

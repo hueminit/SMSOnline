@@ -53,8 +53,9 @@ namespace Models.ViewModel
         public bool IsCurrentUserSendRequest { get; set; }
         public bool StatustRequest { get; set; }
         public int TotalFreeMessage { get; set; }
-
+        
         [StringLength(256)]
         public string Description { set; get; }
+
     }
 }

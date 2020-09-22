@@ -62,7 +62,7 @@
                     hideDuration: 200,
                     positionClass: "toast-top-center",
                 };
-                toastr.success('Welcome to smsonline.');
+                toastr.success('smsonline loading.');
 
                 $('.theme-switcher').removeClass('open');
             }, 500);

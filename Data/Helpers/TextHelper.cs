@@ -25,5 +25,13 @@ namespace Data.Helpers
 
             return isValid;
         }
+        public static string HideNumber(this string number)
+        {
+            string hiddenString = number.Substring(number.Length - 4)
+                .PadLeft(number.Length, '*');
+
+
+            return hiddenString;
+        }
     }
 }

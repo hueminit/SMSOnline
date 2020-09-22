@@ -1,48 +1,74 @@
 ﻿@model Models.ViewModel.Others.DepositRequestModel
 
-@{
-    ViewData["Title"] = "Deposit";
-}
+<!-- begin::page-header -->
+<div class="page-header">
+    <div class="container-fluid d-sm-flex justify-content-between">
+        <h4>CreditCard Create</h4>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a onclick="window.location.href='/CreditCard'">CreditCard</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- end::page-header -->
 
-<div class="row w-100 m-0">
-    <div class="offset-md-6 col-md-5 container w-100">
-        <h2>@ViewData["Title"]</h2>
-        <hr class="hr-2" />
-        @if (Model.CreditCardItems.Any())
-        {
-            using (Html.BeginForm("Index", "Deposit", FormMethod.Post, new { @class = "form-horizontal" }))
-            {
-                @Html.ValidationSummary("", new { @class = "text-danger" })
-                @Html.AntiForgeryToken()
-                <div class="form-group">
-                    <div class="form-group">
-                        @Html.DropDownListFor(model => Model.Deposit.CreditCardId, Model.CreditCardItems)
-                    </div>
-                    <div class="form-group">
-                        @Html.TextBoxFor(m => m.Deposit.Amount, new
-                        {
-                            @class = "form-control",
-                            @placeholder = "Enter amount...",
-                            @required = "required",
-                            @autofocus = "autofocus"
-                        })
-                    </div>
-                    <hr />
-                    <div>
-                        <input type="submit" value="Deposit" class="btn btn-info btn-lg btn-block" />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            @if (Model.CreditCardItems.Any())
+                            {
+                                using (Html.BeginForm("Index", "Deposit", FormMethod.Post, new { @class = "form-horizontal" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Deposit.CreditCardId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(model => Model.Deposit.CreditCardId, Model.CreditCardItems, new { @class = "form-control", })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Deposit.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.Deposit.Amount, new
+                                            {
+                                                @class = "form-control",
+                                                @placeholder = "Enter amount...",
+                                                @required = "required",
+                                                @autofocus = "autofocus"
+                                            })
+                                            @Html.ValidationMessageFor(model => model.Deposit.Amount, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="alert alert-info" role="alert">You cannot make a deposit without a credit card. Consider.<a href="/CreditCard/Create">registering</a> one yourself.</div>
+                            }
+                        </div>
                     </div>
                 </div>
-            }
-
-        }
-        else
-        {
-            <h4>
-                <i>
-                    You cannot make a deposit without a credit card. Consider
-                    <a onclick="window.location.href='/CreditCard/Create'">registering</a> one yourself.
-                </i>
-            </h4>
-        }
+            </div>
+        </div>
     </div>
 </div>

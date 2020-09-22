@@ -16,6 +16,7 @@ namespace Services
     public interface IUserService : IRepository<AppUser>
     {
         Task<AppUserViewModel> FindUserByEmailOrUserNameOrPhoneNumber(CheckAccountViewModel model);
+        Task<bool> CheckUpdateOrCreateUser(CheckAccountViewModel model);
 
         Task<PaginationSet<AppUserViewModel>> FindUser(string currentUserId, string keyword, int page = 1, int pageSize = 8);
 
@@ -51,6 +52,19 @@ namespace Services
             }
 
             return null;
+        }
+
+        public async Task<bool> CheckUpdateOrCreateUser(CheckAccountViewModel model)
+        {
+            var query = await GetMultiAsync(x => x.Email == model.Email
+                                                 || x.UserName == model.UserName || x.PhoneNumber == model.PhoneNumber);
+
+            if (query.Count() > 1)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public async Task<PaginationSet<AppUserViewModel>> FindUser(string currentUserId, string keyword, int page = 1, int pageSize = 8)

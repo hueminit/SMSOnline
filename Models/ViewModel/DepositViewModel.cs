@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Models.ViewModel
@@ -11,6 +12,7 @@ namespace Models.ViewModel
         public decimal Amount { get; set; }
 
         [Required]
+        [DisplayName("Credit Card")]
         public string CreditCardId { get; set; }
 
         public DateTime CreatedAt { get; set; }

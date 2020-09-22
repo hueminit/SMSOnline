@@ -1,5 +1,13 @@
 ﻿@{
-    var error =(string) ViewBag.Error;
+    Layout = "~/Views/Shared/_ErrorLayout.cshtml";
+    var error = (string)ViewBag.Error;
 }
+<div class="col-lg-4 offset-lg-1">
+    <h1>@error</h1>
+    <p>
 
-<h2>@error</h2>
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </p>
+</div>

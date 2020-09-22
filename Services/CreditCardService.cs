@@ -14,7 +14,6 @@ namespace Services
     public interface ICreditCardService
     {
         Task<bool> Create(CreditCardRequestModel model, string userId);
-
         Task<List<CreditCardViewModel>> GetAllCreditCardsAsync(string customerId);
     }
 

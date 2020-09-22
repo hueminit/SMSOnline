@@ -1,49 +1,88 @@
 ﻿@model Models.ViewModel.Others.CreditCardRequestModel
 
-@{
-    ViewData["Title"] = "Add Card";
-}
-<div class="row w-100 m-0">
-    <div class="offset-md-6 col-md-5 container w-100">
-        <h2>@ViewData["Title"]</h2>
-        <hr class="hr-2" />
-        @using (Html.BeginForm("Create", "CreditCard", FormMethod.Post, new { @class = "form-horizontal" }))
-        {
-            @Html.ValidationSummary("", new { @class = "text-danger" })
-            @Html.AntiForgeryToken()
-            <div class="form-group">
-                <div class="form-group">
-                    <label asp-for="Number"></label>
-                    @Html.TextBoxFor(m => m.Number, new
-                    {
-                        @class = "form-control",
-                        @placeholder = "Number",
-                        @required = "required"
-                    })
-                </div>
-                <div class="form-group">
-                    <label asp-for="CVV"></label>
-                    @Html.TextBoxFor(m => m.CVV, new
-                    {
-                        @class = "form-control",
-                        @placeholder = "The number on the back of your card...",
-                        @required = "required"
-                    })
-                </div>
-                <div class="form-group">
-                    <label asp-for="ExpirationDate"></label>
-                    @Html.TextBoxFor(m => m.ExpirationDate, new
-                    {
-                        @class = "form-control",
-                        @placeholder = "ExpirationDate",
-                        @type = "date",
-                        @required = "required"
-                    })
-                </div>
-                <div>
-                    <input type="submit" value="Add Card" class="btn btn-info btn-lg btn-block" />
+<!-- begin::page-header -->
+<div class="page-header">
+    <div class="container-fluid d-sm-flex justify-content-between">
+        <h4>CreditCard Create</h4>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a onclick="window.location.href='/CreditCard'">CreditCard</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- end::page-header -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            @using (Html.BeginForm("Create", "CreditCard", FormMethod.Post, new { @class = "form-horizontal" }))
+                            {
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(m => m.Number, new
+                                        {
+                                            @class = "form-control",
+                                            @placeholder = "Number",
+                                            @required = "required"
+                                        })
+                                        @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CVV, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(m => m.CVV, new
+                                        {
+                                            @class = "form-control",
+                                            @placeholder = "The number on the back of your card...",
+                                            @required = "required"
+                                        })
+                                        @Html.ValidationMessageFor(model => model.CVV, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ExpirationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(m => m.ExpirationDate, new
+                                        {
+                                            @class = "form-control",
+                                            @placeholder = "ExpirationDate",
+                                            @type = "date",
+                                            @required = "required"
+                                        })
+                                        @Html.ValidationMessageFor(model => model.ExpirationDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                        <a onclick="window.location.href='/CreditCard'" class="btn btn-warning">Cancel</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
-        }
+        </div>
     </div>
 </div>
