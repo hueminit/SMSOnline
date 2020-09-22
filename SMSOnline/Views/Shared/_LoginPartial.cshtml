@@ -8,7 +8,7 @@
         <div class="navigation-menu-tab-header" data-toggle="tooltip" title="Roxana Roussell" data-placement="right">
             <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
                 <figure class="avatar avatar-sm">
-                    <img src="https://via.placeholder.com/128X128" class="rounded-circle" alt="avatar">
+                    <img src="@(string.IsNullOrWhiteSpace(currentUser.Avatar) ? Common.Constants.AvatarDefault : currentUser.Avatar)" class="rounded-circle" alt="avatar">
                 </figure>
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
