@@ -220,6 +220,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\CreditCardController.cs" />
     <Compile Include="Controllers\DepositController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Filters\TrackLoginsFilter.cs" />
@@ -979,7 +980,6 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Shared\_ChatSearch.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
-    <Content Include="Views\Contact\Profile.cshtml" />
     <Content Include="Views\Contact\FindUser.cshtml" />
     <Content Include="Views\Response\Success.cshtml" />
     <Content Include="Views\Response\Error.cshtml" />
@@ -990,7 +990,9 @@
     <Content Include="Views\Transaction\Index.cshtml" />
     <Content Include="Views\Deposit\Index.cshtml" />
     <Content Include="Views\Shared\_Paging.cshtml" />
-    <Content Include="Views\Contact\EditProfile.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Chat\AllMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,14 +14,11 @@ namespace Models.Entities
         public string FullNameContactReceived { set; get; }
 
         public string ContactSentId { set; get; }
-        //public virtual AppUser ContactSentRequest { set; get; }
 
         public string ContactReceivedId { set; get; }
         public virtual AppUser ContactReceivedRequest { set; get; }
 
         public bool IsFriend { set; get; }
-
-        public bool IsBlock { set; get; }
 
         public bool StatusRequest { set; get; }
 

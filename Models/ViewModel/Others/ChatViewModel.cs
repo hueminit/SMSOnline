@@ -20,7 +20,7 @@ namespace Models.ViewModel.Others
         public AppUserViewModel UserReceived { set; get; }
         public ContactChatViewModel Chat { set; get; }
         //public PaginationSet<MessageViewModel> ListChat { set; get; }
-        
+
     }
 
     public class ContactChatViewModel

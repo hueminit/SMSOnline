@@ -29,14 +29,8 @@
 
                 <div class="dropdown-menu-body">
                     <div class="list-group list-group-flush">
-                        <a onclick="window.location.href = '/Contact/Profile?profileId=@currentUser.Id'" class="list-group-item">Profile</a>
-                        <a href="#" class="list-group-item d-flex">
-                            Followers <span class="text-muted ml-auto">214</span>
-                        </a>
-                        <a href="#" class="list-group-item d-flex">
-                            Inbox <span class="text-muted ml-auto">18</span>
-                        </a>
-
+                        <a onclick="window.location.href = '/Profile/Index?profileId=@currentUser.Id'" class="list-group-item">Profile</a>
+                        <a onclick="window.location.href = '/Manage/ChangePassword'" class="list-group-item d-flex"> Change Password  </a>
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
                             @Html.AntiForgeryToken()
@@ -56,35 +50,17 @@
                     <i data-feather="bar-chart-2"></i>
                 </a>
             </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="right" title="Apps" data-nav-target="#apps">
-                    <i data-feather="command"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="right" title="UI Elements"
-                   data-nav-target="#elements">
-                    <i data-feather="layers"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="right" title="Pages" data-nav-target="#pages">
-                    <i data-feather="copy"></i>
-                </a>
-            </li>
         </ul>
     </div>
     <div>
         <ul>
             <li>
-                <a href="#" data-toggle="tooltip" data-placement="right" title="Settings">
-                    <i data-feather="settings"></i>
-                </a>
-            </li>
-            <li>
-                <a href="login.html" data-toggle="tooltip" data-placement="right" title="Logout">
-                    <i data-feather="log-out"></i>
-                </a>
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('logoutForm').submit()" data-toggle="tooltip" data-placement="right" title="Logout"> <i data-feather="log-out"></i></a>
+
+                }
             </li>
         </ul>
     </div>

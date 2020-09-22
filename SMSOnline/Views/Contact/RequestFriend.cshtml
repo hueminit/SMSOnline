@@ -127,7 +127,7 @@
                                             </div>
                                             <div>
                                                 <a onclick="window.location.href='/Chat/Index?profileId=@profileId'" class="btn btn-primary">Chat</a>
-                                                <a onclick="window.location.href = '/Contact/Profile?profileId=@profileId'" class="btn btn-primary">View Profile</a>
+                                                <a onclick="window.location.href = '/Profile/Index?profileId=@profileId'" class="btn btn-primary">View Profile</a>
                                                 <form method="post" action="/Contact/AcceptRequest" id="contact-accept">
                                                     <input type="text" hidden name="profileId" value="@profileId">
                                                     <a href="javascript:document.getElementById('contact-accept').submit()" type="submit" class="btn btn-primary">Accept</a>

@@ -1,0 +1,127 @@
+﻿@using SMSOnline.Helpers
+@model Models.Shared.PaginationSet<Models.ViewModel.MessageViewModel>
+@{
+    var currentUser = IdentityHelper.GetAllInfoCurrentLogged();
+}
+<div class="container-fluid h-100">
+
+    <div class="row app-block">
+        <div class="col-md-12 app-content">
+            <div class="app-content-overlay"></div>
+            <div class="app-action">
+                <div class="action-left">
+                    <ul class="list-inline">
+                        <li class="list-inline-item mb-0">
+                            <a href="#" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">
+                                Order by
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Date</a>
+                                <a class="dropdown-item" href="#">From</a>
+                                <a class="dropdown-item" href="#">Subject</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Size</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="action-right">
+                    <form class="d-flex mr-3">
+                        <a href="#" class="app-sidebar-menu-button btn btn-outline-light">
+                            <i data-feather="menu" class="width-15 height-15"></i>
+                        </a>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="message search"
+                                   aria-describedby="button-addon1">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-light" type="button" id="button-addon1">
+                                    <i class="ti-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card card-body app-content-body">
+                <div class="app-lists">
+                    <ul class="list-group list-group-flush">
+                        @if (Model.Items.Any())
+                        {
+                            foreach (var item in Model.Items)
+                            {
+                                var name = string.Empty;
+                                var image = string.Empty;
+                                bool isLogged = false;
+                                var profileId = string.Empty;
+                                if (currentUser.Id == item.UserSentId)
+                                {
+                                    var user = IdentityHelper.GetUserById(item.UserReceivedId);
+                                    name = user.FullName;
+                                    image = string.IsNullOrWhiteSpace(user.Avatar) ? Common.Constants.AvatarDefault : user.Avatar;
+                                    isLogged = IdentityHelper.IsUserLogged(user.UserName);
+                                    profileId = item.UserReceivedId;
+
+                                }
+                                else
+                                {
+                                    var user = IdentityHelper.GetUserById(item.UserSentId);
+                                    name = user.FullName;
+                                    image = string.IsNullOrWhiteSpace(user.Avatar) ? Common.Constants.AvatarDefault : user.Avatar;
+                                    isLogged = IdentityHelper.IsUserLogged(user.UserName);
+                                    profileId = item.UserSentId;
+                                }
+                                <li class="list-group-item">
+
+                                    <div>
+                                        <figure class="avatar avatar-sm mr-3">
+                                            <a onclick="window.location.href = '/Chat/Index?profileId=@profileId'">
+                                                <img src="@image" class="rounded-circle" alt="image" height="128" width="128">
+                                            </a>
+
+                                        </figure>
+                                    </div>
+                                    <div class="flex-grow-1 min-width-0">
+                                        <div class="mb-1 d-flex justify-content-between align-items-center">
+                                            <div class="text-truncate app-list-title">
+                                                <a onclick="window.location.href = '/Chat/Index?profileId=@profileId'">
+                                                    @name
+                                                </a>
+                                            </div>
+                                            <div class="pl-3 d-flex">
+                                                <span class="text-nowrap text-muted">
+                                                    <a onclick="window.location.href = '/Chat/Index?profileId=@profileId'">
+                                                        @item.DateCreatedFormat
+                                                    </a>
+                                                </span>
+                                                <div class="dropdown ml-3">
+                                                    <i class="fa fa-circle @(isLogged ? "text-success" : "text-danger")"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-muted d-flex justify-content-between">
+                                            <div class="text-truncate small">@item.Content</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            {
+                                Html.RenderPartial("_Paging", Model);
+                            }
+                        }
+                        else
+                        {
+                            <h4 class="mb-5">
+                                <i data-feather="search"></i>
+                                Not found message
+                            </h4>
+                        }
+                    </ul>
+                </div>
+                <!-- end::app-lists -->
+                <!-- begin:app-detail -->
+            </div>
+        </div>
+    </div>
+
+</div>
+

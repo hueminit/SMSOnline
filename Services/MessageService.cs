@@ -11,6 +11,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Data.Helpers;
+using Models.Shared;
 
 namespace Services
 {
@@ -22,12 +23,8 @@ namespace Services
 
         Task<List<MessageViewModel>> GetMessagesByUserReceivedAsync(string userSent, string userReceived);
         Task<List<MessageViewModel>> GetAllMessagesOfCurrentUser(string currentUserId);
-
-        Task<List<MessageCustomViewModel>> GetNewMessages(string userSent);
-
+        Task<PaginationSet<MessageViewModel>> GetAllMessagesOfCurrentUserPaging(string currentUserId, int page = 1, int pageSize = 8);
         List<MessageViewModel> GetMessagesByUserReceived(string userSent, string userReceived);
-
-        //Task<bool> DeleteMessage(string contactSentId, string contactReceivedId);
         Task<bool> Save();
     }
 
@@ -136,7 +133,42 @@ namespace Services
             return listMessage;
         }
 
+        public async Task<PaginationSet<MessageViewModel>> GetAllMessagesOfCurrentUserPaging(string currentUserId, int page = 1, int pageSize = 8)
+        {
+            var query = await GetMultiAsync(x => x.UserReceivedId == currentUserId || x.UserSentId == currentUserId);
+            query = query.OrderByDescending(x => x.DateCreated);
+            var data = query.AsEnumerable().DistinctBy(x => new { x.UserSentId, x.UserReceivedId });
+            var res = _mapper.ProjectTo<MessageViewModel>(data.AsQueryable()).ToList();
+            var listMessage = new List<MessageViewModel>();
+            var listMessageRemove = new List<MessageViewModel>();
+            foreach (var message in res)
+            {
+                var model = res.FirstOrDefault(x => x.UserReceivedId == message.UserSentId && x.UserSentId == message.UserReceivedId);
+                if (model != null && message.DateCreated > model.DateCreated)
+                {
+                    //two way : a=>b and b=>a
+                    listMessage.Add(message);
+                    listMessageRemove.Add(model);
+                }
+                else
+                {  //one way : a=>b or b=>a
+                    listMessage.Add(message);
+                }
+            }
 
+            listMessage = listMessage.Except(listMessageRemove).ToList();
+            int totalRow = listMessage.Count();
+            var messages = listMessage.OrderByDescending(x => x.DateCreated)
+               .Skip((page - 1) * pageSize).Take(pageSize);
+            return new PaginationSet<MessageViewModel>()
+            {
+                Page = page,
+                TotalCount = totalRow,
+                TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
+                Items = messages,
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
+            };
+        }
 
 
         public List<MessageViewModel> GetMessagesByUserReceived(string userSent, string userReceived)
@@ -158,28 +190,6 @@ namespace Services
             return res;
         }
 
-        public async Task<List<MessageCustomViewModel>> GetNewMessages(string userSent)
-        {
-            // var query = await GetMultiAsync(x => x.UserSentId == userSent);
-            //todo
-            // query = query.GroupJoin()
-            return null;
-        }
-
-        public async Task<bool> DeleteMessage(string userSent, string userReceived)
-        {
-            try
-            {
-                await DeleteMulti(x => x.UserSentId == userSent && x.UserReceivedId == userReceived);
-                return await _unitOfWork.Commit();
-            }
-            catch (Exception e)
-            {
-                //todo
-            }
-
-            return false;
-        }
 
         public async Task<bool> Save()
         {

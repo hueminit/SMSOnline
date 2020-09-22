@@ -5,6 +5,7 @@ using Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -29,14 +30,11 @@ namespace Models.Entities
         public bool IsDelete { get; set; }
         public int TotalFreeMessage { get; set; }
 
-        //[InverseProperty("UserSent")]
-        //public  ICollection<Message> MessagesSent { get; set; }
+        [StringLength(256)]
+        public string Description { set; get; }
 
         [InverseProperty("UserReceived")]
         public ICollection<Message> MessagesReceived { get; set; }
-
-        //[InverseProperty("ContactSentRequest")]
-        //public ICollection<Contact> ContactSent { get; set; }
 
         [InverseProperty("ContactReceivedRequest")]
         public ICollection<Contact> ContactReceived { get; set; }

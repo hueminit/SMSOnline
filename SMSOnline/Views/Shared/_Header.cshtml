@@ -23,7 +23,7 @@
                     <div class="p-3">
                         <div class="row row-xs">
                             <div class="col-6">
-                                <a href="chat.html">
+                                <a onclick="window.location.href = '/Chat/AllMessage'">
                                     <div class="p-3 border-radius-1 border text-center mb-3">
                                         <i class="width-23 height-23" data-feather="message-circle"></i>
                                         <div class="mt-2">Chat</div>
@@ -39,7 +39,7 @@
                                 </a>
                             </div>
                             <div class="col-6">
-                                <a onclick="window.location.href = '/Contact/Profile?profileId=@HttpContext.Current.User.Identity.GetUserId()'">
+                                <a onclick="window.location.href = '/Profile/Index?profileId=@HttpContext.Current.User.Identity.GetUserId()'">
                                     <div class="p-3 border-radius-1 border text-center">
                                         <i class="width-23 height-23" data-feather="file"></i>
                                         <div class="mt-2">Info</div>

@@ -64,39 +64,47 @@ namespace Services
                                              || x.Email.Contains(keyword)
                                              || x.UserName.Contains(keyword)
                                              || x.PhoneNumber.Contains(keyword));
-                }
-                int totalRow = query.Count();
-                var totalPage = (int)Math.Ceiling((decimal)totalRow / pageSize);
-                query = query.OrderByDescending(x => x.DateCreated)
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize);
-                var users = query.ToList();
-                var data = _mapper.Map<List<AppUser>, List<AppUserViewModel>>(users);
-                var updateData = data?.Select(
-                    c =>
+
+                    int totalRow = query.Count();
+                    var totalPage = (int)Math.Ceiling((decimal)totalRow / pageSize);
+                    query = query.OrderByDescending(x => x.DateCreated)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize);
+                    var users = query.ToList();
+                    var data = _mapper.Map<List<AppUser>, List<AppUserViewModel>>(users);
+                    var updateData = data?.Select(
+                        c =>
+                        {
+                            var request = CheckRequestFriendModel(currentUserId, c.Id);
+                            c.IsFriendWithCurrentUser = request.IsFriend;
+                            c.IsCurrentUserSendRequest = request.IsCurrentUserSendRequest;
+                            c.StatustRequest = request.StatustRequest;
+                            return c;
+                        }).ToList();
+                    var res = new PaginationSet<AppUserViewModel>()
                     {
-                        var request = CheckRequestFriendModel(currentUserId, c.Id);
-                        c.IsFriendWithCurrentUser = request.IsFriend;
-                        c.IsCurrentUserSendRequest = request.IsCurrentUserSendRequest;
-                        c.StatustRequest = request.StatustRequest;
-                        return c;
-                    }).ToList();
-                var res = new PaginationSet<AppUserViewModel>()
-                {
-                    Page = page,
-                    TotalCount = totalRow,
-                    TotalPages = totalPage,
-                    Items = updateData,
-                    MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
-                };
-                return res;
+                        Page = page,
+                        TotalCount = totalRow,
+                        TotalPages = totalPage,
+                        Items = updateData,
+                        MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
+                    };
+                    return res;
+                }
             }
             catch (Exception e)
             {
 
             }
+            return new PaginationSet<AppUserViewModel>()
+            {
+                Page = page,
+                TotalCount = 1,
+                TotalPages = 1,
+                Items = new List<AppUserViewModel>(),
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
+            };
 
-            return null;
         }
 
         public async Task<AppUserViewModel> GetUserByIdAsync(string userId, string currentUserId)
