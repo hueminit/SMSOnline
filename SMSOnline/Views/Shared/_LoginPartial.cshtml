@@ -5,14 +5,14 @@
 }
 <div class="navigation-menu-tab">
     <div>
-        <div class="navigation-menu-tab-header" data-toggle="tooltip" title="Roxana Roussell" data-placement="right">
+        <div class="navigation-menu-tab-header" data-toggle="tooltip" title="@currentUser.FullName" data-placement="right">
             <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
                 <figure class="avatar avatar-sm">
                     <img src="@(string.IsNullOrWhiteSpace(currentUser.Avatar) ? Common.Constants.AvatarDefault : currentUser.Avatar)" class="rounded-circle" alt="avatar">
                 </figure>
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
-                <div class="p-3 text-center" data-backround-image="https://via.placeholder.com/1000X563">
+                <div class="p-3 text-center" style="background:url('/Content/app/assets/media/image/cover-user.jpg') no-repeat center; background-size:cover">
                     <figure class="avatar mb-3">
                         <img src="@(string.IsNullOrWhiteSpace(currentUser.Avatar) ? Common.Constants.AvatarDefault : currentUser.Avatar)"
                              class="rounded-circle" alt="image" width="128" height="128">

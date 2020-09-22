@@ -84,7 +84,7 @@
                             foreach (var user in Model.Items)
                             {
                                 var profileId = string.Empty;
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="card app-file-list">
                                 <div class="app-file-icon">
                                     <i class="fa fa-file-pdf-o text-danger"></i>
@@ -95,15 +95,15 @@
                                     <div>
                                         <h6>
                                             @if (currentUserId.Equals(user.ContactSentId))
-                                                    {
-                                                        profileId = user.ContactReceivedId;
-                                            <a onclick="window.location.href='/Chat/Index?profileId=@profileId'">@user.FullNameContactReceived</a>
-                                                    }
-                                                    else
-                                                    {
-                                                        profileId = user.ContactSentId;
-                                            <a onclick="window.location.href='/Chat/Index?profileId=@profileId'">@user.FullNameContactSent</a>
-                                                    }
+                                            {
+                                                profileId = user.ContactReceivedId;
+                                                <a onclick="window.location.href='/Chat/Index?profileId=@profileId'">@user.FullNameContactReceived</a>
+                                            }
+                                            else
+                                            {
+                                                profileId = user.ContactSentId;
+                                                <a onclick="window.location.href='/Chat/Index?profileId=@profileId'">@user.FullNameContactSent</a>
+                                            }
                                         </h6>
                                     </div>
                                     <div>
