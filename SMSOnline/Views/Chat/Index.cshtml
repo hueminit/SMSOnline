@@ -7,7 +7,7 @@
 <!-- begin::chat block -->
 <div class="container-fluid h-100">
     <input type="text" hidden id="profile" value="@Model.UserReceived.Id">
-    <div class="row no-gutters chat-block">
+    <div class="row no-gutters chat-block" style="min-height:80vh">
 
         <!-- begin::chat sidebar -->
         @{
@@ -22,7 +22,7 @@
             <div class="chat-header border-bottom">
                 <div class="d-flex align-items-center">
                     <div class="pr-3">
-                        <div class="avatar avatar-sm  @(isLogged ? "avatar-state-success" : "avatar-state-danger")">
+                        <div class="avatar avatar-md  @(isLogged ? "avatar-state-success" : "avatar-state-danger")">
                             <img src="@(string.IsNullOrWhiteSpace(Model.UserReceived.Avatar) ? Common.Constants.AvatarDefault : Model.UserReceived.Avatar)"
                                  width="128" height="128" class="rounded-circle" alt="image">
                         </div>

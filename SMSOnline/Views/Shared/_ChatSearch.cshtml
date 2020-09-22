@@ -8,7 +8,7 @@
     <div class="chat-sidebar-header">
         <div class="d-flex">
             <div class="pr-3">
-                <div class="avatar avatar-sm">
+                <div class="avatar avatar-md">
                     <img src="@(string.IsNullOrWhiteSpace(currentUser.Avatar) ? Common.Constants.AvatarDefault : currentUser.Avatar)" class="rounded-circle"
                          height="128" width="128" alt="image">
                 </div>
@@ -82,7 +82,7 @@
                                 <a onclick="window.location.href='/Chat/Index?profileId=@profileId'"
                                    class="list-group-item d-flex align-items-center link-1 pl-0 pr-0 pb-3 pt-3">
                                     <div class="pr-3">
-                                        <div class="avatar avatar-sm @(isLogged ? "avatar-state-success" : "avatar-state-danger")">
+                                        <div class="avatar avatar-md @(isLogged ? "avatar-state-success" : "avatar-state-danger")">
                                             <span class="avatar-title bg-success rounded-circle">F</span>
                                         </div>
                                     </div>
@@ -132,7 +132,7 @@
                                 }
                                 <li class="list-group-item d-flex align-items-center pl-0 pr-0 pb-3 pt-3">
                                     <div class="pr-3">
-                                        <div class="avatar avatar-sm @(isLogged ? "avatar-state-success" : "avatar-state-danger")">
+                                        <div class="avatar avatar-md @(isLogged ? "avatar-state-success" : "avatar-state-danger")">
                                             <span class="avatar-title bg-success rounded-circle">A</span>
                                         </div>
                                     </div>
