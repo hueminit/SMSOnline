@@ -32,6 +32,9 @@ namespace Models.AutoMapper
 
                 cfg.CreateMap<Transaction, TransactionViewModel>().ReverseMap();
                 cfg.CreateMap<TransactionViewModel, Transaction>().ReverseMap();
+
+                cfg.CreateMap<SystemConfigViewModel, SystemConfig>().ReverseMap();
+                cfg.CreateMap<SystemConfig, SystemConfigViewModel>().ReverseMap();
             });
 
             Mapper = config.CreateMapper();

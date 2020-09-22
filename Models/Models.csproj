@@ -87,6 +87,7 @@
     <Compile Include="Entities\CreditCard.cs" />
     <Compile Include="Entities\Deposits.cs" />
     <Compile Include="Entities\Message.cs" />
+    <Compile Include="Entities\SystemConfig.cs" />
     <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\Status.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="ViewModel\Others\MessageCustomViewModel.cs" />
     <Compile Include="ViewModel\Others\MessageRequest.cs" />
     <Compile Include="ViewModel\Others\RequestFriendModel.cs" />
+    <Compile Include="ViewModel\SystemConfigViewModel.cs" />
     <Compile Include="ViewModel\TransactionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

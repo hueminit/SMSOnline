@@ -41,6 +41,8 @@ namespace Data
                 manager.Create(user, "123654$");
                 manager.AddToRole(user.Id, "Admin");
             }
+
+            //if(!context)
         }
     }
 }
