@@ -29,7 +29,6 @@
                         <div class="col-md-8">
                             @using (Html.BeginForm("Create", "CreditCard", FormMethod.Post, new { @class = "form-horizontal" }))
                             {
-                                @Html.ValidationSummary("", new { @class = "text-danger" })
                                 @Html.AntiForgeryToken()
 
                                 <div class="form-group">
