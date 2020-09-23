@@ -28,12 +28,12 @@
 
                 <div class="dropdown-menu-body">
                     <div class="list-group list-group-flush">
-                        <a onclick="window.location.href = '/Profile/Index?profileId=@currentUser.Id'" class="list-group-item">Profile</a>
-                        <a onclick="window.location.href = '/Manage/ChangePassword'" class="list-group-item d-flex"> Change Password  </a>
+                        <a onclick="window.location.href = '/Profile/Index?profileId=@currentUser.Id'" class="list-group-item" style="cursor:pointer">Profile</a>
+                        <a onclick="window.location.href = '/Manage/ChangePassword'" class="list-group-item d-flex" style="cursor:pointer">Change Password</a>
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
                         @Html.AntiForgeryToken()
-                        <a href="javascript:document.getElementById('logoutForm').submit()" class="list-group-item text-danger" data-sidebar-target="#settings">Sign Out!</a>
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="list-group-item text-danger" data-sidebar-target="#settings">Log Out!</a>
 
                         }
                     </div>
