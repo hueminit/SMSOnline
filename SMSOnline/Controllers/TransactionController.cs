@@ -16,9 +16,9 @@ namespace SMSOnline.Controllers
         }
 
         // GET: Transaction
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int page = 1)
         {
-            var res = await _transactionService.GetAllTransactionsById(IdentityHelper.CurrentUserId);
+            var res = await _transactionService.GetAllTransactionsById(IdentityHelper.CurrentUserId,page);
             return View(res);
         }
     }

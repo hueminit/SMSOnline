@@ -30,8 +30,8 @@
                     <li>
                         <a href="javascript:void(0)">Bank</a>
                         <ul style="display: block;">
-                            <li><a onclick="window.location.href='/Transaction'">All Transactions</a></li>
-                            <li><a onclick="window.location.href='/CreditCard'">All CreditCard</a></li>
+                            <li><a onclick="window.location.href='/Transaction'">Transactions</a></li>
+                            <li><a onclick="window.location.href='/CreditCard'">CreditCard</a></li>
                             <li><a onclick="window.location.href='/CreditCard/Create'">Create CreditCard</a></li>
                             <li><a onclick="window.location.href='/Deposit'">Deposit</a></li>
                         </ul>
@@ -42,7 +42,17 @@
                             <a href="javascript:void(0)">For Admin</a>
                             <ul style="display: block;">
                                 <li><a onclick="window.location.href='/SystemConfig'">System Config</a></li>
-                                <li><a onclick="window.location.href='/Report'">Report</a></li>
+                                <li>
+                                    <a href="javascript:void(0)">Report</a>
+                                    <ul>
+                                        <li>
+                                            <a onclick="window.location.href = '/Report'">All Deposit</a>
+                                        </li>
+                                        <li>
+                                            <a onclick="window.location.href = '/Report/TransationUser'">Transation User</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                     }
