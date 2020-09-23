@@ -226,6 +226,7 @@
     <Compile Include="Filters\TrackLoginsFilter.cs" />
     <Compile Include="Helpers\IdentityHelper.cs" />
     <Compile Include="Hub\SMSOnlineHub.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

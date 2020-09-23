@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-4">
 
-            <div class="card">
+            <div class="card h-100">
                 <div class="card-body text-center">
                     <figure class="avatar avatar-lg m-b-20">
                         <img src="@(string.IsNullOrWhiteSpace(Model.Avatar) ? Common.Constants.AvatarDefault : Model.Avatar)" class="rounded-circle" alt="...">
@@ -33,43 +33,45 @@
                     <p>
                         @Model.Description
                     </p>
-                    @if (!isCurrentUser)
-                    {
-                        <a href="/Chat/Index?profileId=@Model.Id" class="btn btn-outline-primary">
-                            Chat
-                        </a>
-                    }
-                    @if (Model.IsFriendWithCurrentUser && !isCurrentUser)
-                    {
-                        <form method="post" action="/Contact/RemoveFriend" id="contact-remove-friend">
-                            <input type="text" hidden name="profileId" value="@Model.Id">
-                            <a href="javascript:document.getElementById('contact-remove-friend').submit()" type="submit" class="btn btn-primary">Remove Contact</a>
-                        </form>
-                    }
-                    else if (!Model.IsCurrentUserSendRequest && Model.StatustRequest && !isCurrentUser)
-                    {
-                        <form method="post" action="/Contact/AcceptRequest" id="contact-accept">
-                            <input type="text" hidden name="profileId" value="@Model.Id">
-                            <a href="javascript:document.getElementById('contact-accept').submit()" type="submit" class="btn btn-primary">Accept</a>
-                        </form>
-                        <form method="post" action="/Contact/CancelRequest" id="contact-cancel">
-                            <input type="text" hidden name="profileId" value="@Model.Id">
-                            <a href="javascript:document.getElementById('contact-cancel').submit()" type="submit" class="btn btn-primary">Cancel</a>
-                        </form>
-                    }
-                    else if (!isCurrentUser)
-                    {
-                        <form method="post" action="/Contact/AddContact" id="contact-add">
-                            <input type="text" hidden name="profileId" value="@Model.Id">
-                            <a href="javascript:document.getElementById('contact-add').submit()" type="submit" class="btn btn-primary">Add Contact</a>
-                        </form>
-                    }
+                    <div class="d-flex justify-content-around">
+                        @if (!isCurrentUser)
+                        {
+                            <a href="/Chat/Index?profileId=@Model.Id" class="btn btn-outline-primary">
+                                Chat
+                            </a>
+                        }
+                        @if (Model.IsFriendWithCurrentUser && !isCurrentUser)
+                        {
+                            <form method="post" action="/Contact/RemoveFriend" id="contact-remove-friend">
+                                <input type="text" hidden name="profileId" value="@Model.Id">
+                                <a href="javascript:document.getElementById('contact-remove-friend').submit()" type="submit" class="btn btn-primary">Remove Contact</a>
+                            </form>
+                        }
+                        else if (!Model.IsCurrentUserSendRequest && Model.StatustRequest && !isCurrentUser)
+                        {
+                            <form method="post" action="/Contact/AcceptRequest" id="contact-accept">
+                                <input type="text" hidden name="profileId" value="@Model.Id">
+                                <a href="javascript:document.getElementById('contact-accept').submit()" type="submit" class="btn btn-primary">Accept</a>
+                            </form>
+                            <form method="post" action="/Contact/CancelRequest" id="contact-cancel">
+                                <input type="text" hidden name="profileId" value="@Model.Id">
+                                <a href="javascript:document.getElementById('contact-cancel').submit()" type="submit" class="btn btn-primary">Cancel</a>
+                            </form>
+                        }
+                        else if (!isCurrentUser)
+                        {
+                            <form method="post" action="/Contact/AddContact" id="contact-add">
+                                <input type="text" hidden name="profileId" value="@Model.Id">
+                                <a href="javascript:document.getElementById('contact-add').submit()" type="submit" class="btn btn-primary">Add Contact</a>
+                            </form>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
 
-            <div class="card">
+            <div class="card h-100">
                 <div class="card-body">
                     @if (isCurrentUser)
                     {
@@ -81,24 +83,24 @@
                         </h6>
                     }
                     <div class="row mb-2">
-                        <div class="col-6 text-muted">Full Name:</div>
-                        <div class="col-6">@Model.FullName </div>
+                        <div class="col-3 text-muted">Full Name:</div>
+                        <div class="col-9">@Model.FullName </div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-6 text-muted">Brith Day:</div>
-                        <div class="col-6">@Model.BirthDay</div>
+                        <div class="col-3 text-muted">Brith Day:</div>
+                        <div class="col-9">@Model.BirthDay</div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-6 text-muted">Address:</div>
-                        <div class="col-6">@Model.Address</div>
+                        <div class="col-3 text-muted">Address:</div>
+                        <div class="col-9">@Model.Address</div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-6 text-muted">Phone:</div>
-                        <div class="col-6">@Model.PhoneNumber</div>
+                        <div class="col-3 text-muted">Phone:</div>
+                        <div class="col-9">@Model.PhoneNumber</div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-6 text-muted">Email:</div>
-                        <div class="col-6">@Model.Email</div>
+                        <div class="col-3 text-muted">Email:</div>
+                        <div class="col-9">@Model.Email</div>
                     </div>
                 </div>
             </div>

@@ -28,11 +28,11 @@
                 </div>
                 <div class="app-sidebar-menu">
                     <div class="list-group list-group-flush">
-                        <a href="" class="list-group-item active d-flex align-items-center">
+                        <a href="" class="list-group-item active d-flex align-items-center" style="cursor:pointer">
                             <i data-feather="folder" class="width-15 height-15 mr-2"></i>
                             All Friends
                         </a>
-                        <a onclick="window.location.href='/Contact/RequestFriend'" class="list-group-item d-flex align-items-center">
+                        <a onclick="window.location.href='/Contact/RequestFriend'" class="list-group-item d-flex align-items-center" style="cursor:pointer">
                             <i data-feather="folder" class="width-15 height-15 mr-2"></i>
                             Request Friends
                         </a>
@@ -86,32 +86,31 @@
                                 var profileId = string.Empty;
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="card app-file-list">
-                                <div class="app-file-icon">
-                                    <i class="fa fa-file-pdf-o text-danger"></i>
+                                <div class="app-file-icon p-0">
+                                    <img src="/Content/uploads/avatar.png" class="img-fluid" alt="avatar">
                                     <div class="dropdown position-absolute top-0 right-0 mr-3">
                                     </div>
                                 </div>
-                                <div class="p-2 small">
+                                <div class="p-10 small">
                                     <div>
-                                        <h6>
+                                        <h4 class="text-center m-b-15" style="cursor:pointer">
                                             @if (currentUserId.Equals(user.ContactSentId))
                                             {
                                                 profileId = user.ContactReceivedId;
-                                                <a onclick="window.location.href='/Chat/Index?profileId=@profileId'">@user.FullNameContactReceived</a>
+                                                <a onclick="window.location.href='/Profile/Index?profileId=@profileId'">@user.FullNameContactReceived</a>
                                             }
                                             else
                                             {
                                                 profileId = user.ContactSentId;
-                                                <a onclick="window.location.href='/Chat/Index?profileId=@profileId'">@user.FullNameContactSent</a>
+                                                <a onclick="window.location.href='/Profile/Index?profileId=@profileId'">@user.FullNameContactSent</a>
                                             }
-                                        </h6>
+                                        </h4>
                                     </div>
-                                    <div>
-                                        <a onclick="window.location.href='/Chat/Index?profileId=@profileId'" class="btn btn-primary">Chat</a>
-                                        <a onclick="window.location.href = '/Profile/Index?profileId=@profileId'" class="btn btn-primary">View Profile</a>
+                                    <div class="d-flex justify-content-around">
+                                        <a onclick="window.location.href='/Chat/Index?profileId=@profileId'" class="btn btn-success">Chat</a>
                                         <form method="post" action="/Contact/RemoveFriend" id="contact-remove-friend">
                                             <input type="text" hidden name="profileId" value="@profileId">
-                                            <a href="javascript:document.getElementById('contact-remove-friend').submit()" type="submit" class="btn btn-primary">Remove Contact</a>
+                                            <a href="javascript:document.getElementById('contact-remove-friend').submit()" type="submit" class="btn btn-danger">Remove</a>
                                         </form>
                                     </div>
                                 </div>

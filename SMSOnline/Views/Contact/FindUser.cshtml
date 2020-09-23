@@ -87,7 +87,7 @@
                                             {
                                                 <form method="post" action="/Contact/CancelRequest" id="contact-cancel">
                                                     <input type="text" hidden name="profileId" value="@user.Id">
-                                                    <a href="javascript:document.getElementById('contact-cancel').submit()" type="submit" class="btn btn-primary">Cancel</a>
+                                                    <a href="javascript:document.getElementById('contact-cancel').submit()" type="submit" class="btn btn-primary">Cancel Request</a>
                                                 </form>
                                             }
                                             else if (!user.IsCurrentUserSendRequest && user.StatustRequest)
