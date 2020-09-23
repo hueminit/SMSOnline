@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Models.Entities;
 using Models.Enums;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Data
@@ -43,6 +44,29 @@ namespace Data
             }
 
             //if(!context)
+        }
+
+
+        public static void CreateSystemConfig(AppDbContext context)
+        {
+            if (!context.SystemConfigs.Any())
+            {
+                var config = new List<SystemConfig>()
+                {
+                    new SystemConfig()
+                    {
+                        Code = Common.Constants.MessageFreeKey,
+                        ValueNumber = Common.Constants.MessageFreeDefault
+                    },
+                    new SystemConfig()
+                    {
+                        Code = Common.Constants.MessagePriceKey,
+                        ValueNumber = Common.Constants.MessagePrice
+                    }
+                };
+                context.SystemConfigs.AddRange(config);
+                context.SaveChanges();
+            }
         }
     }
 }

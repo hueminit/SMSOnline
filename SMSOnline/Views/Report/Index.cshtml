@@ -1,0 +1,75 @@
+﻿@using SMSOnline.Helpers
+@model Models.ViewModel.Others.TransactionCustomViewModel
+@{
+    var keyword = (string)ViewBag.Keyword;
+}
+<!-- begin::page-header -->
+<div class="page-header">
+    <div class="container-fluid d-sm-flex justify-content-between">
+        <h4>All Deposit</h4>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Report</li>
+                <li class="breadcrumb-item active" aria-current="page">All Deposit</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- end::page-header -->
+<div class="accordion" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                Total Amount : $@Model.TotalAmount
+            </button>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+             data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if (Model.Transaction.Items.Any())
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">User Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Create At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Transaction.Items)
+                                {
+                                    var user = IdentityHelper.GetUserById(item.UserId);
+                                    <tr>
+                                        <th>
+                                            <a onclick="window.location.href = '/Profile/Index?profileId=@user.Id'">
+                                                <span class="badge badge-warning">
+                                                    @user.UserName
+                                                </span>
+                                            </a>
+                                        </th>
+                                        <td>$@item.Price</td>
+                                        <td>@item.Type</td>
+                                        <td>@item.CreatedAt</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        {
+                            Html.RenderPartial("_Paging", Model.Transaction);
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-info" role="alert">Not Found Record.</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

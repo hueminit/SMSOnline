@@ -8,30 +8,67 @@
 
             if (Model.Page > 1)
             {
-        <li class="page-item">
-            <a class="page-link" href="?page=@(Model.Page-1)">Previous</a>
-        </li>
+
+                <li class="page-item">
+                    @if (string.IsNullOrWhiteSpace(Model.keyword))
+                    {
+                        <a class="page-link" href="?page=@(Model.Page - 1)">Previous</a>
+                    }
+                    else
+                    {
+                        <a class="page-link" href="?keyword=@Model.keyword&page=@(Model.Page - 1)">Previous</a>
+                    }
+
+                </li>
             }
 
             for (int i = startPageIndex; i <= endPageIndex; i++)
             {
                 if (Model.Page == i)
                 {
-        <li class="page-item active"><a class="page-link" href="?page=@i">@i</a></li>
+                    if (string.IsNullOrWhiteSpace(Model.keyword))
+                    {
+                        <li class="page-item active"><a class="page-link" href="?page=@i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item active"><a class="page-link" href="?keyword=@Model.keyword&page=@i">@i</a></li>
+                    }
+
                 }
                 else
                 {
-        <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
+                    if (string.IsNullOrWhiteSpace(Model.keyword))
+                    {
+                        <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="?keyword=@Model.keyword&page=@i">@i</a></li>
+                    }
+
                 }
             }
             if (Model.Page < Model.TotalPages)
             {
-        <li class="page-item">
-            <a class="page-link" href="?page=@(Model.Page+1)">Next</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="?page=@Model.TotalPages">Last</a>
-        </li>
+                if (string.IsNullOrWhiteSpace(Model.keyword))
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?page=@(Model.Page+1)">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=@Model.TotalPages">Last</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?keyword=@Model.keyword&page=@(Model.Page+1)">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?keyword=@Model.keyword&page=@Model.TotalPages">Last</a>
+                    </li>
+                }
             }
 
         }

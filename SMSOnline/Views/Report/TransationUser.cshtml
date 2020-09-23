@@ -1,0 +1,77 @@
+﻿@using Models.Enums
+@model Models.Shared.PaginationSet<Models.ViewModel.TransactionViewModel>
+
+<!-- begin::page-header -->
+<div class="page-header">
+    <div class="container-fluid d-sm-flex justify-content-between">
+        <h4>Transactions User</h4>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Transactions User</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- end::page-header -->
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div>
+                            <div class="app-action">
+                                <div class="action-right">
+                                    <form class="d-flex mr-3" method="get" action="/Report/TransationUser" id="report-user">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Enter username or phone number or email"
+                                                   aria-describedby="button-addon1" name="keyword">
+                                            <div class="input-group-append">
+                                                <a class="btn btn-outline-light" type="button" id="button-addon1" href="javascript:document.getElementById('report-user').submit()">
+                                                    <i data-feather="search"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        @if (Model.Items.Any())
+                        {
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Transation Type</th>
+                                    <th scope="col">Created On</th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var transaction in Model.Items)
+                                {
+                                    <tr>
+                                        <td><span class="badge @(transaction.Type == TransactionType.Deposit ? "badge-success" : "badge-danger")">@transaction.Type</span></td>
+                                        <th>@transaction.CreatedAt</th>
+                                        <td>$@transaction.Price</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                            {
+                                Html.RenderPartial("_Paging", Model);
+                            }
+                        }
+                        else
+                        {
+                            <div class="alert alert-info" role="alert">user haven't made any transactions yet.</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

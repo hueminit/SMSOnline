@@ -221,8 +221,11 @@
     <Compile Include="Controllers\CreditCardController.cs" />
     <Compile Include="Controllers\DepositController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ResponseController.cs" />
+    <Compile Include="Controllers\SystemConfigController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
+    <Compile Include="Filters\CustomAuthorize.cs" />
     <Compile Include="Filters\TrackLoginsFilter.cs" />
     <Compile Include="Helpers\IdentityHelper.cs" />
     <Compile Include="Hub\SMSOnlineHub.cs" />
@@ -995,6 +998,10 @@
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Chat\AllMessage.cshtml" />
     <Content Include="Views\Shared\_ErrorLayout.cshtml" />
+    <Content Include="Views\SystemConfig\Index.cshtml" />
+    <Content Include="Views\SystemConfig\Edit.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\TransationUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

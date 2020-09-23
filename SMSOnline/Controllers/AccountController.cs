@@ -29,21 +29,24 @@ namespace SMSOnline.Controllers
         private ApplicationUserManager _userManager;
         private IUserService _userService;
         private IEmailService _emailService;
+        private ISystemConfigService _configService;
         private DpapiDataProtectionProvider provider = new DpapiDataProtectionProvider("Sample");
 
-        public AccountController(IUserService userService, IEmailService emailService)
+        public AccountController(IUserService userService, IEmailService emailService, ISystemConfigService configService)
         {
             _userService = userService;
             _emailService = emailService;
+            _configService = configService;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserService userService, IEmailService emailService)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserService userService, IEmailService emailService, ISystemConfigService configService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
             UserManager.UserTokenProvider = new DataProtectorTokenProvider<AppUser>(provider.Create("EmailConfirmation"));
             _userService = userService;
             _emailService = emailService;
+            _configService = configService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -198,6 +201,7 @@ namespace SMSOnline.Controllers
             };
             if (ModelState.IsValid || (await _userService.FindUserByEmailOrUserNameOrPhoneNumber(check)) == null)
             {
+                var messageFree = await _configService.GetConfigByCodeAsync(Common.Constants.MessageFreeKey);
                 var user = new AppUser
                 {
                     UserName = model.UserName,
@@ -212,7 +216,7 @@ namespace SMSOnline.Controllers
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
                     Balance = 0,
-                    TotalFreeMessage = Common.Constants.FreeMessageDefault
+                    TotalFreeMessage =(messageFree != null && messageFree.ValueNumber.HasValue) ? (int)messageFree.ValueNumber :  Common.Constants.MessageFreeDefault
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

@@ -19,6 +19,9 @@ namespace Data
         public DbSet<Transaction> Transactions { get; set; }
 
         public DbSet<Message> Messages { get; set; }
+        public DbSet<SystemConfig> SystemConfigs { get; set; }
+
+
 
         public static AppDbContext Create()
         {

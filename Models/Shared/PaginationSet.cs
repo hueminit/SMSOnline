@@ -19,5 +19,6 @@ namespace Models.Shared
         public int TotalCount { set; get; }
         public int MaxPage { set; get; } // max số trang hiển thị
         public IEnumerable<T> Items { set; get; }
+        public string keyword { set; get; }
     }
 }

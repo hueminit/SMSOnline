@@ -23,6 +23,7 @@ namespace Services
         Task<AppUserViewModel> GetUserByIdAsync(string userId, string currentUserId);
 
         AppUserViewModel GetUserById(string userId, string currentUserId);
+        Task<AppUserViewModel> GetUserByConditionAsync(CheckAccountViewModel model);
 
         RequestFriendModel CheckRequestFriendModel(string currentUserId, string profileId);
 
@@ -76,7 +77,6 @@ namespace Services
                 {
                     query = query.Where(x => x.FullName.Contains(keyword)
                                              || x.Email.Contains(keyword)
-                                             || x.UserName.Contains(keyword)
                                              || x.PhoneNumber.Contains(keyword));
 
                     int totalRow = query.Count();
@@ -155,6 +155,18 @@ namespace Services
             return null;
         }
 
+        public async Task<AppUserViewModel> GetUserByConditionAsync(CheckAccountViewModel model)
+        {
+            var user = await GetSingleByConditionAsync(x => x.Email.Contains(model.Email)
+                                                            || x.UserName.Contains(model.UserName) || x.PhoneNumber.Contains(model.PhoneNumber));
+            if(user != null)
+            {
+                return  _mapper.Map<AppUser, AppUserViewModel>(user);
+            }
+
+            return null;
+        }
+
         public RequestFriendModel CheckRequestFriendModel(string currentUserId, string profileId)
         {
             var model = new RequestFriendModel();
@@ -183,9 +195,9 @@ namespace Services
             return true;
         }
 
-        public Task<bool> Save()
+        public async Task<bool> Save()
         {
-            return _unitOfWork.Commit();
+            return await _unitOfWork.Commit();
         }
     }
 }

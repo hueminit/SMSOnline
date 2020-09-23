@@ -21,7 +21,6 @@ namespace SMSOnline.Controllers
         {
             if (IdentityHelper.CurrentUserLogged)
             {
-               var res = await  _messageService.GetAllMessagesOfCurrentUser(IdentityHelper.CurrentUserId);
                 return View();
             }
             return RedirectToAction("Login", "Account");

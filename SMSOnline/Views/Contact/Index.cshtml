@@ -2,6 +2,7 @@
 @model Models.Shared.PaginationSet<Models.ViewModel.ContactViewModel>
 @{
     var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+    var keyword = (string)ViewBag.Keyword;
 }
 <!-- begin::page-header -->
 <div class="page-header">
@@ -9,9 +10,6 @@
         <h4>All Contact</h4>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="/">Home</a>
-                </li>
                 <li class="breadcrumb-item active" aria-current="page">All Contact</li>
             </ol>
         </nav>
@@ -43,32 +41,18 @@
         <div class="col-md-9 app-content">
             <div class="app-content-overlay"></div>
             <div class="app-action">
-                <div class="action-left">
-                    <ul class="list-inline">
-                        <li class="list-inline-item mb-0">
-                            <a href="#" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">
-                                Order by
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Date</a>
-                                <a class="dropdown-item" href="#">Name</a>
-                                <a class="dropdown-item" href="#">Size</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
                 <div class="action-right">
-                    <form class="d-flex mr-3">
+                    <form class="d-flex mr-3" method="get" action="/Contact/Index" id="contact-search-friend">
                         <a href="#" class="app-sidebar-menu-button btn btn-outline-light">
                             <i data-feather="menu"></i>
                         </a>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search file"
-                                   aria-describedby="button-addon1">
+                            <input type="text" class="form-control" placeholder="Search contact"
+                                   aria-describedby="button-addon1" name="keyword">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-light" type="button" id="button-addon1">
+                                <a class="btn btn-outline-light" type="button" id="button-addon1" href="javascript:document.getElementById('contact-search-friend').submit()">
                                     <i data-feather="search"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </form>

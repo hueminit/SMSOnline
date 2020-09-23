@@ -35,6 +35,26 @@
                             <li><a onclick="window.location.href='/Deposit'" style="cursor:pointer">Deposit</a></li>
                         </ul>
                     </li>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>
+                            <a href="javascript:void(0)">For Admin</a>
+                            <ul style="display: block;">
+                                <li><a onclick="window.location.href='/SystemConfig'">System Config</a></li>
+                                <li>
+                                    <a href="javascript:void(0)">Report</a>
+                                    <ul>
+                                        <li>
+                                            <a onclick="window.location.href = '/Report'">All Deposit</a>
+                                        </li>
+                                        <li>
+                                            <a onclick="window.location.href = '/Report/TransationUser'">Transation User</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

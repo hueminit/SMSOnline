@@ -1,4 +1,5 @@
-﻿@model List<Models.ViewModel.TransactionViewModel>
+﻿@using Models.Enums
+@model Models.Shared.PaginationSet<Models.ViewModel.TransactionViewModel>
 @{
     ViewData["Title"] = "Transactions";
 }
@@ -9,9 +10,6 @@
         <h4>Transactions</h4>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="/">Dashboard</a>
-                </li>
                 <li class="breadcrumb-item active" aria-current="page">Transactions</li>
             </ol>
         </nav>
@@ -27,7 +25,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        @if (Model.Any())
+                        @if (Model.Items.Any())
                         {
                             <table class="table">
                                 <thead>
@@ -38,16 +36,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var transaction in Model)
+                                    @foreach (var transaction in Model.Items)
                                     {
                                         <tr>
-                                            <td><span class="badge badge-success">@transaction.Type</span></td>
+                                            <td><span class="badge @(transaction.Type == TransactionType.Deposit ? "badge-success" : "badge-danger")">@transaction.Type</span></td>
                                             <th>@transaction.CreatedAt</th>
                                             <td>$@transaction.Price</td>
                                         </tr>
                                     }
                                 </tbody>
                             </table>
+                            {
+                                Html.RenderPartial("_Paging", Model);
+                            }
                         }
                         else
                         {

@@ -19,15 +19,19 @@ namespace SMSOnline.Controllers
             _userService = userService;
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string keyword)
         {
-            var data = await _contactService.GetAllContact(true, currentUser);
+            ViewBag.Keyword = keyword;
+            var data = await _contactService.GetAllContact(keyword, true, currentUser);
+            data.keyword = keyword;
             return View(data);
         }
 
-        public async Task<ActionResult> RequestFriend()
+        public async Task<ActionResult> RequestFriend(string keyword)
         {
-            var data = await _contactService.GetAllRequestFriend(currentUser);
+            ViewBag.Keyword = keyword;
+            var data = await _contactService.GetAllRequestFriend(keyword,currentUser);
+            data.keyword = keyword;
             return View(data);
         }
 
@@ -88,8 +92,8 @@ namespace SMSOnline.Controllers
 
         public async Task<ActionResult> FindUser(string keyword, int page = 1)
         {
-            ViewBag.Keyword = keyword;
             var users = await _userService.FindUser(currentUser, keyword, page, 3);
+            users.keyword = keyword;
             return View(users);
         }
     }

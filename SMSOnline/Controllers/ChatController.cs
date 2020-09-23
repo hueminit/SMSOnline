@@ -89,7 +89,7 @@ namespace SMSOnline.Controllers
                 if (ModelState.IsValid)
                 {
                     var user = await _userService.GetUserByIdAsync(currentUser, currentUser);
-                    if (user.TotalFreeMessage > 0 && user.TotalFreeMessage <= Common.Constants.FreeMessageDefault)
+                    if (user.TotalFreeMessage > 0 && user.TotalFreeMessage <= Common.Constants.MessageFreeDefault)
                     {
                         var isCreated = await _messageService.CreateMessageProcess(message, user, false);
                         if (isCreated)

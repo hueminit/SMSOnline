@@ -3,45 +3,22 @@
 @{
     var currentUser = IdentityHelper.GetAllInfoCurrentLogged();
 }
+<!-- begin::page-header -->
+<div class="page-header">
+    <div class="container-fluid d-sm-flex justify-content-between">
+        <h4>All Message</h4>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">All Message</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- end::page-header -->
 <div class="container-fluid h-100">
 
     <div class="row app-block">
         <div class="col-md-12 app-content">
-            <div class="app-content-overlay"></div>
-            <div class="app-action">
-                <div class="action-left">
-                    <ul class="list-inline">
-                        <li class="list-inline-item mb-0">
-                            <a href="#" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">
-                                Order by
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Date</a>
-                                <a class="dropdown-item" href="#">From</a>
-                                <a class="dropdown-item" href="#">Subject</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Size</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="action-right">
-                    <form class="d-flex mr-3">
-                        <a href="#" class="app-sidebar-menu-button btn btn-outline-light">
-                            <i data-feather="menu" class="width-15 height-15"></i>
-                        </a>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="message search"
-                                   aria-describedby="button-addon1">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-light" type="button" id="button-addon1">
-                                    <i class="ti-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
             <div class="card card-body app-content-body">
                 <div class="app-lists">
                     <ul class="list-group list-group-flush">

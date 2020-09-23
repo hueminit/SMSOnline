@@ -7,15 +7,20 @@ using Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
+using Data.Helpers;
+using Models.Shared;
+using Models.ViewModel.Others;
 
 namespace Services
 {
-    public interface ITransactionService
+    public interface ITransactionService : IRepository<Transaction>
     {
         Task<bool> CreateTransactionAsync(string customerId, decimal price, TransactionType type);
 
-        Task<List<TransactionViewModel>> GetAllTransactionsById(string currentUserId);
+        Task<PaginationSet<TransactionViewModel>> GetAllTransactionsById(string currentUserId, int page = 1, int pageSize = 8);
+        Task<TransactionCustomViewModel> GetAllDeposits(string keyword, int page = 1, int pageSize = 8);
     }
 
     public class TransactionService : RepositoryBase<Transaction>, ITransactionService
@@ -49,10 +54,46 @@ namespace Services
             return false;
         }
 
-        public async Task<List<TransactionViewModel>> GetAllTransactionsById(string currentUserId)
+        public async Task<PaginationSet<TransactionViewModel>> GetAllTransactionsById(string currentUserId, int page = 1, int pageSize = 8)
         {
             var query = await GetMultiAsync(x => x.UserId == currentUserId);
-            return await _mapper.ProjectTo<TransactionViewModel>(query).ToListAsync();
+            int totalRow = query.Count();
+            query = query?.OrderByDescending(x => x.CreatedAt)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+            var res = new PaginationSet<TransactionViewModel>()
+            {
+                Page = page,
+                TotalCount = totalRow,
+                TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
+                Items = _mapper.ProjectTo<TransactionViewModel>(query).ToList(),
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
+            };
+            return res;
         }
+
+        public async Task<TransactionCustomViewModel> GetAllDeposits(string keyword, int page = 1, int pageSize = 8)
+        {
+            TransactionCustomViewModel model = new TransactionCustomViewModel();
+            var query = await GetAll();
+
+            int totalRow = query.Count();
+            var totalAmount = query?.Where(x=>x.Type == TransactionType.Deposit)?.Sum(x => x.Price);            
+            query = query?.OrderByDescending(x => x.CreatedAt)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+            model.Transaction = new PaginationSet<TransactionViewModel>()
+            {
+                Page = page,
+                TotalCount = totalRow,
+                TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
+                Items = _mapper.ProjectTo<TransactionViewModel>(query).ToList(),
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
+            };
+            model.TotalAmount = totalAmount ?? 0;
+            return model;
+        }
+
+        
     }
 }
