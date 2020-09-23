@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public interface ITransactionService
+    public interface ITransactionService : IRepository<Transaction>
     {
         Task<bool> CreateTransactionAsync(string customerId, decimal price, TransactionType type);
 

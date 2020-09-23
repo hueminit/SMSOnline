@@ -1,0 +1,64 @@
+﻿@model List<Models.ViewModel.SystemConfigViewModel>
+<!-- begin::page-header -->
+<div class="page-header">
+    <div class="container-fluid d-sm-flex justify-content-between">
+        <h4>System Config</h4>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">System Config</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- end::page-header -->
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        @if (Model.Any())
+                        {
+                            <table class="table">
+                                <thead>
+                                    <tr>
+
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Value String</th>
+                                        <th scope="col">Value Number</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var config in Model)
+                                    {
+                                        <tr>
+                                            <th>
+                                                <span class="badge badge-danger">
+                                                    @config.Code
+                                                </span>
+                                            </th>
+                                            <td>@(string.IsNullOrWhiteSpace(config.ValueString) ? "Not available" : config.ValueString)</td>
+                                            <td>@(config.ValueNumber.HasValue ? (object) config.ValueNumber.Value : "Not available")</td>
+                                            <td>
+                                                <a onclick="window.location.href='/SystemConfig/Edit?code=@config.Code'" class="btn btn-warning">Edit</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info" role="alert">Not Found System Config</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

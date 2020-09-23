@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public interface IDepositService
+    public interface IDepositService : IRepository<Deposit>
     {
         Task<bool> CreateDepositAsync(DepositViewModel model, AppUserViewModel user);
     }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public interface ICreditCardService
+    public interface ICreditCardService : IRepository<CreditCard>
     {
         Task<bool> Create(CreditCardRequestModel model, string userId);
         Task<List<CreditCardViewModel>> GetAllCreditCardsAsync(string customerId);

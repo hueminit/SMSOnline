@@ -32,10 +32,12 @@ namespace Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ISystemConfigService _systemConfigService;
 
-        public MessageService(IDbFactory dbFactory, IUnitOfWork unitOfWork) : base(dbFactory)
+        public MessageService(IDbFactory dbFactory, IUnitOfWork unitOfWork, ISystemConfigService systemConfigService) : base(dbFactory)
         {
             _unitOfWork = unitOfWork;
+            _systemConfigService = systemConfigService;
             _mapper = AutoMapperConfig.Mapper;
         }
 
@@ -72,7 +74,16 @@ namespace Services
             {
                 if (deductingFromAccount)
                 {
-                    currentUser.Balance = currentUser.Balance - Common.Constants.MessagePrice;
+                    var messageCofig = await _systemConfigService.GetConfigByCodeAsync(Common.Constants.MessagePriceKey);
+                    if (messageCofig != null && messageCofig.ValueNumber.HasValue)
+                    {
+                        currentUser.Balance = currentUser.Balance - messageCofig.ValueNumber.Value;
+                    }
+                    else
+                    {
+                        currentUser.Balance = currentUser.Balance - Common.Constants.MessagePrice;
+                    }
+                    
                 }
                 else
                 {
