@@ -111,6 +111,7 @@
     <Compile Include="ViewModel\Others\MessageCustomViewModel.cs" />
     <Compile Include="ViewModel\Others\MessageRequest.cs" />
     <Compile Include="ViewModel\Others\RequestFriendModel.cs" />
+    <Compile Include="ViewModel\Others\TransactionCustomViewModel.cs" />
     <Compile Include="ViewModel\SystemConfigViewModel.cs" />
     <Compile Include="ViewModel\TransactionViewModel.cs" />
   </ItemGroup>

@@ -75,15 +75,21 @@ namespace Services
                 if (deductingFromAccount)
                 {
                     var messageCofig = await _systemConfigService.GetConfigByCodeAsync(Common.Constants.MessagePriceKey);
+                    var transaction = new Transaction();
+                    transaction.UserId = currentUser.Id;
+                    transaction.Type = TransactionType.SubtractMessageFees;
+                    transaction.CreatedAt = DateTime.Now;
                     if (messageCofig != null && messageCofig.ValueNumber.HasValue)
                     {
                         currentUser.Balance = currentUser.Balance - messageCofig.ValueNumber.Value;
+                        transaction.Price = messageCofig.ValueNumber.Value;
                     }
                     else
                     {
                         currentUser.Balance = currentUser.Balance - Common.Constants.MessagePrice;
+                        transaction.Price = Common.Constants.MessagePrice;
                     }
-                    
+                    DbContext.Transactions.Add(transaction);
                 }
                 else
                 {
