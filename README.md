@@ -1,2 +1,2 @@
 # SMSOnline
-Asp.Net Core 3.1 ,EntityFramework Core, AJax,Identity,Signalr
+Asp.Net MVC ,EntityFramework Core, AJax,Identity,Signalr
