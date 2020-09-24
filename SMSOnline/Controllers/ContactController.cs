@@ -80,8 +80,9 @@ namespace SMSOnline.Controllers
                 {
                     return RedirectToAction("Error", "Response", new { message = "invitation has been sent" });
                 }
-                var currentUserName = System.Web.HttpContext.Current.User.Identity.GetUserName();
-                var isSuccess = await _contactService.CreateContact(currentUser, user, currentUserName);
+                var userInfo = await _userService.GetUserByIdAsync(currentUser, currentUser);
+
+                var isSuccess = await _contactService.CreateContact(currentUser, user, userInfo.FullName);
                 if (isSuccess)
                 {
                     return RedirectToAction("Success", "Response", new { message = "Add friend successful" });

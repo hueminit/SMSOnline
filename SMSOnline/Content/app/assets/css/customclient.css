@@ -1,2 +1,65 @@
 ﻿body {
 }
+
+.square-block {
+    position: relative;
+    width: 100%;
+}
+
+.square-block:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+.square-block__image {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+.circle-hover-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.circle-hover-effect::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,.2);
+    border-radius: 100%;
+    opacity: 0;
+}
+
+.circle-hover-effect:hover::before {
+    -webkit-animation: circle .75s;
+    animation: circle .75s;
+}
+
+@keyframes circle {
+    0% {
+        opacity: 1;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    100% {
+        width: 200%;
+        height: 200%;
+        opacity: 0;
+    }
+}
