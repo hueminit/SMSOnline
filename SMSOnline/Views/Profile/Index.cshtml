@@ -84,8 +84,14 @@
                         <div class="col-9">@Model.FullName </div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-3 text-muted">Brith Day:</div>
-                        <div class="col-9">@Model.BirthDay</div>
+                        <div class="col-3 text-muted">Birth Day:</div>
+
+                        <div class="col-9">
+                            @if (!string.IsNullOrWhiteSpace(Model.BirthDay.ToString()))
+                            {
+                                @Model.BirthDay.Value.ToString("MM-dd-yyyy");
+                            }
+                        </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-3 text-muted">Address:</div>
