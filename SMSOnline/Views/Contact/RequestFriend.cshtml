@@ -100,14 +100,8 @@
                                                 <a onclick="window.location.href='/Profile/Index?profileId=@profileId'">@name</a>
                                             </h4>
                                             <div class="d-flex justify-content-around">
-                                                <form method="post" action="/Contact/AcceptRequest" id="contact-accept">
-                                                    <input type="text" hidden name="profileId" value="@profileId">
-                                                    <a href="javascript:document.getElementById('contact-accept').submit()" type="submit" class="btn btn-sm btn-success">Accept</a>
-                                                </form>
-                                                <form method="post" action="/Contact/CancelRequest" id="contact-cancel">
-                                                    <input type="text" hidden name="profileId" value="@profileId">
-                                                    <a href="javascript:document.getElementById('contact-cancel').submit()" type="submit" class="btn btn-sm btn-danger">Cancel</a>
-                                                </form>
+                                                <a onclick="acceptRequest('@profileId')" class="btn btn-sm btn-success">Accept</a>
+                                                <a onclick="removeContact('@profileId')" class="btn btn-sm btn-danger">Cancel</a>
                                             </div>
                                         </div>
                                     </div>
@@ -128,5 +122,28 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        function acceptRequest(userId) {
+            postRequest('/Contact/AcceptRequest', userId);
+        }
+        function removeContact(userId) {
+            console.log(userId)
+            var r = confirm("Press a button!");
+            if (r == true) {
+                postRequest('/Contact/CancelRequest', userId);
+            }
 
-<!-- begin::footer -->
+        }
+        function postRequest(url, userId) {
+            console.log(userId)
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: { profileId: userId }
+            }).done(function (ketqua) {
+                location.reload();
+            });
+        }
+    </script>
+}

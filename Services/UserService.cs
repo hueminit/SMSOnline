@@ -171,7 +171,7 @@ namespace Services
         {
             var model = new RequestFriendModel();
             var query = DbContext.Contacts.AsNoTracking();
-            var contact = query.FirstOrDefault(x => (x.ContactReceivedId == profileId
+            var contact = query.AsNoTracking().FirstOrDefault(x => (x.ContactReceivedId == profileId
                                                      && x.ContactSentId == currentUserId)
                                                     || (x.ContactReceivedId == currentUserId
                                                         && x.ContactSentId == profileId));
