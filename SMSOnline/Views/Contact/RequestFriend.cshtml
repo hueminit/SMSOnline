@@ -129,7 +129,7 @@
         }
         function removeContact(userId) {
             console.log(userId)
-            var r = confirm("Press a button!");
+            var r = confirm("Do you want to cancel this friend request?");
             if (r == true) {
                 postRequest('/Contact/CancelRequest', userId);
             }

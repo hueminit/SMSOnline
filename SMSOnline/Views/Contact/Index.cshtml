@@ -131,7 +131,7 @@
     <script>
         function RemoveContact(userId) {
             console.log(userId)
-            var r = confirm("Press a button!");
+            var r = confirm("Do you want to remove this friend?");
             if (r == true) {
                 postRequest('/Contact/RemoveFriend', userId);
             } 
