@@ -23,32 +23,32 @@
 
             <div class="open" id="dashboards">
                 <ul>
-                    <li><a onclick="window.location.href='/Contact/FindUser'" style="cursor:pointer">Find User</a></li>
-                    <li><a onclick="window.location.href='/Contact/Index'" style="cursor:pointer">Contacts</a></li>
-                    <li><a onclick="window.location.href='/Chat/AllMessage'" style="cursor:pointer">Chat</a></li>
+                    <li><a onclick="window.location.href='/Contact/FindUser'" class="cursor-pointer">Find User</a></li>
+                    <li><a onclick="window.location.href='/Contact/Index'" class="cursor-pointer">Contacts</a></li>
+                    <li><a onclick="window.location.href='/Chat/AllMessage'" class="cursor-pointer">Chat</a></li>
                     <li>
                         <a href="javascript:void(0)">Bank</a>
                         <ul style="display: block;">
-                            <li><a onclick="window.location.href='/Transaction'" style="cursor:pointer">All Transactions</a></li>
-                            <li><a onclick="window.location.href='/CreditCard'" style="cursor:pointer">All CreditCard</a></li>
-                            <li><a onclick="window.location.href='/CreditCard/Create'" style="cursor:pointer">Create CreditCard</a></li>
-                            <li><a onclick="window.location.href='/Deposit'" style="cursor:pointer">Deposit</a></li>
+                            <li><a onclick="window.location.href='/Transaction'" class="cursor-pointer">All Transactions</a></li>
+                            <li><a onclick="window.location.href='/CreditCard'" class="cursor-pointer">All CreditCard</a></li>
+                            <li><a onclick="window.location.href='/CreditCard/Create'" class="cursor-pointer">Create CreditCard</a></li>
+                            <li><a onclick="window.location.href='/Deposit'" class="cursor-pointer">Deposit</a></li>
                         </ul>
                     </li>
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>
-                            <a href="javascript:void(0)">For Admin</a>
+                            <a href="javascript:void(0)" class="cursor-pointer">For Admin</a>
                             <ul style="display: block;">
-                                <li><a onclick="window.location.href='/SystemConfig'">System Config</a></li>
+                                <li><a onclick="window.location.href='/SystemConfig'" class="cursor-pointer">System Config</a></li>
                                 <li>
-                                    <a href="javascript:void(0)">Report</a>
+                                    <a href="javascript:void(0)" class="cursor-pointer">Report</a>
                                     <ul>
                                         <li>
-                                            <a onclick="window.location.href = '/Report'">All Deposit</a>
+                                            <a onclick="window.location.href = '/Report'" class="cursor-pointer">All Deposit</a>
                                         </li>
                                         <li>
-                                            <a onclick="window.location.href = '/Report/TransationUser'">Transation User</a>
+                                            <a onclick="window.location.href = '/Report/TransationUser'" class="cursor-pointer">Transation User</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -27,11 +27,11 @@
                 </div>
                 <div class="app-sidebar-menu">
                     <div class="list-group list-group-flush">
-                        <a href="" class="list-group-item active d-flex align-items-center" style="cursor:pointer">
+                        <a href="" class="list-group-item active d-flex align-items-center cursor-pointer">
                             <i data-feather="folder" class="width-15 height-15 mr-2"></i>
                             All Friends
                         </a>
-                        <a onclick="window.location.href='/Contact/RequestFriend'" class="list-group-item d-flex align-items-center" style="cursor:pointer">
+                        <a onclick="window.location.href='/Contact/RequestFriend'" class="list-group-item d-flex align-items-center cursor-pointer">
                             <i data-feather="folder" class="width-15 height-15 mr-2"></i>
                             Request Friends
                         </a>
@@ -93,19 +93,19 @@
                                 <div class="col-lg-3 col-md-4 col-6">
                                     <div class="card app-file-list">
                                         <div class="app-file-icon p-0 square-block bg-white circle-hover-effect">
-                                            <a onclick="window.location.href='/Profile/Index?profileId=@profileId'" style="cursor:pointer">
+                                            <a onclick="window.location.href='/Profile/Index?profileId=@profileId'" class="cursor-pointer">
                                                 <img src="@image" class="img-fluid square-block__image" alt="avatar">
                                             </a>
                                         </div>
                                         <div class="p-10 p-t-15 p-b-15 small">
                                             <div>
-                                                <h5 class="text-center m-b-15" style="cursor:pointer">
+                                                <h5 class="text-center m-b-15 cursor-pointer">
                                                     <a onclick="window.location.href='/Profile/Index?profileId=@profileId'">@name</a>
                                                 </h5>
                                             </div>
                                             <div class="d-flex justify-content-around">
-                                                <a onclick="window.location.href='/Chat/Index?profileId=@profileId'" class="btn btn-sm btn-success text-white">Chat</a>
-                                                <a onclick="RemoveContact('@profileId')" class="btn btn-sm btn-danger">Remove</a>
+                                                <a onclick="window.location.href='/Chat/Index?profileId=@profileId'" class="btn btn-sm btn-success text-white cursor-pointer">Chat</a>
+                                                <a onclick="RemoveContact('@profileId')" class="btn btn-sm btn-danger text-white cursor-pointer">Remove</a>
                                             </div>
                                         </div>
                                     </div>

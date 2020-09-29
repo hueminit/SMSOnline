@@ -22,7 +22,7 @@
             <div class="chat-header border-bottom">
                 <div class="d-flex align-items-center">
                     <div class="pr-3">
-                        <div class="avatar avatar-md  @(isLogged ? "avatar-state-success" : "avatar-state-danger")">
+                        <div class="avatar avatar-md cursor-pointer @(isLogged ? "avatar-state-success" : "avatar-state-danger")" onclick="window.location.href='/Profile/Index?profileId=@Model.UserReceived.Id'">
                             <img src="@(string.IsNullOrWhiteSpace(Model.UserReceived.Avatar) ? Common.Constants.AvatarDefault : Model.UserReceived.Avatar)"
                                  width="128" height="128" class="rounded-circle" alt="image">
                         </div>

@@ -75,26 +75,26 @@
                                                     </div>
                                                 </div>
                                                 <div class="contact-action col-12 col-md-6 col-lg-5 col-xl-4 d-flex justify-content-around">
-                                                    <a href="/Chat/Index?profileId=@user.Id" class="btn btn-warning">Chat</a>
+                                                    <a href="/Chat/Index?profileId=@user.Id" class="btn btn-warning cursor-pointer">Chat</a>
                                                     @if (user.IsFriendWithCurrentUser)
                                                     {
 
                                                     }
                                                     else if (user.IsCurrentUserSendRequest && user.StatustRequest)
                                                     {
-                                                        <a onclick="cancelRequest('@user.Id')" id="contact-cancel" href="#" type="button" class="btn btn-primary">Cancel Request</a>
+                                                        <a onclick="cancelRequest('@user.Id')" id="contact-cancel" href="#" type="button" class="btn btn-primary cursor-pointer">Cancel Request</a>
                                                     }
                                                     else if (!user.IsCurrentUserSendRequest && user.StatustRequest)
                                                     {
-                                                        <a onclick="acceptRequest('@user.Id')" id="contact-accept" href="#" type="button" class="btn btn-primary">Accept</a>
-                                                        <a onclick="cancelRequest('@user.Id')" id="contact-cancel" href="#" type="button" class="btn btn-primary">Cancel</a>
+                                                        <a onclick="acceptRequest('@user.Id')" id="contact-accept" href="#" type="button" class="btn btn-primary cursor-pointer">Accept</a>
+                                                        <a onclick="cancelRequest('@user.Id')" id="contact-cancel" href="#" type="button" class="btn btn-primary cursor-pointer">Cancel</a>
                                                     }
                                                     else
                                                     {
-                                                        <a onclick="addContact('@user.Id')" id="contact-add" href="#" type="button" class="btn btn-primary">Add Contact</a>
+                                                        <a onclick="addContact('@user.Id')" id="contact-add" href="#" type="button" class="btn btn-primary cursor-pointer">Add Contact</a>
                                                     }
                                                     <input type="text" hidden name="profileId" value="@user.Id">
-                                                    <a onclick="window.location.href = '/Profile/Index?profileId=@user.Id'" class="btn btn-success">View Detail</a>
+                                                    <a onclick="window.location.href = '/Profile/Index?profileId=@user.Id'" class="btn btn-success cursor-pointer">View Detail</a>
                                                 </div>
                                             </div>
                                         </li>

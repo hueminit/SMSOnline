@@ -25,8 +25,8 @@
 
                 <div class="dropdown-menu-body">
                     <div class="list-group list-group-flush">
-                        <a onclick="window.location.href = '/Profile/Index?profileId=@currentUser.Id'" class="list-group-item" style="cursor:pointer">Profile</a>
-                        <a onclick="window.location.href = '/Manage/ChangePassword'" class="list-group-item d-flex" style="cursor:pointer">Change Password</a>
+                        <a onclick="window.location.href = '/Profile/Index?profileId=@currentUser.Id'" class="list-group-item cursor-pointer">Profile</a>
+                        <a onclick="window.location.href = '/Manage/ChangePassword'" class="list-group-item d-flex cursor-pointer">Change Password</a>
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
                         @Html.AntiForgeryToken()
