@@ -72,7 +72,7 @@ namespace Services
         {
             try
             {
-                var query = await GetMultiAsync(x => x.IsDelete == false && x.Id != currentUserId);
+                var query = await GetMultiAsync(x => x.Id != currentUserId);
                 if (!string.IsNullOrWhiteSpace(keyword))
                 {
                     query = query.Where(x => x.FullName.Contains(keyword)
