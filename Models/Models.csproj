@@ -96,7 +96,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\DomainEntity.cs" />
     <Compile Include="Shared\IDateTracking.cs" />
-    <Compile Include="Shared\IsDelete.cs" />
     <Compile Include="Shared\ISwitchable.cs" />
     <Compile Include="Shared\PaginationSet.cs" />
     <Compile Include="ViewModel\AppUserViewModel.cs" />
