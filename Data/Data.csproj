@@ -129,6 +129,10 @@
     <Compile Include="Migrations\202010011114546_RemoveIsDelete.Designer.cs">
       <DependentUpon>202010011114546_RemoveIsDelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010011239120_update seed data.cs" />
+    <Compile Include="Migrations\202010011239120_update seed data.Designer.cs">
+      <DependentUpon>202010011239120_update seed data.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -192,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010011114546_RemoveIsDelete.resx">
       <DependentUpon>202010011114546_RemoveIsDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010011239120_update seed data.resx">
+      <DependentUpon>202010011239120_update seed data.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

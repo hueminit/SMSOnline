@@ -54,7 +54,7 @@ namespace Data
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
                     Gender = Gender.Male,
-                    Address = "238 Hoàng Quốc Việt, Cầu Giấy, Hà Nội",
+                    Address = "180 Phạm Văn Đồng, Cầu Giấy, Hà Nội",
                     PhoneNumberConfirmed = true,
                     EmailConfirmed = true
                 };
