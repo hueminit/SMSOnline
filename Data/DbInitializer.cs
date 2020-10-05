@@ -39,13 +39,8 @@ namespace Data
                     EmailConfirmed = true,
                     Avatar= "/Content/uploads/admin-avatar.png"
                 };
-                manager.Create(user, "admin");
-                context.SaveChanges();
-                if (context.Users.Any(u => u.UserName == "admin"))
-                {
-                    manager.AddToRole(user.Id, "Admin");
-                    context.SaveChanges();
-                }
+                manager.Create(user, "123654$");
+                manager.AddToRole(user.Id, "Admin");
             }
         }
 
