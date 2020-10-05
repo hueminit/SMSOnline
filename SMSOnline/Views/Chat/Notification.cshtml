@@ -1,0 +1,36 @@
+﻿@{
+    var hasCreditCard  =(bool) ViewBag.HasCreditCard;
+}
+
+<!-- begin::page-header -->
+<div class="page-header">
+    <div class="container-fluid d-sm-flex justify-content-between">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Notification</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- end::page-header -->
+
+<div class="container-fluid">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="alert alert-success" role="alert">
+                @if (!hasCreditCard)
+                {
+                    <h4 class="alert-heading">Tài khoản của bạn đã hết tiền !</h4>
+                    <p><a class="btn btn-primary" href="/Deposit">Primary</a></p>
+                }
+                else
+                {
+                    <h4 class="alert-heading">Bạn đã sử dụng hết số tin nhắn free vui lòng tạo thể và nạp tiền !</h4>
+                    <p><a class="btn btn-primary" href="/CreditCard/Create">Primary</a></p>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
