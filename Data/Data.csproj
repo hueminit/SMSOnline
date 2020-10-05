@@ -151,9 +151,7 @@
       <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202009150357417_Init.resx">
       <DependentUpon>202009150357417_Init.cs</DependentUpon>

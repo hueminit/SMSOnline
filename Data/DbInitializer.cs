@@ -18,10 +18,7 @@ namespace Data
                 var manager = new RoleManager<IdentityRole>(store);
                 var role = new IdentityRole { Name = "Admin" };
                 manager.Create(role);
-                manager.Create(new IdentityRole()
-                {
-                    Name = "User",
-                });
+                context.SaveChanges();
             }
 
             if (!context.Users.Any(u => u.UserName == "admin"))
@@ -33,33 +30,22 @@ namespace Data
                     UserName = "admin",
                     FullName = "Administrator",
                     Email = "admin@gmail.com",
-                    PhoneNumber = "0392118580",
+                    PhoneNumber = "0392118585",
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
                     Gender = Gender.Male,
-                    Address = "238 Hoàng Quốc Việt, Cầu Giấy, Hà Nội",
+                    Address = "238 Hoang Quoc Viet, Cau Giay, Ha Noi",
                     PhoneNumberConfirmed = true,
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    Avatar= "/Content/uploads/admin-avatar.png"
                 };
-
-                manager.Create(user, "123456$");
-                manager.AddToRole(user.Id, "Admin");
-
-                var user1 = new AppUser()
+                manager.Create(user, "admin");
+                context.SaveChanges();
+                if (context.Users.Any(u => u.UserName == "admin"))
                 {
-                    UserName = "huent",
-                    FullName = "Nguyen Thi Hue",
-                    Email = "huent@gmail.com",
-                    PhoneNumber="0392118581",
-                    DateCreated = DateTime.Now,
-                    DateModified = DateTime.Now,
-                    Gender = Gender.Male,
-                    Address = "180 Phạm Văn Đồng, Cầu Giấy, Hà Nội",
-                    PhoneNumberConfirmed = true,
-                    EmailConfirmed = true
-                };
-                manager.Create(user1, "123456$");
-
+                    manager.AddToRole(user.Id, "Admin");
+                    context.SaveChanges();
+                }
             }
         }
 
