@@ -1,9 +1,9 @@
 ﻿@using Microsoft.AspNet.Identity
 
 <div class="navigation">
-    @if (Request.IsAuthenticated)
+    @if (Request.IsAuthenticated && !string.IsNullOrEmpty(User?.Identity?.Name))
     {
-    @Html.Partial("_LoginPartial")
+       @Html.Partial("_LoginPartial")
     }
     <!-- begin::navigation menu -->
     <div class="navigation-menu-body">

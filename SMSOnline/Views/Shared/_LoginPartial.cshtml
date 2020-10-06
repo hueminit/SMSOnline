@@ -3,61 +3,58 @@
 @{
     var currentUser = IdentityHelper.GetAllInfoCurrentLogged();
 }
-<div class="navigation-menu-tab">
-    <div>
-        <div class="navigation-menu-tab-header" data-toggle="tooltip" title="@currentUser.FullName" data-placement="right">
-            <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
-                <figure class="avatar avatar-md">
-                    <img src="@(string.IsNullOrWhiteSpace(currentUser.Avatar) ? Common.Constants.AvatarDefault : currentUser.Avatar)" class="rounded-circle" alt="avatar">
-                </figure>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
-                <div class="p-3 text-center" style="background:url('/Content/app/assets/media/image/cover-user.jpg') no-repeat center; background-size:cover">
-                    <figure class="avatar avatar-lg mb-3">
-                        <img src="@(string.IsNullOrWhiteSpace(currentUser.Avatar) ? Common.Constants.AvatarDefault : currentUser.Avatar)"
-                             class="rounded-circle" alt="image" width="128" height="128">
+@if (currentUser != null)
+{
+    <div class="navigation-menu-tab d-flex flex-column justify-content-between">
+        <div>
+            <div class="navigation-menu-tab-header" data-toggle="tooltip" title="@currentUser.FullName" data-placement="right">
+                <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
+                    <figure class="avatar avatar-md">
+                        <img src="@(string.IsNullOrWhiteSpace(currentUser.Avatar) ? Common.Constants.AvatarDefault : currentUser.Avatar)" class="rounded-circle" alt="avatar">
                     </figure>
-                    <h4 class="font-italic d-flex align-items-center justify-content-center">
-                        @currentUser.FullName
-                    </h4>
-                    <span>Balance: <strong>$@currentUser.Balance</strong></span>
-                </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
+                    <div class="p-3 text-center" style="background:url('/Content/app/assets/media/image/cover-user.jpg') no-repeat center; background-size:cover">
+                        <figure class="avatar avatar-lg mb-3">
+                            <img src="@(string.IsNullOrWhiteSpace(currentUser.Avatar) ? Common.Constants.AvatarDefault : currentUser.Avatar)"
+                                 class="rounded-circle" alt="image" width="128" height="128">
+                        </figure>
+                        <h4 class="font-italic d-flex align-items-center justify-content-center">
+                            @currentUser.FullName
+                        </h4>
+                        <span>Balance: <strong>$@currentUser.Balance</strong></span>
+                    </div>
 
-                <div class="dropdown-menu-body">
-                    <div class="list-group list-group-flush">
-                        <a onclick="window.location.href = '/Profile/Index?profileId=@currentUser.Id'" class="list-group-item cursor-pointer">Profile</a>
-                        <a onclick="window.location.href = '/Manage/ChangePassword'" class="list-group-item d-flex cursor-pointer">Change Password</a>
-                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                        {
-                        @Html.AntiForgeryToken()
-                        <a href="javascript:document.getElementById('logoutForm').submit()" class="list-group-item text-danger" data-sidebar-target="#settings">Log Out!</a>
+                    <div class="dropdown-menu-body">
+                        <div class="list-group list-group-flush">
+                            <a onclick="window.location.href = '/Profile/Index?profileId=@currentUser.Id'" class="list-group-item cursor-pointer">Profile</a>
+                            <a onclick="window.location.href = '/Manage/ChangePassword'" class="list-group-item d-flex cursor-pointer">Change Password</a>
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="list-group-item text-danger" data-sidebar-target="#settings">Log Out!</a>
 
-                        }
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="flex-grow-1">
-        <ul>
-            <li>
-                <a class="active" href="#" data-toggle="tooltip" data-placement="right" title="Dashboards"
-                   data-nav-target="#dashboards">
-                    <i data-feather="bar-chart-2"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div>
-        <ul>
-            <li>
-                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                {
-                @Html.AntiForgeryToken()
-                <a href="javascript:document.getElementById('logoutForm').submit()" data-toggle="tooltip" data-placement="right" title="Logout"> <i data-feather="log-out"></i></a>
+        <div>
+            <ul>
+                <li>
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()" data-toggle="tooltip" data-placement="right" title="Logout"> <i data-feather="log-out"></i></a>
 
-                }
-            </li>
-        </ul>
+                    }
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
+}
+else
+{
+    Response.Redirect("~/Account/Login");
+}

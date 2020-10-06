@@ -28,7 +28,7 @@
              data-parent="#accordionExample">
             <div class="card-body">
                 <div class="table-responsive">
-                    @if (Model.Transaction.Items.Any())
+                    @if (Model.Transaction != null && Model.Transaction.Items != null &&  Model.Transaction.Items.Any())
                     {
                         <table class="table">
                             <thead>

@@ -39,7 +39,7 @@ namespace Data
                     EmailConfirmed = true,
                     Avatar= "/Content/uploads/admin-avatar.png"
                 };
-                manager.Create(user, "123654$");
+                manager.Create(user, "123456$");
                 manager.AddToRole(user.Id, "Admin");
             }
         }
