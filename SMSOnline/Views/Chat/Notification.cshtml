@@ -1,5 +1,5 @@
 ﻿@{
-    var hasCreditCard  =(bool) ViewBag.HasCreditCard;
+    var hasCreditCard = (bool)ViewBag.HasCreditCard;
 }
 
 <!-- begin::page-header -->
@@ -21,13 +21,24 @@
             <div class="alert alert-success" role="alert">
                 @if (!hasCreditCard)
                 {
-                    <h4 class="alert-heading">Tài khoản của bạn đã hết tiền !</h4>
-                    <p><a class="btn btn-primary" href="/Deposit">Nạp Tiền</a></p>
+                    <h5 class="alert-heading">
+                        Sorry, you have use run out of free messages!
+                        <br />
+                        Please link a credit card and top up to continue messaging.
+                    </h5>
+                    <br />
+                    <p><a class="btn btn-primary" href="/CreditCard/Create">Link Credit Card</a></p>
+
                 }
                 else
                 {
-                    <h4 class="alert-heading">Bạn đã sử dụng hết số tin nhắn free vui lòng tạo thể và nạp tiền !</h4>
-                    <p><a class="btn btn-primary" href="/CreditCard/Create">Tạo Credit-Card</a></p>
+                    <h5 class="alert-heading">
+                        Sorry, your account has run out of money!
+                        <br />
+                        Please recharge your account to continue messaging.
+                    </h5>
+                    <br />
+                    <p><a class="btn btn-primary" href="/Deposit">Deposit</a></p>
                 }
 
             </div>
