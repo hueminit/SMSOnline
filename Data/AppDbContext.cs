@@ -28,19 +28,23 @@ namespace Data
             return new AppDbContext();
         }
 
+        
         protected override void OnModelCreating(DbModelBuilder builder)
         {
+            // Override/ Config key for Identity
             builder.Entity<IdentityUserClaim>().ToTable("AppUserClaims").HasKey(x => x.Id);
             builder.Entity<IdentityUserClaim>().ToTable("AppRoleClaims").HasKey(x => x.Id);
             builder.Entity<IdentityUserLogin>().ToTable("AppUserLogins").HasKey(x => x.UserId);
             builder.Entity<IdentityUserRole>().ToTable("AppUserRoles").HasKey(x => new { x.RoleId, x.UserId });
 
+            // Config foreign key for Message
             builder.Entity<Message>()
                 .HasRequired(m => m.UserReceived)
                 .WithMany(t => t.MessagesReceived)
                 .HasForeignKey(m => m.UserReceivedId)
                 .WillCascadeOnDelete(false);
 
+            // Config foreign key for Contact
             builder.Entity<Contact>()
                 .HasRequired(m => m.ContactReceivedRequest)
                 .WithMany(t => t.ContactReceived)

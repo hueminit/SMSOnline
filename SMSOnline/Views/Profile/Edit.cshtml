@@ -3,6 +3,9 @@
 @{
     bool isCheck = false;
 }
+@section Css {
+    <link href="~/Content/app/Datepicker/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+}
 <!-- begin::page-header -->
 <div class="page-header">
     <div class="container-fluid d-sm-flex justify-content-between">
@@ -30,103 +33,109 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(model => model.Id)
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label font-weight-bold" })
-                                <div>
-                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label font-weight-bold" })
-                                <div>
-                                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label font-weight-bold" })
-                                <div>
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label font-weight-bold" })
-                                <div>
-                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.BirthDay, htmlAttributes: new { @class = "control-label font-weight-bold" })
-                                <div>
-                                    @Html.TextBoxFor(m => m.BirthDay, new
-                               {
-                                   @class = "form-control",
-                                   @placeholder = "BirthDay",
-                                   @required = "required",
-                                   @type = "date"
-                               })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @if (Model.Gender == Gender.Male)
-                                {
-                                    isCheck = true;
-                                }
-                                <div class="form-group" style="text-align: left;">
-                                    @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label font-weight-bold" })
                                     <div>
-                                        <div class="form-check" style="display: inline-block; margin-right: 25px;">
-                                            <input class="form-check-input position-static" type="radio" @(isCheck ? "checked='checked'" : "") name="Gender" id="Gender" value="0"> Male
-                                        </div>
-                                        <div class="form-check" style="display: inline-block">
-                                            <input class="form-check-input position-static" type="radio" @(isCheck == false ? "checked='checked'" : "") name="Gender" id="Gender" value="1"> Female
+                                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    <div>
+                                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    <div>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    <div>
+                                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.BirthDay, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    <div>
+                                        @Html.TextBoxFor(m => m.BirthDay, new
+                                   {
+                                       @class = "form-control datepicker",
+                                       @placeholder = "BirthDay",
+                                       @required = "required",
+                                       @type = "text"
+                                   })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @if (Model.Gender == Gender.Male)
+                                    {
+                                        isCheck = true;
+                                    }
+                                    <div class="form-group" style="text-align: left;">
+                                        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                        <div>
+                                            <div class="form-check" style="display: inline-block; margin-right: 25px;">
+                                                <input class="form-check-input position-static" type="radio" @(isCheck ? "checked='checked'" : "") name="Gender" id="Gender" value="0"> Male
+                                            </div>
+                                            <div class="form-check" style="display: inline-block">
+                                                <input class="form-check-input position-static" type="radio" @(isCheck == false ? "checked='checked'" : "") name="Gender" id="Gender" value="1"> Female
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label font-weight-bold" })
-                                <div>
-                                    <img src="@(string.IsNullOrWhiteSpace(Model.Avatar) ? Common.Constants.AvatarDefault : Model.Avatar)" alt="hihi" height="256" width="320">
-                                    <input type="file" class="form-control-file" name="fileUpload" id="fileUpload">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    <div class="avatar-upload">
+                                        <div class="avatar-edit">
+                                            <input type='file' id="fileUpload" name="fileUpload" accept=".png, .jpg, .jpeg" />
+                                            <label for="fileUpload"></label>
+                                        </div>
+                                        <div class="avatar-preview">
+                                            <div id="imagePreview" style="background-image: url(@(string.IsNullOrWhiteSpace(Model.Avatar) ? Common.Constants.AvatarDefault : Model.Avatar));">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label font-weight-bold" })
-                                <div>
-                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    <div>
+                                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    <div>
+                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label font-weight-bold" })
-                                <div>
-                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-offset-2">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                        <a onclick="window.location.href='/Profile/Index?profileId=@Model.Id'" class="btn btn-warning">Cancel</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="col-md-offset-2">
-                                    <input type="submit" value="Save" class="btn btn-primary" />
-                                    <a onclick="window.location.href='/Profile/Index?profileId=@Model.Id'" class="btn btn-warning">Cancel</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     }
 
                 </div>
@@ -134,3 +143,27 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('body').on('change', '#fileUpload', function (e) {
+            readURL(this);
+        });
+    </script>
+}

@@ -199,7 +199,7 @@ namespace SMSOnline.Controllers
                 PhoneNumber = model.PhoneNumber,
                 UserName = model.UserName
             };
-            if (ModelState.IsValid || (await _userService.FindUserByEmailOrUserNameOrPhoneNumber(check)) == null)
+            if (ModelState.IsValid && (await _userService.FindUserByEmailOrUserNameOrPhoneNumber(check)) == null)
             {
                 var messageFree = await _configService.GetConfigByCodeAsync(Common.Constants.MessageFreeKey);
                 var user = new AppUser
@@ -215,6 +215,7 @@ namespace SMSOnline.Controllers
                     Avatar = Common.Constants.AvatarDefault,
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
+                    PhoneNumberConfirmed = true,
                     Balance = 0,
                     TotalFreeMessage =(messageFree != null && messageFree.ValueNumber.HasValue) ? (int)messageFree.ValueNumber :  Common.Constants.MessageFreeDefault
                 };
@@ -228,7 +229,7 @@ namespace SMSOnline.Controllers
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await _emailService.SendEmailAsync(model.Email, "Confirm your account",
-                        "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        "Thank you for registing to our SMS Online service.<br> Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

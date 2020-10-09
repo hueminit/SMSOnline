@@ -11,7 +11,7 @@ namespace Data.Migrations
 
         protected override void Seed(Data.AppDbContext context)
         {
-            DbInitializer.CreateAppUser(context);
+            DbInitializer.CreateUser(context);
             DbInitializer.CreateSystemConfig(context);
         }
     }

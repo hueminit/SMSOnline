@@ -47,27 +47,20 @@
                                     isLogged = IdentityHelper.IsUserLogged(user.UserName);
                                     profileId = item.UserSentId;
                                 }
-                                <li class="list-group-item">
-
+                                <li class="list-group-item cursor-pointer" onclick="window.location.href = '/Chat/Index?profileId=@profileId'">
                                     <div>
                                         <figure class="avatar avatar-md mr-3">
-                                            <a onclick="window.location.href = '/Chat/Index?profileId=@profileId'">
-                                                <img src="@image" class="rounded-circle" alt="image" height="128" width="128">
-                                            </a>
+                                            <img src="@image" class="rounded-circle" alt="image" height="128" width="128">
                                         </figure>
                                     </div>
                                     <div class="flex-grow-1 min-width-0">
                                         <div class="mb-1 d-flex justify-content-between align-items-center">
                                             <div class="text-truncate app-list-title">
-                                                <a onclick="window.location.href = '/Chat/Index?profileId=@profileId'">
-                                                    @name
-                                                </a>
+                                                @name
                                             </div>
                                             <div class="pl-3 d-flex">
                                                 <span class="text-nowrap text-muted">
-                                                    <a onclick="window.location.href = '/Chat/Index?profileId=@profileId'">
-                                                        @item.DateCreatedFormat
-                                                    </a>
+                                                    @item.DateCreatedFormat
                                                 </span>
                                                 <div class="dropdown ml-3">
                                                     <i class="fa fa-circle @(isLogged ? "text-success" : "text-danger")"></i>
@@ -86,7 +79,7 @@
                         }
                         else
                         {
-                            <h4 class="mb-5">
+                            <h4 class="mb-5 p-20">
                                 <i data-feather="search"></i>
                                 Not found message
                             </h4>

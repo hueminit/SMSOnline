@@ -10,7 +10,7 @@ namespace Data
 {
     public static class DbInitializer
     {
-        public static void CreateAppUser(AppDbContext context)
+        public static void CreateUser(AppDbContext context)
         {
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {
@@ -18,10 +18,7 @@ namespace Data
                 var manager = new RoleManager<IdentityRole>(store);
                 var role = new IdentityRole { Name = "Admin" };
                 manager.Create(role);
-                manager.Create(new IdentityRole()
-                {
-                    Name = "User",
-                });
+                context.SaveChanges();
             }
 
             if (!context.Users.Any(u => u.UserName == "admin"))
@@ -33,19 +30,19 @@ namespace Data
                     UserName = "admin",
                     FullName = "Administrator",
                     Email = "admin@gmail.com",
+                    PhoneNumber = "0392118585",
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
                     Gender = Gender.Male,
-                    Address = "43 nguyễn chí thanh hà nội"
+                    Address = "238 Hoang Quoc Viet, Cau Giay, Ha Noi",
+                    PhoneNumberConfirmed = true,
+                    EmailConfirmed = true,
+                    Avatar= "/Content/uploads/admin-avatar.png"
                 };
-
-                manager.Create(user, "123654$");
+                manager.Create(user, "123456$");
                 manager.AddToRole(user.Id, "Admin");
             }
-
-            //if(!context)
         }
-
 
         public static void CreateSystemConfig(AppDbContext context)
         {

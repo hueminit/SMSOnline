@@ -59,6 +59,7 @@ namespace SMSOnline.Controllers
 
             if (isUpdate)
             {
+               
                 HttpPostedFileBase fileUpload = Request.Files["fileUpload"];
                 if (fileUpload != null && fileUpload.ContentLength > 0)
                 {
@@ -72,10 +73,12 @@ namespace SMSOnline.Controllers
                     user.FullName = userViewModel.FullName;
                     user.BirthDay = userViewModel.BirthDay;
                     user.Email = userViewModel.Email;
+                    user.Description = userViewModel.PhoneNumber;
                     user.Address = userViewModel.Address;
                     user.Gender = userViewModel.Gender;
                     user.Description = userViewModel.Description;
-                    user.Avatar = userViewModel.Avatar;
+                    user.Description = user.UserName;
+                    user.Avatar = string.IsNullOrWhiteSpace(userViewModel.Avatar) ? user.Avatar : userViewModel.Avatar;
                     await _userService.UpdateUser(user);
                     var res = await _userService.Save();
                     if (res)

@@ -1,7 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
+@using SMSOnline.Helpers
 @model Models.Shared.PaginationSet<Models.ViewModel.ContactViewModel>
 @{
-    var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+    var currentUser = IdentityHelper.GetAllInfoCurrentLogged();
 }
 <!-- begin::page-header -->
 <div class="page-header">
@@ -25,11 +26,11 @@
                 </div>
                 <div class="app-sidebar-menu">
                     <div class="list-group list-group-flush">
-                        <a onclick="window.location.href='/Contact/Index'" class="list-group-item d-flex align-items-center" style="cursor:pointer">
+                        <a onclick="window.location.href='/Contact/Index'" class="list-group-item d-flex align-items-center cursor-pointer">
                             <i data-feather="folder" class="width-15 height-15 mr-2"></i>
                             All Friends
                         </a>
-                        <a onclick="window.location.href='/Contact/RequestFriend'" class="list-group-item active d-flex align-items-center" style="cursor:pointer">
+                        <a onclick="window.location.href='/Contact/RequestFriend'" class="list-group-item active d-flex align-items-center cursor-pointer">
                             <i data-feather="folder" class="width-15 height-15 mr-2"></i>
                             Request Friends
                         </a>
@@ -59,47 +60,48 @@
             </div>
             <div class="card app-content-body">
 
-                <div class="card-body">
+                <div class="card-body p-l-50 p-r-50">
 
                     <div class="row">
                         @if (Model.Items.Any())
                         {
-                            foreach (var user in Model.Items)
+                            foreach (var item in Model.Items)
                             {
+                                var name = string.Empty;
+                                var image = string.Empty;
+                                bool isLogged = false;
                                 var profileId = string.Empty;
-                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                if (currentUser.Id == item.ContactSentId)
+                                {
+                                    var user = IdentityHelper.GetUserById(item.ContactReceivedId);
+                                    name = user.FullName;
+                                    image = string.IsNullOrWhiteSpace(user.Avatar) ? Common.Constants.AvatarDefault : user.Avatar;
+                                    isLogged = IdentityHelper.IsUserLogged(user.UserName);
+                                    profileId = item.ContactReceivedId;
+
+                                }
+                                else
+                                {
+                                    var user = IdentityHelper.GetUserById(item.ContactSentId);
+                                    name = user.FullName;
+                                    image = string.IsNullOrWhiteSpace(user.Avatar) ? Common.Constants.AvatarDefault : user.Avatar;
+                                    isLogged = IdentityHelper.IsUserLogged(user.UserName);
+                                    profileId = item.ContactSentId;
+                                }
+                                <div class="col-lg-3 col-md-4 col-6">
                                     <div class="card app-file-list">
-                                        <div class="app-file-icon p-0">
-                                            <img src="/Content/uploads/avatar.png" class="img-fluid" alt="avatar">
-                                            <div class="dropdown position-absolute top-0 right-0 mr-3">
-                                            </div>
+                                        <div class="app-file-icon p-0 square-block bg-white circle-hover-effect">
+                                            <a onclick="window.location.href='/Profile/Index?profileId=@profileId'" class="cursor-pointer">
+                                                <img src="@image" class="img-fluid square-block__image" alt="avatar">
+                                            </a>
                                         </div>
-                                        <div class="p-10 small">
-                                            <h4 class="text-center m-b-15" style="cursor:pointer">
-                                                @if (currentUserId.Equals(user.ContactSentId))
-                                                {
-                                                    profileId = user.ContactReceivedId;
-                                                    <a onclick="window.location.href='/Profile/Index?profileId=@profileId'">
-                                                        @user.FullNameContactReceived
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    profileId = user.ContactSentId;
-                                                    <a onclick="window.location.href='/Profile/Index?profileId=@profileId'">
-                                                        @user.FullNameContactSent
-                                                    </a>
-                                                }
+                                        <div class="p-10 p-t-15 p-b-15 small">
+                                            <h4 class="text-center m-b-15">
+                                                <a onclick="window.location.href='/Profile/Index?profileId=@profileId'" class="cursor-pointer">@name</a>
                                             </h4>
                                             <div class="d-flex justify-content-around">
-                                                <form method="post" action="/Contact/AcceptRequest" id="contact-accept">
-                                                    <input type="text" hidden name="profileId" value="@profileId">
-                                                    <a href="javascript:document.getElementById('contact-accept').submit()" type="submit" class="btn btn-success">Accept</a>
-                                                </form>
-                                                <form method="post" action="/Contact/CancelRequest" id="contact-cancel">
-                                                    <input type="text" hidden name="profileId" value="@profileId">
-                                                    <a href="javascript:document.getElementById('contact-cancel').submit()" type="submit" class="btn btn-danger">Cancel</a>
-                                                </form>
+                                                <a onclick="acceptRequest('@profileId')" class="btn btn-sm btn-success text-white cursor-pointer">Accept</a>
+                                                <a onclick="removeContact('@profileId')" class="btn btn-sm btn-danger text-white cursor-pointer">Cancel</a>
                                             </div>
                                         </div>
                                     </div>
@@ -120,5 +122,28 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        function acceptRequest(userId) {
+            postRequest('/Contact/AcceptRequest', userId);
+        }
+        function removeContact(userId) {
+            console.log(userId)
+            var r = confirm("Do you want to cancel this friend request?");
+            if (r == true) {
+                postRequest('/Contact/CancelRequest', userId);
+            }
 
-<!-- begin::footer -->
+        }
+        function postRequest(url, userId) {
+            console.log(userId)
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: { profileId: userId }
+            }).done(function (ketqua) {
+                location.reload();
+            });
+        }
+    </script>
+}

@@ -2,6 +2,7 @@
 @{
     var currentUser = IdentityHelper.GetAllInfoCurrentLogged();
 }
+
 <div class="col-lg-4 chat-sidebar border-right">
 
     @*begin::chat sidebar search*@
@@ -23,8 +24,8 @@
                            data-feather="settings"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" onclick="window.location.href = '/Profile/Index?profileId=@currentUser.Id'">View Profile</a>
-                        <a class="dropdown-item" onclick="window.location.href = '/Contact/EditProfile'">Edit Profile</a>
+                        <a class="dropdown-item cursor-pointer" onclick="window.location.href = '/Profile/Index?profileId=@currentUser.Id'">View Profile</a>
+                        <a class="dropdown-item cursor-pointer" onclick="window.location.href = '/Contact/EditProfile'">Edit Profile</a>
                     </div>
                 </div>
             </div>
@@ -80,11 +81,10 @@
                                 }
 
                                 <a onclick="window.location.href='/Chat/Index?profileId=@profileId'"
-                                   class="list-group-item d-flex align-items-center link-1 pl-0 pr-0 pb-3 pt-3">
+                                   class="list-group-item d-flex align-items-center link-1 pl-0 pr-0 pb-3 pt-3 cursor-pointer">
                                     <div class="pr-3">
                                         <div class="avatar avatar-md @(isLogged ? "avatar-state-success" : "avatar-state-danger")">
-                                            <img src="/Content/uploads/avatar.png" width="128" height="128" class="rounded-circle" alt="image">
-                                            @*<span class="avatar-title bg-success rounded-circle">F</span>*@
+                                            <img src="@image" width="128" height="128" class="rounded-circle" alt="image">
                                         </div>
                                     </div>
                                     <div>
@@ -131,17 +131,17 @@
                                     isLogged = IdentityHelper.IsUserLogged(user.UserName);
                                     profileId = item.ContactSentId;
                                 }
-                                <li class="list-group-item d-flex align-items-center pl-0 pr-0 pb-3 pt-3">
+                                <li class="list-group-item d-flex align-items-center pl-0 pr-0 pb-3 pt-3 cursor-pointer"  onclick="window.location.href='/Chat/Index?profileId=@profileId'">
                                     <div class="pr-3">
                                         <div class="avatar avatar-md @(isLogged ? "avatar-state-success" : "avatar-state-danger")">
-                                            <span class="avatar-title bg-success rounded-circle">A</span>
+                                            <img src="@image" width="128" height="128" class="rounded-circle" alt="image">
                                         </div>
                                     </div>
                                     <div>
                                         <h6 class="mb-1">@name</h6>
                                     </div>
                                     <div class="text-right ml-auto">
-                                        <a onclick="window.location.href='/Chat/Index?profileId=@profileId'" class="p-1">
+                                        <a class="p-1">
                                             <i data-feather="message-circle" class="width-18 height-18"></i>
                                         </a>
                                     </div>

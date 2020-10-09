@@ -43,10 +43,14 @@ namespace SMSOnline.Helpers
 
         public static AppUser GetAllInfoCurrentLogged()
         {
-            AppUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
-                .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-
-            return user;
+            var id = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            AppUser user = System.Web.HttpContext.Current?.GetOwinContext()?.GetUserManager<ApplicationUserManager>()
+                .FindById(id);
+            if(user != null)
+            {
+                return user;
+            }
+            return null;
         }
 
         public static AppUser GetUserById(string userId)

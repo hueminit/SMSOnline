@@ -78,19 +78,23 @@ namespace Services
             var query = await GetAll();
 
             int totalRow = query.Count();
-            var totalAmount = query?.Where(x=>x.Type == TransactionType.Deposit)?.Sum(x => x.Price);            
-            query = query?.OrderByDescending(x => x.CreatedAt)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize);
-            model.Transaction = new PaginationSet<TransactionViewModel>()
+            if(totalRow > 0)
             {
-                Page = page,
-                TotalCount = totalRow,
-                TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
-                Items = _mapper.ProjectTo<TransactionViewModel>(query).ToList(),
-                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
-            };
-            model.TotalAmount = totalAmount ?? 0;
+                var totalAmount = query?.Where(x => x.Type == TransactionType.Deposit)?.Sum(x => x.Price);
+                query = query?.OrderByDescending(x => x.CreatedAt)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize);
+                model.Transaction = new PaginationSet<TransactionViewModel>()
+                {
+                    Page = page,
+                    TotalCount = totalRow,
+                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
+                    Items = _mapper.ProjectTo<TransactionViewModel>(query).ToList(),
+                    MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage"))
+                };
+                model.TotalAmount = totalAmount ?? 0;
+            }
+            
             return model;
         }
 

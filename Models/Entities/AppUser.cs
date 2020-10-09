@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Models.Entities
 {
     [Table("AppUsers")]
-    public sealed class AppUser : IdentityUser, IDateTracking, ISwitchable, IsDelete
+    public sealed class AppUser : IdentityUser, IDateTracking, ISwitchable
     {
         public string FullName { get; set; }
         public decimal Balance { get; set; }
@@ -27,7 +27,6 @@ namespace Models.Entities
         [DefaultValue(Status.Active)]
         public Status Status { set; get; } = Status.Active;
 
-        public bool IsDelete { get; set; }
         public int TotalFreeMessage { get; set; }
 
         [StringLength(256)]

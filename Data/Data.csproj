@@ -125,6 +125,14 @@
     <Compile Include="Migrations\202009230343141_SystemConfigs.Designer.cs">
       <DependentUpon>202009230343141_SystemConfigs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010011114546_RemoveIsDelete.cs" />
+    <Compile Include="Migrations\202010011114546_RemoveIsDelete.Designer.cs">
+      <DependentUpon>202010011114546_RemoveIsDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010011239120_update seed data.cs" />
+    <Compile Include="Migrations\202010011239120_update seed data.Designer.cs">
+      <DependentUpon>202010011239120_update seed data.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -143,9 +151,7 @@
       <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202009150357417_Init.resx">
       <DependentUpon>202009150357417_Init.cs</DependentUpon>
@@ -185,6 +191,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009230343141_SystemConfigs.resx">
       <DependentUpon>202009230343141_SystemConfigs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010011114546_RemoveIsDelete.resx">
+      <DependentUpon>202010011114546_RemoveIsDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010011239120_update seed data.resx">
+      <DependentUpon>202010011239120_update seed data.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

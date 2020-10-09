@@ -19,13 +19,15 @@ namespace SMSOnline.Controllers
         private readonly IMessageService _messageService;
         private readonly IUserService _userService;
         private readonly IContactService _contactService;
+        private readonly ICreditCardService _creditCardService;
 
 
-        public ChatController(IMessageService messageService, IUserService userService, IContactService contactService)
+        public ChatController(IMessageService messageService, IUserService userService, IContactService contactService,ICreditCardService creditCardService)
         {
             _messageService = messageService;
             _userService = userService;
             _contactService = contactService;
+            _creditCardService = creditCardService;
         }
 
         public async Task<ActionResult> AllMessage()
@@ -102,8 +104,15 @@ namespace SMSOnline.Controllers
                     {
                         if (user.Balance < Common.Constants.MessagePrice)
                         {
-                            ViewBag.Error = "Account insufficient to continue ";
-                            return RedirectToAction("Index", "Chat", new { profileId = @message.UserReceivedId });
+                            var check = await _creditCardService.GetSingleByConditionAsync(x => x.UserId == user.Id);
+                            if (check != null)
+                            {
+                                return RedirectToAction("Notification", "Chat", new {  hasCreditCard = true.ToString() });
+                            }
+                            else
+                            {
+                                return RedirectToAction("Notification", "Chat", new { hasCreditCard = false.ToString() });
+                            }
                         }
                         else
                         {
@@ -122,6 +131,13 @@ namespace SMSOnline.Controllers
                 return RedirectToAction("Error", "Response", new { message = ex.Message });
             }
             return RedirectToAction("Index", "Chat", new { profileId = @message.UserReceivedId });
+        }
+
+        public ActionResult Notification(string hasCreditCard)
+        {
+            bool.TryParse(hasCreditCard, out bool check);
+            ViewBag.HasCreditCard = check;
+            return View();
         }
     }
 }

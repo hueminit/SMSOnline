@@ -229,6 +229,10 @@
     <Compile Include="Filters\TrackLoginsFilter.cs" />
     <Compile Include="Helpers\IdentityHelper.cs" />
     <Compile Include="Hub\SMSOnlineHub.cs" />
+    <Compile Include="Migrations\202010011238340_update seed data.cs" />
+    <Compile Include="Migrations\202010011238340_update seed data.Designer.cs">
+      <DependentUpon>202010011238340_update seed data.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1002,6 +1006,7 @@
     <Content Include="Views\SystemConfig\Edit.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Report\TransationUser.cshtml" />
+    <Content Include="Views\Chat\Notification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1034,6 +1039,11 @@
       <Project>{c5f33ce4-cd40-439f-a13f-af517671e541}</Project>
       <Name>Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202010011238340_update seed data.resx">
+      <DependentUpon>202010011238340_update seed data.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

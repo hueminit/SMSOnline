@@ -1,0 +1,47 @@
+﻿@{
+    var hasCreditCard = (bool)ViewBag.HasCreditCard;
+}
+
+<!-- begin::page-header -->
+<div class="page-header">
+    <div class="container-fluid d-sm-flex justify-content-between">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Notification</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- end::page-header -->
+
+<div class="container-fluid">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="alert alert-success" role="alert">
+                @if (!hasCreditCard)
+                {
+                    <h5 class="alert-heading">
+                        Sorry, you have use run out of free messages!
+                        <br />
+                        Please link a credit card and top up to continue messaging.
+                    </h5>
+                    <br />
+                    <p><a class="btn btn-primary" href="/CreditCard/Create">Link Credit Card</a></p>
+
+                }
+                else
+                {
+                    <h5 class="alert-heading">
+                        Sorry, your account has run out of money!
+                        <br />
+                        Please recharge your account to continue messaging.
+                    </h5>
+                    <br />
+                    <p><a class="btn btn-primary" href="/Deposit">Deposit</a></p>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

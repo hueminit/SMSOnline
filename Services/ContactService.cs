@@ -121,7 +121,7 @@ namespace Services
         public async Task<PaginationSet<ContactViewModel>> GetAllRequestFriend(string keyword, string currentUserId, int page = 1, int pageSize = 8)
         {
             var query = await GetMultiAsync(x => x.ContactReceivedId == currentUserId
-                                                 && x.IsFriend == false);
+                                                 && x.IsFriend == false && x.StatusRequest!=false);
             if (!string.IsNullOrWhiteSpace(keyword))
             {
                 query = query.Where(x => x.PhoneNumber.Contains(keyword)
